@@ -1,0 +1,16 @@
+## Import packages
+import(uts)
+
+
+## Export Classes
+exportClasses(uts_vector)
+exportClasses(uts_matrix)
+exportClasses(uts_data_frame)
+
+
+## Register S3 methods (needed if a package is imported but not attached to the search path)
+#S3method(add_ymd, dates)
+
+
+## Miscellaneous functions
+#exportPattern("^[^\\.]")      # export all methods/variables that do not start with a period
