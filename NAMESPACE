@@ -4,8 +4,8 @@ import(uts)
 
 ## Export Classes
 exportClasses(uts_vector)
-exportClasses(uts_matrix)
-exportClasses(uts_data_frame)
+#exportClasses(uts_matrix)
+#exportClasses(uts_data_frame)
 
 
 ## Register S3 methods (needed if a package is imported but not attached to the search path)
