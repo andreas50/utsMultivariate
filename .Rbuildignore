@@ -1,5 +1,4 @@
-workflow.txt
-conventions.txt
+Rprof.out
 .*\.so$
 .*\.o$
 ^.*\.Rproj$
