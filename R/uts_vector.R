@@ -2,5 +2,173 @@
 # UTS_VECTOR class #
 ####################
 
-# Define generic functions
-uts_vector <- function(x, ...) UseMethod("uts_vector")
+#' Unevenly-spaced Time Series Vector
+#' 
+#' Create a vector of unevenly spaced time series (\code{"uts_vector"}).
+#'
+#' @return An object of class \code{"uts_vector"}.
+#' @param \dots zero or more \code{\link{uts}} objects.
+#' 
+#' @keywords ts classes
+#' @examples
+#' # Two equivalent constructors
+#' uts_vector(apples=ex_uts(), oranges=ex_uts2())
+#' c(apples=ex_uts(), oranges=ex_uts2())
+#' 
+#' # Create "uts_vector" out of both "uts" and "uts_vector" objects
+#' c(ex_uts(), ex_uts_vector(), kiwis=ex_uts2())
+#' 
+#' # Empty "uts_vector"
+#' uts_vector()
+uts_vector <- function(...)
+{
+  c.uts(...)
+}
+
+
+#' @describeIn uts_vector constructor for \code{"uts_vector"} object out of \code{"uts"} objects.
+c.uts <- function(...)
+{
+  # Check arguments
+  args <- list(...)
+  if (!all(sapply(args, function(x) is.uts(x) || is.uts_vector(x))))
+    stop("Not all arguments are 'uts' objects")
+  
+  # Allocate memory for output
+  num_uts <- 0
+  out <- list()
+  names <- c()
+
+  # Merge arguments
+  for (num_arg in seq_along(args)) {
+    # Merge "uts"
+    obj <- args[[num_arg]]
+    if (is.uts(obj)) {
+      num_uts <- num_uts + 1
+      if (length(names(args)[num_arg]) > 0)   # Extract name of "uts"
+        names <- c(names, names(args)[num_arg])
+      else
+        names <- c(names, "")
+      out[[num_uts]] <- obj
+    }
+    
+    # Merge "uts_vector"
+    if (is.uts_vector(obj)) {
+      for (k in seq_along(obj)) {
+        num_uts <- num_uts + 1
+        if (length(names(obj)[k]) > 0)  # Extract name of k-th "uts_vector" element
+          names <- c(names, names(obj)[k])
+        else
+          names <- c(names, "")
+        out[[num_uts]] <- obj[[k]]
+      }
+    }
+  }
+
+  # Set attributes
+  if (any(names != ""))
+    names(out) <- names
+  class(out) <- c("uts_vector", "list")
+  out
+}
+
+
+#' @describeIn uts_vector constructor for \code{"uts_vector"} object out of \code{"uts"} and other \code{"uts_vector"} objects.
+c.uts_vector <- function(...)
+{
+  c.uts(...)
+}
+
+
+#' Is Object a uts_vector?
+#' 
+#' Return \code{TRUE} if and only if the argument is a \code{"uts_vector"} object.
+#'  
+#' @param x an \R object.
+#' 
+#' @keywords internal
+#' @examples
+#' is.uts_vector(uts_vector())
+#' is.uts_vector(ex_uts_vector())
+#' is.uts_vector(5)
+is.uts_vector <- function(x)
+{
+  inherits(x, "uts_vector")
+}
+
+
+#' Print Values
+#' 
+#' @param x an object of class \code{"uts_vector"}.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @keywords internal
+#' @seealso \code{\link[base:print]{print}}
+#' @examples
+#' uts_vector()
+#' print(uts_vector(a=ex_uts(), b=ex_uts2()))
+print.uts_vector <- function(x)
+{
+  # Special case of empty "uts_vector"
+  num_uts <- length(x)
+  if (num_uts == 0) {
+    cat("-----------------\n")
+    cat("uts_vector object\n")
+    cat("-----------------\n")
+    cat("No time series available at this time\n")
+    return()
+  }
+  
+  # Determine start and end times
+  start <- as.character(start(x), usetz=TRUE)
+  end <- as.character(end(x), usetz=TRUE)
+
+  # Extract time series stats
+  Name <- names(x)
+  if (length(Name) < num_uts)
+    Name <- rep(NA, num_uts)
+  stats <- data.frame(Name, Datapoints=sapply(x, length), start, end)
+  rownames(stats) <- 1:num_uts
+
+  # Print nice description
+  cat("\nIndividual time series characteristics:\n")
+  cat("---------------------------------------\n")
+  print(stats)
+}
+
+
+#' First and Last Observation Times
+#' 
+#' Get the first and last observation time, respectively, of each time series.
+#' 
+#' @return \code{end()} returns the first observation time of each time series.
+#' @param x a \code{"uts_vector"} object.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @examples
+#' start(ex_uts_vector())
+start.uts_vector <- function(x, ...)
+{
+  if (length(x) > 0) {
+    # cannot use sapply() because class attribute gets lost
+    do.call("c", lapply(x, start))
+  } else
+    as.POSIXct(character())
+}
+
+
+#' @rdname start.uts_vector
+#' 
+#' @return \code{end()} returns the last observation time of each time series.
+#' 
+#' @examples 
+#' end(ex_uts_vector2())
+end.uts_vector <- function(x, ...)
+{
+  if (length(x) > 0) {
+    # cannot use sapply() because class attribute gets lost
+    do.call("c", lapply(x, end))
+  } else
+    as.POSIXct(character())
+}
+

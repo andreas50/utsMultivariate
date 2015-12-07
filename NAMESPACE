@@ -1,16 +1,30 @@
 ## Import packages
 import(uts)
+import(lubridate)
+importFrom(stats, end, start)
 
 
-## Export Classes
+# Export classes
 exportClasses(uts_vector)
 #exportClasses(uts_matrix)
 #exportClasses(uts_data_frame)
 
 
-## Register S3 methods (needed if a package is imported but not attached to the search path)
-#S3method(add_ymd, dates)
+# Export generic methods
+export(uts_vector)
 
 
-## Miscellaneous functions
-#exportPattern("^[^\\.]")      # export all methods/variables that do not start with a period
+# Register S3 methods (needed if a package is imported but not attached to the search path)
+S3method(c, uts)
+S3method(c, uts_vector)
+S3method(end, uts_vector)
+S3method(start, uts_vector)
+
+
+# Sample multivariate time series
+export(ex_uts_vector)
+export(ex_uts_vector2)
+
+
+# Miscellaneous functions
+export(is.uts_vector)
