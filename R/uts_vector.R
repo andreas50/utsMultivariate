@@ -80,6 +80,43 @@ c.uts_vector <- function(...)
 }
 
 
+#' Create uts_vector from wide tabular data
+#' 
+#' Create a \code{"uts_vector"} from wide tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). With this input format, values in the same row are measurements at the same point in time, while values in the same column are measurements of the same variable.
+#' 
+#' @return An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
+#' @param values a matrix or data.frame. Each row represents a vector of observations at a specific time point.
+#' @param times a \code{\link{POSIXct}} object. The observation times of the rows of \code{values}.
+#' @param names a character vector, indicating the source of each column in \code{values}. By default, the column names of \code{values} are used.
+#' 
+#' @keywords ts classes
+#' @examples 
+#' data <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10])
+#' uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10))
+uts_vector_wide <- function(values, times, names=colnames(values))
+{
+  # Argument checking
+  if (!is.matrix(values) && !is.data.frame(values))
+    stop("The data is not in matrix or data.frame format")
+  if (nrow(values) != length(times))
+    stop("The number of observation value vectors does not match the number of observation times")
+  if (!is.null(names) && (length(names) != ncol(values)))
+    stop("The numnber of observation variables does not match the number of variable names")
+  
+  # Order data by chronologically
+  o <- order(times)
+  times <- times[o]
+  values <- values[o,,drop=FALSE]  
+
+  # Generate "uts_vector"
+  out <- uts_vector()
+  for (j in seq_len(ncol(values)))
+    out[[j]] <- uts(values[, j], times)
+  names(out) <- names
+  out
+}
+
+
 #' Is Object a uts_vector?
 #' 
 #' Return \code{TRUE} if and only if the argument is a \code{"uts_vector"} object.
@@ -171,4 +208,5 @@ end.uts_vector <- function(x, ...)
   } else
     as.POSIXct(character())
 }
+
 

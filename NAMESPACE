@@ -10,8 +10,9 @@ exportClasses(uts_vector)
 #exportClasses(uts_data_frame)
 
 
-# Export generic methods
+# Export constructors
 export(uts_vector)
+export(uts_vector_wide)
 
 
 # Register S3 methods (needed if a package is imported but not attached to the search path)
