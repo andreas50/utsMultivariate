@@ -11,7 +11,11 @@
 #' Helper functions:
 #' 
 #' 
-#' Methods that exists solely ensure that methods intended for \code{\link{ts}} objects in base \R are not accidentally applied to \code{"uts"} objects:
+#' Methods that exists solely ensure that methods intended for \code{\link{ts}} objects in base \R are not accidentally applied to \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} objects:
+#' \itemize{
+#'   \item \code{\link[=cycle.uts_vector]{cycle}}
+#'   \item \code{\link[=frequency.uts_vector]{frequency}}
+#' }
 #' 
 #' @name utsMultivariate-internal
 NULL
