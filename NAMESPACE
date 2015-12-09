@@ -19,6 +19,7 @@ export(uts_vector_wide)
 S3method(c, uts)
 S3method(c, uts_vector)
 S3method(end, uts_vector)
+S3method(print, uts_vector)
 S3method(start, uts_vector)
 
 

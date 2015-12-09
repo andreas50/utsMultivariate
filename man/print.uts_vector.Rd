@@ -4,7 +4,7 @@
 \alias{print.uts_vector}
 \title{Print Values}
 \usage{
-\method{print}{uts_vector}(x)
+\method{print}{uts_vector}(x, ...)
 }
 \arguments{
 \item{x}{an object of class \code{"uts_vector"}.}

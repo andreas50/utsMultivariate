@@ -144,7 +144,7 @@ is.uts_vector <- function(x)
 #' @examples
 #' uts_vector()
 #' print(uts_vector(a=ex_uts(), b=ex_uts2()))
-print.uts_vector <- function(x)
+print.uts_vector <- function(x, ...)
 {
   # Special case of empty "uts_vector"
   num_uts <- length(x)
