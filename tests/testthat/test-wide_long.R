@@ -1,4 +1,4 @@
-context("start_end")
+context("wide_long")
 
 test_that("uts_vector_wide works",{
   # Argument checking
