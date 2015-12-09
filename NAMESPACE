@@ -1,25 +1,26 @@
 ## Import packages
 import(uts)
 import(lubridate)
-importFrom(stats, end, start)
+importFrom(stats, end, na.omit, start)
 
 
-# Export classes
-exportClasses(uts_vector)
-#exportClasses(uts_matrix)
-#exportClasses(uts_data_frame)
-
-
-# Export constructors
+# Export class constructors
 export(uts_vector)
 export(uts_vector_wide)
+
+
+# Export generic methods
+export(sapply)
 
 
 # Register S3 methods (needed if a package is imported but not attached to the search path)
 S3method(c, uts)
 S3method(c, uts_vector)
 S3method(end, uts_vector)
+S3method(na.omit, uts_vector)
 S3method(print, uts_vector)
+S3method(sapply, default)
+S3method(sapply, uts_vector)
 S3method(start, uts_vector)
 
 
