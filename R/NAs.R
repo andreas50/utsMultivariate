@@ -9,37 +9,42 @@
 #' @param object a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso \code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.fail}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+#' @seealso \code{\link{is.na}}
 #' @seealso \code{\link[uts:is.na.uts]{is.na}} \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.
+#' @seealso \code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+#' 
 #' @examples
 #' # Remove NAs from a "uts_vector"
-#' tmp <- ex_uts_vector()
-#' tmp$oranges$values[c(2, 4)] <- NA
-#' na.omit(tmp)
+#' test <- ex_uts_vector()
+#' test$oranges$values[c(2, 4)] <- NA
+#' na.omit(test)
 na.omit.uts_vector <- function(object, ...)
 {
   sapply(object, na.omit, ...)
 }
       
 
-if (0) {      
-      #' Not Available / Missing Values
-      #' 
-      #' Find missing values.
-      #' 
-      #' @return A logical \code{"uts"} (i.e. a \code{"uts"} with \code{\link{logical}} observation values), indicating which observation values are \code{NA}.
-      #' @param x a \code{"uts"} object.
-      #' @seealso \code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.fail}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
-      #' @seealso \code{\link[=na.omit.uts]{na.omit}} for \code{"uts"} objects.
-      #' @examples
-      #' # Set observation to NA
-      #' test <- ex_uts()
-      #' test$values[c(2, 4)] <- NA      # NEXT: use replacement using time points
-      #' 
-      #' # Get logical "uts", indicating which observations are NA
-      #' is.na(test)
-      is.na.uts <- function(x)
-      {
-        uts(is.na(x$values), x$times)
-      }
+#' Not Available / Missing Values
+#' 
+#' Find missing values.
+#' 
+#' @return An object of the same class as \code{x}, but with observation values replaced with \code{TRUE} or \code{FALSE}, indicating which observation values of \code{x} are \code{NA}.
+#' @param x a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"} object.
+#' 
+#' @seealso \code{\link{na.omit}}
+#' @seealso \code{\link[uts:is.na.uts]{is.na}}, \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.
+#' @seealso \code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+#' 
+#' @examples
+#' # Set observation to NA
+#' test <- ex_uts_vector()
+#' test$oranges$values[c(2, 4)] <- NA
+#' 
+#' # Get logical "uts_vector", indicating which observations are NA
+#' is.na(test)
+#' is.na(test)$oranges
+is.na.uts_vector <- function(x)
+{
+  sapply(x, is.na)
 }
+

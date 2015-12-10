@@ -16,13 +16,15 @@ Returns the object with incomplete cases removed.
 }
 \examples{
 # Remove NAs from a "uts_vector"
-tmp <- ex_uts_vector()
-tmp$oranges$values[c(2, 4)] <- NA
-na.omit(tmp)
+test <- ex_uts_vector()
+test$oranges$values[c(2, 4)] <- NA
+na.omit(test)
 }
 \seealso{
-\code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.fail}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+\code{\link{is.na}}
 
 \code{\link[uts:is.na.uts]{is.na}} \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.
+
+\code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
 }
 
