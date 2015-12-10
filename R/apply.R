@@ -10,6 +10,7 @@
 #' As recommended in Section 7.1 ("Adding new generics") of "Writing R Extensions", the implementation of \code{\link{sapply.default}} has been made a wrapper around \code{\link[base:sapply]{base::sapply}}.
 #' 
 #' @param X an \R object.
+#' @param further arguments passed to or from methods.
 #' 
 #' @keywords internal
 sapply <- function(X, ...) UseMethod("sapply")
@@ -22,18 +23,22 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 
 #' Apply a Function over a Multivariate Time Series
 #' 
+#' This method is a wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"}.
+#' 
 #' @param X a \code{"uts_vector"} object.
-#' @param FUN the function to be applied to each element of \code{X}.
-#' @param \ldots optional arguments to \code{FUN}.
+#' @param \ldots arguments passed to \code{sapply} in base \R.
 #' 
 #' @examples
+#' # Same results as sapply() in base R
 #' sapply(ex_uts_vector(), length)
 #' sapply(ex_uts_vector(), range)
+#' 
+#' # Results that are further simplified to a "uts_vector"
 #' sapply(ex_uts_vector(), log)
-sapply.uts_vector <- function(X, FUN, ...)
+#' sapply(ex_uts_vector2(), lag_t, ddays(1))
+sapply.uts_vector <- function(X, ...)
 {
-  # Call base::sapply()
-  out <- base::sapply(X, FUN=FUN, ...)
+  out <- base::sapply(X, ...)
 
   # Simpify output further, if possible
   is_uts <- sapply(out, is.uts)
@@ -41,3 +46,4 @@ sapply.uts_vector <- function(X, FUN, ...)
     out <- do.call("c", out)
   out
 }
+

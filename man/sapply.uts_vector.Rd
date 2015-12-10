@@ -4,21 +4,23 @@
 \alias{sapply.uts_vector}
 \title{Apply a Function over a Multivariate Time Series}
 \usage{
-\method{sapply}{uts_vector}(X, FUN, ...)
+\method{sapply}{uts_vector}(X, ...)
 }
 \arguments{
 \item{X}{a \code{"uts_vector"} object.}
 
-\item{FUN}{the function to be applied to each element of \code{X}.}
-
-\item{\ldots}{optional arguments to \code{FUN}.}
+\item{\ldots}{arguments passed to \code{sapply} in base \R.}
 }
 \description{
-Apply a Function over a Multivariate Time Series
+This method is a wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"}.
 }
 \examples{
+# Same results as sapply() in base R
 sapply(ex_uts_vector(), length)
 sapply(ex_uts_vector(), range)
+
+# Results that are further simplified to a "uts_vector"
 sapply(ex_uts_vector(), log)
+sapply(ex_uts_vector2(), lag_t, ddays(1))
 }
 

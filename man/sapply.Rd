@@ -11,6 +11,8 @@ sapply(X, ...)
 }
 \arguments{
 \item{X}{an \R object.}
+
+\item{further}{arguments passed to or from methods.}
 }
 \description{
 The function is needed, because \code{\link[base:sapply]{sapply}} of base \R is not generic.
