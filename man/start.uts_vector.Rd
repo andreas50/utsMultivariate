@@ -15,9 +15,9 @@
 \item{\dots}{further arguments passed to or from methods.}
 }
 \value{
-\code{end()} returns the first observation time of each time series.
+\code{start()} returns the first observation time of each time series as a \code{\link{POSIXct}} object. The time zone is determined by the first time series.
 
-\code{end()} returns the last observation time of each time series.
+\code{end()} returns the last observation time of each time series as a \code{\link{POSIXct}} object. The time zone is determined by the first time series.
 }
 \description{
 Get the first and last observation time, respectively, of each time series.

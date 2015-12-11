@@ -9,6 +9,8 @@
 #' @return An object of class \code{"uts_vector"}.
 #' @param \dots zero or more \code{\link{uts}} objects.
 #' 
+#' @seealso \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
+#' 
 #' @keywords ts classes
 #' @examples
 #' # Two equivalent constructors

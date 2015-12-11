@@ -5,10 +5,27 @@ test_that("start works",{
     start(uts_vector()),
     as.POSIXct(character())
   )
-  
   expect_equal(
     start(c(ex_uts())),
     start(ex_uts())
+  )
+  
+  # 19th century dates
+  ts1 <- uts(1, as.POSIXct("1850-06-01", tz="GMT"))
+  ts2 <- uts(2, as.POSIXct("1850-06-01", tz="GMT"))
+  utsv <- c(ts1, ts2)
+  expect_equal(
+    start(utsv),
+    rep(as.POSIXct("1850-06-01", tz="GMT"), 2)
+  )
+  
+  # Mixed time zones
+  ts1 <- uts(1, as.POSIXct("1950-06-01", tz="America/Chicago"))
+  ts2 <- uts(2, as.POSIXct("1950-06-01", tz="Australia/Sydney"))
+  utsv <- c(ts1, ts2)
+  expect_equal(
+    start(utsv),
+    as.POSIXct(c("1950-06-01 0:00:00", "1950-05-31 09:00:00"), tz="America/Chicago")
   )
   
   # Regression tests
@@ -22,10 +39,27 @@ test_that("end works",{
     end(uts_vector()),
     as.POSIXct(character())
   )
-  
   expect_equal(
     end(c(ex_uts())),
     end(ex_uts())
+  )
+  
+  # 19th century dates
+  ts1 <- uts(1, as.POSIXct("1850-06-01", tz="GMT"))
+  ts2 <- uts(2, as.POSIXct("1850-06-01", tz="GMT"))
+  utsv <- c(ts1, ts2)
+  expect_equal(
+    end(utsv),
+    rep(as.POSIXct("1850-06-01", tz="GMT"), 2)
+  )
+  
+  # Mixed time zones
+  ts1 <- uts(1, as.POSIXct("1950-06-01", tz="America/Chicago"))
+  ts2 <- uts(2, as.POSIXct("1950-06-01", tz="Australia/Sydney"))
+  utsv <- c(ts1, ts2)
+  expect_equal(
+    end(utsv),
+    as.POSIXct(c("1950-06-01 0:00:00", "1950-05-31 09:00:00"), tz="America/Chicago")
   )
   
   # Regression tests
