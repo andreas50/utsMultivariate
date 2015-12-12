@@ -2,11 +2,11 @@ context("apply")
 
 test_that("sapply works",{
   # Same result as base::sapply()
-  expect_equal(
+  expect_identical(
     sapply(ex_uts_vector(), length),
     base::sapply(ex_uts_vector(), length)
   )
-  expect_equal(
+  expect_identical(
     sapply(ex_uts_vector(), range),
     base::sapply(ex_uts_vector(), range)
   )
