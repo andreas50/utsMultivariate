@@ -4,7 +4,7 @@ test_that("sapply works",{
   # Same result as base::sapply()
   expect_equal(
     sapply(ex_uts_vector(), length),
-    base::sapply(ex_uts_vector(), length)
+    lengths(ex_uts_vector())
   )
   expect_equal(
     sapply(ex_uts_vector(), range),

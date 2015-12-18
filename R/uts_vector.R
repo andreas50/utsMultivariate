@@ -166,7 +166,7 @@ print.uts_vector <- function(x, ...)
   Name <- names(x)
   if (length(Name) < num_uts)
     Name <- rep(NA, num_uts)
-  stats <- data.frame(Name, Datapoints=sapply(x, length), start, end)
+  stats <- data.frame(Name, Datapoints=lengths(x), start, end)
   rownames(stats) <- 1:num_uts
 
   # Print nice description
