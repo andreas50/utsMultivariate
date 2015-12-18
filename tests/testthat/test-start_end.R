@@ -1,11 +1,11 @@
 context("start_end")
 
 test_that("start works",{
-  expect_equal(
+  expect_identical(
     start(uts_vector()),
     as.POSIXct(character())
   )
-  expect_equal(
+  expect_identical(
     start(c(ex_uts())),
     start(ex_uts())
   )
@@ -14,7 +14,7 @@ test_that("start works",{
   ts1 <- uts(1, as.POSIXct("1850-06-01", tz="GMT"))
   ts2 <- uts(2, as.POSIXct("1850-06-01", tz="GMT"))
   utsv <- c(ts1, ts2)
-  expect_equal(
+  expect_identical(
     start(utsv),
     rep(as.POSIXct("1850-06-01", tz="GMT"), 2)
   )
@@ -23,7 +23,7 @@ test_that("start works",{
   ts1 <- uts(1, as.POSIXct("1950-06-01", tz="America/Chicago"))
   ts2 <- uts(2, as.POSIXct("1950-06-01", tz="Australia/Sydney"))
   utsv <- c(ts1, ts2)
-  expect_equal(
+  expect_identical(
     start(utsv),
     as.POSIXct(c("1950-06-01 0:00:00", "1950-05-31 09:00:00"), tz="America/Chicago")
   )
@@ -35,7 +35,7 @@ test_that("start works",{
 
 
 test_that("end works",{
-  expect_equal(
+  expect_identical(
     end(uts_vector()),
     as.POSIXct(character())
   )
@@ -48,7 +48,7 @@ test_that("end works",{
   ts1 <- uts(1, as.POSIXct("1850-06-01", tz="GMT"))
   ts2 <- uts(2, as.POSIXct("1850-06-01", tz="GMT"))
   utsv <- c(ts1, ts2)
-  expect_equal(
+  expect_identical(
     end(utsv),
     rep(as.POSIXct("1850-06-01", tz="GMT"), 2)
   )
@@ -57,7 +57,7 @@ test_that("end works",{
   ts1 <- uts(1, as.POSIXct("1950-06-01", tz="America/Chicago"))
   ts2 <- uts(2, as.POSIXct("1950-06-01", tz="Australia/Sydney"))
   utsv <- c(ts1, ts2)
-  expect_equal(
+  expect_identical(
     end(utsv),
     as.POSIXct(c("1950-06-01 0:00:00", "1950-05-31 09:00:00"), tz="America/Chicago")
   )
