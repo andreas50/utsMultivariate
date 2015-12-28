@@ -1,11 +1,14 @@
 Package: utsMultivariate
-Version: 1.0.0.9001
+Version: 0.1.0.9000
 Date: 2015-12-10
 Title: Multivariate Unevenly-spaced Time Series
 Author: Andreas Eckner <andreas@eckner.com>
 Maintainer: Andreas Eckner <andreas@eckner.com>
-Depends: lubridate, uts
-Suggests: testthat
+Depends:
+    lubridate,
+    uts
+Suggests:
+    testthat
 Description: S3 classes for multivariate unevenly spaced time series. R users
     familiar with vectors, matrices, and data frames should find it
     straightforward to work with the corresponding time series objects, because
@@ -13,3 +16,4 @@ Description: S3 classes for multivariate unevenly spaced time series. R users
     analogous.
 License: GPL-2 | GPL-3
 URL: www.eckner.com
+RoxygenNote: 5.0.1
