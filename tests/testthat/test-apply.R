@@ -4,7 +4,8 @@ test_that("sapply works",{
   # Same result as base::sapply()
   expect_identical(
     sapply(ex_uts_vector(), length),
-    lengths(ex_uts_vector())
+    #lengths(ex_uts_vector())     # requires R (>= 3.2.0)
+    base::sapply(ex_uts_vector(), length)
   )
   expect_identical(
     sapply(ex_uts_vector(), range),

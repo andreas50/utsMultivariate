@@ -12,7 +12,7 @@
 \item{\ldots}{arguments passed to \code{sapply} in base \R.}
 }
 \description{
-This method is a wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"}.
+A wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"}.
 }
 \examples{
 # Same results as sapply() in base R
