@@ -42,7 +42,7 @@ sapply.uts_vector <- function(X, ...)
 
   # Simpify output further, if possible
   is_uts <- sapply(out, is.uts)
-  if (all(is_uts))
+  if (all(is_uts) && (length(out) > 0))
     out <- do.call("c", out)
   out
 }

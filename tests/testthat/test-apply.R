@@ -1,6 +1,12 @@
 context("apply")
 
 test_that("sapply works",{
+  # Trival case of empty uts_vector
+  expect_identical(
+    sapply(uts_vector(), length),
+    sapply(list(), length)
+  )
+  
   # Same result as base::sapply()
   expect_identical(
     sapply(ex_uts_vector(), length),
