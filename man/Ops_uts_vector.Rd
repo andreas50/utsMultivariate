@@ -4,20 +4,20 @@
 \alias{Ops_uts_vector}
 \title{Ops Group Methods for uts_vector}
 \usage{
-Ops_uts_vector(x, x2, .Generic)
+Ops_uts_vector(e1, e2, .Generic)
 }
 \description{
 Ops Group Methods for uts_vector
 }
 \examples{
 # Unary operators
--ex_uts()
-!(ex_uts() > 48)
+-ex_uts_vector()
+!(ex_uts_vector() > 48)
 
 # Binary operators
-ex_uts() + ex_uts()
-ex_uts() + 20
-20 + ex_uts()
+ex_uts_vector() + 20
+ex_uts_vector() + ex_uts()
+ex_uts_vector() + ex_uts_vector()
 }
 \keyword{internal}
 

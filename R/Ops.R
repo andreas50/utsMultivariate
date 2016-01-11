@@ -4,44 +4,43 @@
 #' @keywords internal
 #' @examples
 #' # Unary operators
-#' -ex_uts()
-#' !(ex_uts() > 48)
+#' -ex_uts_vector()
+#' !(ex_uts_vector() > 48)
 #' 
 #' # Binary operators
-#' ex_uts() + ex_uts()
-#' ex_uts() + 20
-#' 20 + ex_uts()
-Ops_uts_vector <- function(x, x2, .Generic)
+#' ex_uts_vector() + 20
+#' ex_uts_vector() + ex_uts()
+#' ex_uts_vector() + ex_uts_vector()
+Ops_uts_vector <- function(e1, e2, .Generic)
 {
   # Unary operator
-  if (missing(x2)) {
-    if (length(x) > 0)
-    	x <- sapply(x, .Generic)
-		return(x)
+  if (missing(e2)) {
+    if (length(e1) > 0)
+    	e1 <- sapply(e1, .Generic)
+		return(e1)
   }
-  
+
   # Binary operator
-  if (is(x, "uts_vector") && is(x2, "uts_vector")) {
-    # uts_vector Ops uts_vector
-    if (length(x) != length(x2))
+  if (is.uts_vector(e1) && is.uts_vector(e2)) {
+    if (length(e1) != length(e2))
       stop("The two uts_vectors need to be of same length in order to apply the element-wise operator '",
         .Generic, "'", sep="")
-    out <- x
-    for (j in 1:length(x))
-      out[[j]] <- do.call(.Generic, list(x[[j]],  x2[[j]]))
-  }  else if (is.numeric(x2)) {
-    # uts_vector Ops numeric
-    out <- x
-    for (j in 1:length(x))
-      out[[j]] <- do.call(.Generic, list(x[[j]],  x2))
+    out <- e1
+    for (j in 1:length(e1))
+      out[[j]] <- do.call(.Generic, list(e1[[j]],  e2[[j]]))
+  }  else if (is.uts_vector(e1)) {
+    if (!is.uts(e2) && (length(e2) != 1))
+      stop("Group methods 'Ops' between a 'uts_vector' and other objects work only for objects of length one")
+    out <- e1
+    for (j in 1:length(e1))
+      out[[j]] <- do.call(.Generic, list(e1[[j]],  e2))
   } else {
-    # numeric Ops uts_vector
-    out <- x2
-    for (j in 1:length(x2))
-      out[[j]] <- do.call(.Generic, list(x,  x2[[j]]))
+    if (!is.uts(e1) && (length(e1) != 1))
+      stop("Group methods 'Ops' between a 'uts_vector' and other objects work only for objects of length one")
+    out <- e2
+    for (j in 1:length(e2))
+      out[[j]] <- do.call(.Generic, list(e1,  e2[[j]]))
   }
   out
 }
-
-
 
