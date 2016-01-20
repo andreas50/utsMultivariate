@@ -27,6 +27,9 @@ Create a vector of unevenly spaced time series (\code{"uts_vector"}).
 
 \item \code{c}: constructor for \code{"uts_vector"} object out of \code{"uts"} and other \code{"uts_vector"} objects.
 }}
+\note{
+A virtual class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
+}
 \examples{
 # Two equivalent constructors
 uts_vector(apples=ex_uts(), oranges=ex_uts2())

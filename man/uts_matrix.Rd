@@ -8,7 +8,7 @@ uts_matrix(data = uts(), nrow = 1, ncol = 1, byrow = FALSE,
   dimnames = NULL)
 }
 \arguments{
-\item{data}{\code{\link{uts}} or \code{\link{uts_vector}} object.}
+\item{data}{a \code{\link{uts}} or \code{\link{uts_vector}}.}
 
 \item{nrow}{the desired number of rows.}
 
@@ -24,11 +24,14 @@ An object of class \code{"uts_matrix"}.
 \description{
 Create a matrix of unevenly spaced time series (\code{"uts_matrix"}).
 }
+\note{
+A virtual class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
+}
 \examples{
-# Create "uts_matrix" from single "uts" with recycling
+# Create using a single "uts" with recycling
 uts_matrix(ex_uts(), 2, 3)
 
-# Create "uts_matrix" from "uts_vector" with recycling
+# Create using "uts_vector" with recycling
 uts_matrix(ex_uts(), 2, 3)
 uts_matrix(ex_uts(), 2, 3, byrow=TRUE)
 

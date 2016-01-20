@@ -5,6 +5,8 @@
 #' Unevenly-spaced Time Series Matrix
 #' 
 #' Create a matrix of unevenly spaced time series (\code{"uts_matrix"}).
+#' 
+#' @note A virtual class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
 #'
 #' @return An object of class \code{"uts_matrix"}.
 #' @param data a \code{\link{uts}} or \code{\link{uts_vector}}.

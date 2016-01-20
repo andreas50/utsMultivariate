@@ -5,6 +5,8 @@
 #' Unevenly-spaced Time Series Vector
 #' 
 #' Create a vector of unevenly spaced time series (\code{"uts_vector"}).
+#' 
+#' @note A virtual class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
 #'
 #' @return An object of class \code{"uts_vector"}.
 #' @param \dots zero or more \code{\link{uts}} objects.
@@ -70,7 +72,7 @@ c.uts <- function(...)
   # Set attributes
   if (any(names != ""))
     names(out) <- names
-  class(out) <- c("uts_vector", "list")
+  class(out) <- c("uts_vector", "uts_virtual")
   out
 }
 
