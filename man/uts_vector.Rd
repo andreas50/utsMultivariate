@@ -42,7 +42,7 @@ c(ex_uts(), ex_uts_vector(), kiwis=ex_uts2())
 uts_vector()
 }
 \seealso{
-\code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
+\code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
 }
 \keyword{classes}
 \keyword{ts}

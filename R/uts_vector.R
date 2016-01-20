@@ -11,7 +11,7 @@
 #' @return An object of class \code{"uts_vector"}.
 #' @param \dots zero or more \code{\link{uts}} objects.
 #' 
-#' @seealso \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
+#' @seealso \code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
 #' 
 #' @keywords ts classes
 #' @examples
@@ -81,6 +81,38 @@ c.uts <- function(...)
 c.uts_vector <- function(...)
 {
   c.uts(...)
+}
+
+
+#' Repeat uts and uts_vector
+#' 
+#' Create a \code{"uts_vector"} by replicating the individual \code{"uts"} of the input \code{x}.
+#' 
+#' This method is a wrapper around \code{\link{rep}} in base \R that makes sure the returned object is of class \code{"uts_vector"}.
+#'
+#' @return An object of class \code{"uts_vector"}.
+#' @param x a \code{"uts"} or \code{"uts_vector"}.
+#' @param \dots further arguments passed to \code{\link{rep}} in base \R.
+#' 
+#' @examples
+#' # Repeat "uts"
+#' rep(ex_uts(), 4)
+#' 
+#' # Repeat "uts_vector"
+#' rep(ex_uts_vector(), times=3)
+#' rep(ex_uts_vector(), each=3)
+rep.uts <- function(x, ...)
+{
+  out <- base::rep(list(x), ...)
+  do.call(c.uts, out)
+}
+
+
+#' @rdname rep.uts
+rep.uts_vector <- function(x, ...)
+{
+  out <- base::rep(unclass(x), ...)
+  do.call(c.uts_vector, out)
 }
 
 
