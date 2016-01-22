@@ -59,8 +59,7 @@ print.uts_vector <- function(x, ...)
 print.uts_matrix <- function(x, print_times=FALSE, ...)
 {
     # Special case of empty "uts_matrix"
-  num_uts <- length(x)
-  if (num_uts == 0) {
+  if (length(x) == 0) {
     cat("-----------------\n")
     cat("uts_matrix object\n")
     cat("-----------------\n")

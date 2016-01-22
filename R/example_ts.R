@@ -14,7 +14,7 @@ ex_uts_vector <- function()
 {
   c(
     apples = ex_uts(),
-    oranges = lag_t(ex_uts() * 1.1, dhours(1.5))
+    oranges = head(lag_t(ex_uts() * 1.1, dhours(1.5)), 5L)
   )
 }
 
