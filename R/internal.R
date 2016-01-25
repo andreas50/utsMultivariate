@@ -4,7 +4,9 @@
 #' 
 #' \code{uts_vector} methods:
 #' \itemize{
+#'   \item \code{\link{is.uts_matrix}}
 #'   \item \code{\link{is.uts_vector}}
+#'   \item \code{\link{print.uts_matrix}}
 #'   \item \code{\link{print.uts_vector}}
 #' }
 #' 

@@ -81,3 +81,13 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
 }
 
 
+#' @rdname uts_matrix
+#' 
+#' @description \code{is.uts_matrix} returns \code{TRUE} if its argument is a \code{"uts_matrix"} object.
+#' 
+#' @keywords internal
+is.uts_matrix <- function(x)
+{
+  inherits(x, "uts_matrix")
+}
+

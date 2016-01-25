@@ -25,6 +25,12 @@
 #' 
 #' # Empty "uts_vector"
 #' uts_vector()
+#' 
+#' # The first two test return TRUE, the last two tests return FALSE
+#' is.uts_vector(uts_vector())
+#' is.uts_vector(ex_uts_vector())
+#' is.uts_vector(5)
+#' is.uts_vector(ex_uts())
 uts_vector <- function(...)
 {
   c.uts(...)
@@ -87,7 +93,7 @@ c.uts_vector <- function(...)
 
 #' @rdname uts_vector
 #' 
-#' @description \code{is.uts_vector} returns \code{TRUE} if its argument is a "uts_vector" object.
+#' @description \code{is.uts_vector} returns \code{TRUE} if its argument is a \code{"uts_vector"} object.
 #' 
 #' @keywords internal
 is.uts_vector <- function(x)

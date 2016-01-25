@@ -26,7 +26,7 @@ An object of class \code{"uts_vector"}.
 \description{
 Create a vector of unevenly spaced time series (\code{"uts_vector"}).
 
-\code{is.uts_vector} returns \code{TRUE} if its argument is a "uts_vector" object.
+\code{is.uts_vector} returns \code{TRUE} if its argument is a \code{"uts_vector"} object.
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -47,6 +47,12 @@ c(ex_uts(), ex_uts_vector(), kiwis=ex_uts2())
 
 # Empty "uts_vector"
 uts_vector()
+
+# The first two test return TRUE, the last two tests return FALSE
+is.uts_vector(uts_vector())
+is.uts_vector(ex_uts_vector())
+is.uts_vector(5)
+is.uts_vector(ex_uts())
 }
 \seealso{
 \code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
