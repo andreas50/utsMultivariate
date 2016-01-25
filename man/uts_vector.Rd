@@ -48,10 +48,9 @@ c(ex_uts(), ex_uts_vector(), kiwis=ex_uts2())
 # Empty "uts_vector"
 uts_vector()
 
-# The first two test return TRUE, the last two tests return FALSE
+# The first two test return TRUE, the other returns FALSE
 is.uts_vector(uts_vector())
-is.uts_vector(ex_uts_vector())
-is.uts_vector(5)
+is.uts_matrix(uts_matrix())      # "uts_matrix" inherits from "uts_vector"
 is.uts_vector(ex_uts())
 }
 \seealso{

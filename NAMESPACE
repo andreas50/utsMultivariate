@@ -35,6 +35,7 @@ export(ex_uts_vector2)
 
 
 # Miscellaneous functions
+export(is.uts_matrix)
 export(is.uts_vector)
 export(Ops_uts_vector)
 

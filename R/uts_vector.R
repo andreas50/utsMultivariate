@@ -10,7 +10,6 @@
 #'
 #' @return An object of class \code{"uts_vector"}.
 #' @param \dots zero or more \code{\link{uts}} objects.
-#' @param x an \R object.
 #' 
 #' @seealso \code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
 #' 
@@ -26,10 +25,9 @@
 #' # Empty "uts_vector"
 #' uts_vector()
 #' 
-#' # The first two test return TRUE, the last two tests return FALSE
+#' # The first two test return TRUE, the other returns FALSE
 #' is.uts_vector(uts_vector())
-#' is.uts_vector(ex_uts_vector())
-#' is.uts_vector(5)
+#' is.uts_matrix(uts_matrix())      # "uts_matrix" inherits from "uts_vector"
 #' is.uts_vector(ex_uts())
 uts_vector <- function(...)
 {
@@ -94,6 +92,8 @@ c.uts_vector <- function(...)
 #' @rdname uts_vector
 #' 
 #' @description \code{is.uts_vector} returns \code{TRUE} if its argument is a \code{"uts_vector"} object.
+#' 
+#' @param x an \R object.
 #' 
 #' @keywords internal
 is.uts_vector <- function(x)
