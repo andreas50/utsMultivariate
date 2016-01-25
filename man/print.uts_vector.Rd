@@ -3,7 +3,7 @@
 \name{print.uts_vector}
 \alias{print.uts_matrix}
 \alias{print.uts_vector}
-\title{Print Values}
+\title{Print Multivariate Time Series}
 \usage{
 \method{print}{uts_vector}(x, ...)
 
@@ -17,7 +17,7 @@
 \item{\dots}{further arguments passed to or from methods.}
 }
 \description{
-Print basic information (the number of data points, and the first and last observation time) about the individual \code{"uts"} in a multivariate time series object.
+Print basic information (the number of data points, and the first and last observation time) about the individual \code{"uts"} in a multivariate time series.
 }
 \examples{
 # Print "uts_vector"
@@ -25,9 +25,8 @@ uts_vector()
 print(uts_vector(a=ex_uts(), b=ex_uts2()))
 
 # Print "uts_matrix"
-utsm <- uts_matrix(ex_uts(), 2, 3)
-utsm
-print(utsm, print_times=TRUE)
+ex_uts_matrix()
+print(ex_uts_matrix(), print_times=TRUE)
 
 # Print "uts_data_frame"
 }

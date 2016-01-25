@@ -30,6 +30,7 @@ S3method(start, uts_vector)
 
 
 # Sample multivariate time series
+export(ex_uts_matrix)
 export(ex_uts_vector)
 export(ex_uts_vector2)
 

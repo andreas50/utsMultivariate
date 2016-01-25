@@ -2,9 +2,9 @@
 # Print methods for uts* classes #
 ##################################
 
-#' Print Values
+#' Print Multivariate Time Series
 #' 
-#' Print basic information (the number of data points, and the first and last observation time) about the individual \code{"uts"} in a multivariate time series object.
+#' Print basic information (the number of data points, and the first and last observation time) about the individual \code{"uts"} in a multivariate time series.
 #' 
 #' @param x an object used to select a method.
 #' @param print_times boolean. For two-dimensional time series objects, whether to print the start and end times of the individual time series.
@@ -18,9 +18,8 @@
 #' print(uts_vector(a=ex_uts(), b=ex_uts2()))
 #' 
 #' # Print "uts_matrix"
-#' utsm <- uts_matrix(ex_uts(), 2, 3)
-#' utsm
-#' print(utsm, print_times=TRUE)
+#' ex_uts_matrix()
+#' print(ex_uts_matrix(), print_times=TRUE)
 #' 
 #' # Print "uts_data_frame"
 print.uts_vector <- function(x, ...)
