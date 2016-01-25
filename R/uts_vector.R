@@ -10,6 +10,7 @@
 #'
 #' @return An object of class \code{"uts_vector"}.
 #' @param \dots zero or more \code{\link{uts}} objects.
+#' @param x an \R object.
 #' 
 #' @seealso \code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
 #' 
@@ -84,6 +85,17 @@ c.uts_vector <- function(...)
 }
 
 
+#' @rdname uts_vector
+#' 
+#' @description \code{is.uts_vector} returns \code{TRUE} if its argument is a "uts_vector" object.
+#' 
+#' @keywords internal
+is.uts_vector <- function(x)
+{
+  inherits(x, "uts_vector")
+}
+
+
 #' Repeat uts and uts_vector
 #' 
 #' Create a \code{"uts_vector"} by replicating the individual \code{"uts"} of the input \code{x}.
@@ -150,22 +162,5 @@ uts_vector_wide <- function(values, times, names=colnames(values))
     out[[j]] <- uts(values[, j], times)
   names(out) <- names
   out
-}
-
-
-#' Is Object a uts_vector?
-#' 
-#' Return \code{TRUE} if and only if the argument is a \code{"uts_vector"} object.
-#'  
-#' @param x an \R object.
-#' 
-#' @keywords internal
-#' @examples
-#' is.uts_vector(uts_vector())
-#' is.uts_vector(ex_uts_vector())
-#' is.uts_vector(5)
-is.uts_vector <- function(x)
-{
-  inherits(x, "uts_vector")
 }
 

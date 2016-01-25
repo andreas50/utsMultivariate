@@ -3,6 +3,7 @@
 \name{uts_vector}
 \alias{c.uts}
 \alias{c.uts_vector}
+\alias{is.uts_vector}
 \alias{uts_vector}
 \title{Unevenly-spaced Time Series Vector}
 \usage{
@@ -11,8 +12,12 @@ uts_vector(...)
 \method{c}{uts}(...)
 
 \method{c}{uts_vector}(...)
+
+is.uts_vector(x)
 }
 \arguments{
+\item{x}{an \R object.}
+
 \item{\dots}{zero or more \code{\link{uts}} objects.}
 }
 \value{
@@ -20,6 +25,8 @@ An object of class \code{"uts_vector"}.
 }
 \description{
 Create a vector of unevenly spaced time series (\code{"uts_vector"}).
+
+\code{is.uts_vector} returns \code{TRUE} if its argument is a "uts_vector" object.
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -45,5 +52,6 @@ uts_vector()
 \code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
 }
 \keyword{classes}
+\keyword{internal}
 \keyword{ts}
 
