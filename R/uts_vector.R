@@ -160,7 +160,7 @@ uts_vector_wide <- function(values, times, names=colnames(values))
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
   
-  # Order data by chronologically
+  # Order data chronologically
   o <- order(times)
   times <- times[o]
   values <- values[o,,drop=FALSE]  
@@ -197,22 +197,22 @@ uts_vector_long <- function(values, times, names)
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
   
+  # Order data chronologically
+  o <- order(times)
+  times <- times[o]
+  values <- values[o] 
+  names <- names[o]
+  
   # Determine list of indices for each unique name
   indices <- split(seq_along(names), names)
-  num_ts <- length(indices)
-  out <- rep(uts(), num_ts)
-  names(out) <- names(indices)
 
   # Insert data
+  out <- uts_vector()
   for (j in seq_along(indices)) {
-    # Order observations chronologically
+    # Insert UTS for j-th name
     pos <- indices[[j]]
-    values_j <- values[pos]
-    times_j <- times[pos]
-    o <- order(times_j)
-    
-    # Insert UTS
-    out[[j]] <- uts(values_j[o], times_j[o])
+    out[[j]] <- uts(values[pos], times[pos])
   }
+  names(out) <- names(indices)
   out  
 }
