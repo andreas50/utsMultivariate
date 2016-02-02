@@ -54,7 +54,7 @@ is.uts_matrix(uts_matrix())      # "uts_matrix" inherits from "uts_vector"
 is.uts_vector(ex_uts())
 }
 \seealso{
-\code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
+\code{\link{rep.uts}}, \code{\link{uts_vector_long}}, \code{\link{uts_vector_wide}} for alternative constructors.
 }
 \keyword{classes}
 \keyword{internal}

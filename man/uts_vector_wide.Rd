@@ -17,11 +17,14 @@ uts_vector_wide(values, times, names = colnames(values))
 An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
 }
 \description{
-Create a \code{"uts_vector"} from wide tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). With this input format, values in the same row are measurements at the same point in time, while values in the same column are measurements of the same variable.
+Create a \code{"uts_vector"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, values in the same row are measurements at the same point in time, while values in the same column are measurements of the same variable.
 }
 \examples{
 data <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10])
 uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10))
+}
+\seealso{
+\code{\link{uts_vector_long}}
 }
 \keyword{classes}
 \keyword{ts}

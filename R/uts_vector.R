@@ -11,7 +11,7 @@
 #' @return An object of class \code{"uts_vector"}.
 #' @param \dots zero or more \code{\link{uts}} objects.
 #' 
-#' @seealso \code{\link{rep.uts}}, \code{\link{uts_vector_wide}}, \code{uts_vector_long} for alternative constructors.
+#' @seealso \code{\link{rep.uts}}, \code{\link{uts_vector_long}}, \code{\link{uts_vector_wide}} for alternative constructors.
 #' 
 #' @keywords ts classes
 #' @examples
@@ -136,7 +136,7 @@ rep.uts_vector <- function(x, ...)
 
 #' Create uts_vector from wide tabular data
 #' 
-#' Create a \code{"uts_vector"} from wide tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). With this input format, values in the same row are measurements at the same point in time, while values in the same column are measurements of the same variable.
+#' Create a \code{"uts_vector"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, values in the same row are measurements at the same point in time, while values in the same column are measurements of the same variable.
 #' 
 #' @return An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
 #' @param values a matrix or data.frame. Each row represents a vector of observations at a specific time point.
@@ -144,6 +144,7 @@ rep.uts_vector <- function(x, ...)
 #' @param names a character vector, indicating the source of each column in \code{values}. By default, the column names of \code{values} are used.
 #' 
 #' @keywords ts classes
+#' @seealso \code{\link{uts_vector_long}}
 #' @examples 
 #' data <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10])
 #' uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10))
@@ -153,9 +154,11 @@ uts_vector_wide <- function(values, times, names=colnames(values))
   if (!is.matrix(values) && !is.data.frame(values))
     stop("The data is not in matrix or data.frame format")
   if (nrow(values) != length(times))
-    stop("The number of observation value vectors does not match the number of observation times")
+    stop("The number of observation values does not match the number of observation times")
   if (!is.null(names) && (length(names) != ncol(values)))
     stop("The numnber of observation variables does not match the number of variable names")
+  if (!is.POSIXct(times))
+    stop("The observation time vector is not a POSIXct object")
   
   # Order data by chronologically
   o <- order(times)
@@ -170,3 +173,46 @@ uts_vector_wide <- function(values, times, names=colnames(values))
   out
 }
 
+
+#' Create uts_vector from long tabular data
+#' 
+#' Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the source of each observation.
+#' 
+#' @return An object of class \code{"uts_vector"} with length given by to the number of distinct \code{names}.
+#' @param values a vector observation values.
+#' @param times a \code{\link{POSIXct}} object. The matching observation times.
+#' @param names a character vector. Thehe source of each observation.
+#' 
+#' @keywords ts classes
+#' @seealso \code{\link{uts_vector_wide}}
+#' @examples 
+#' uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(1:10), names=rep(c("a", "b", "c"), length=10))
+uts_vector_long <- function(values, times, names)
+{
+  # Argument checking
+  if (length(values) != length(times))
+    stop("The number of observation values does not match the number of observation times")
+  if (length(values) != length(names))
+    stop("The length of the observation names does not match the number of observation values")
+  if (!is.POSIXct(times))
+    stop("The observation time vector is not a POSIXct object")
+  
+  # Determine list of indices for each unique name
+  indices <- split(seq_along(names), names)
+  num_ts <- length(indices)
+  out <- rep(uts(), num_ts)
+  names(out) <- names(indices)
+
+  # Insert data
+  for (j in seq_along(indices)) {
+    # Order observations chronologically
+    pos <- indices[[j]]
+    values_j <- values[pos]
+    times_j <- times[pos]
+    o <- order(times_j)
+    
+    # Insert UTS
+    out[[j]] <- uts(values_j[o], times_j[o])
+  }
+  out  
+}

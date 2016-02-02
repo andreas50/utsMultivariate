@@ -6,7 +6,9 @@ importFrom(stats, end, na.omit, start)
 
 # Export class constructors
 export(uts_matrix)
+export(uts_matrix_long)
 export(uts_vector)
+export(uts_vector_long)
 export(uts_vector_wide)
 
 
