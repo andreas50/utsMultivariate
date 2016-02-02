@@ -35,3 +35,24 @@ test_that("uts_vector_long works",{
     file="test-uts_vector_long_2.rds"
   )
 })
+
+
+test_that("uts_matrix_long works",{
+  # Argument checking
+  expect_error(uts_matrix_long(1, times=Sys.time() + days(1:2), "A", "a"))
+  expect_error(uts_matrix_long(1, times=Sys.time(), 1:2, "a"))
+  expect_error(uts_matrix_long(1, times=Sys.time(), "A", 1:2))
+  
+  # Regression tests
+  expect_equal_to_reference(
+    uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
+      colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d")),
+    file="test-uts_matrix_long_1.rds"
+  )
+  expect_equal_to_reference(
+    uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(5:1),
+      colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d")),
+    file="test-uts_matrix_long_2.rds"
+  )
+})
+

@@ -1,5 +1,5 @@
 ####################
-# UTS_MATRIXclass #
+# UTS_MATRIX class #
 ####################
 
 #' Unevenly-spaced Time Series Matrix
@@ -82,6 +82,61 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
   class(out) <- c("uts_matrix", class(uts_vector()))
   dim(out) <- c(nrow, ncol)
   dimnames(out) <- dimnames
+  out
+}
+
+
+#' Create uts_matrix from long tabular data
+#' 
+#' Create a \code{"uts_matrix"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, and the row and column name (also known as \emph{record} and \emph{field}) of each observation.
+#' 
+#' @return An object of class \code{"uts_matrix"}. The number of rows is given by to the number of records (distinct \code{rownames}), while the number of columns is given by the number of fields (distinct \code{colnames}).
+#' @param values a vector observation values.
+#' @param times a \code{\link{POSIXct}} object. The matching observation times.
+#' @param rownames a character vector. The the row name (also known as \emph{record}) of each observation.
+#' @param colnames a character vector. The the column names (also known as \emph{field}) of each observation.
+#' 
+#' @keywords ts classes
+#' @examples 
+#' uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
+#'   colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d"))
+uts_matrix_long <- function(values, times, rownames, colnames)
+{
+  # Argument checking
+  if (length(values) != length(times))
+    stop("The number of observation values does not match the number of observation times")
+  if (length(values) != length(rownames))
+    stop("The number of observation values does not match the number of row names")
+  if (length(values) != length(colnames))
+    stop("The number of observation values does not match the number of column names")
+  if (!is.POSIXct(times))
+    stop("The observation time vector is not a POSIXct object")
+  
+  # Order data chronologically
+  o <- order(times)
+  times <- times[o]
+  values <- values[o] 
+  rownames <- rownames[o]
+  colnames <- colnames[o]
+  
+  # Allocate memory for output
+  rnames <- unique(rownames)
+  cnames <- unique(colnames)
+  nrows <- length(rnames)
+  ncols <- length(cnames)
+  out <- uts_matrix(uts(), ncol=ncols, nrow=nrows, dimnames=list(rnames, cnames))
+  
+  # Determine values and times for each (row,column) pair
+  keys <- paste(rep(rnames, ncols), rep(cnames, each=nrows), sep="$$$")
+  all_keys <- paste(rownames, colnames, sep="$$$")
+  pos <- match(all_keys, keys)
+  values_ij <- split(values, pos)
+  times_ij <- split(times, pos)
+
+  # Insert individual UTS
+  index <- as.numeric(names(values_ij))
+  for (j in seq_along(index))
+    out[[index[j]]] <- uts(values_ij[[j]], times_ij[[j]])
   out
 }
 

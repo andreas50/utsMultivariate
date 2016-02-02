@@ -20,7 +20,8 @@ An object of class \code{"uts_vector"} with length given by to the number of dis
 Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the source of each observation.
 }
 \examples{
-uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(1:10), names=rep(c("a", "b", "c"), length=10))
+uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(1:10),
+  names=rep(c("a", "b", "c"), length=10))
 }
 \seealso{
 \code{\link{uts_vector_wide}}
