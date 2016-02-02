@@ -10,8 +10,12 @@ test_that("uts_vector_wide works",{
   # Regression tests
   data <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10])
   expect_equal_to_reference(
-    start(uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10))),
-    file="test-uts_vector_wide.rds"
+    uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10)),
+    file="test-uts_vector_wide_1.rds"
+  )
+  expect_equal_to_reference(
+    uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(10:1)),
+    file="test-uts_vector_wide_2.rds"
   )
 })
 
