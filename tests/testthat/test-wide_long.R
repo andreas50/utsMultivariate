@@ -27,11 +27,13 @@ test_that("uts_vector_long works",{
   
   # Regression tests
   expect_equal_to_reference(
-    uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(1:10), names=rep(c("a", "b", "c"), length=10)),
+    uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
+      sources=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b")),
     file="test-uts_vector_long_1.rds"
   )
   expect_equal_to_reference(
-    uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(10:1), names=rep(c("a", "b", "c"), length=10)),
+    uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(10:1),
+      sources=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b")),
     file="test-uts_vector_long_2.rds"
   )
   #

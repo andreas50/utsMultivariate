@@ -141,7 +141,7 @@ rep.uts_vector <- function(x, ...)
 #' @return An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
 #' @param values a matrix or data.frame. Each row represents a vector of observations at a specific time point.
 #' @param times a \code{\link{POSIXct}} object. The observation times of the rows of \code{values}.
-#' @param names a character vector, indicating the source of each column in \code{values}. By default, the column names of \code{values} are used.
+#' @param names a character vector. The source (e.g. person, country, etc.) of each column in \code{values}. By default, the column names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_long}}
@@ -176,12 +176,12 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 
 #' Create uts_vector from long tabular data
 #' 
-#' Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the source of each observation.
+#' Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the source name of each observation.
 #' 
-#' @return An object of class \code{"uts_vector"} with length given by to the number of distinct \code{names}.
+#' @return An object of class \code{"uts_vector"} with length given by to the number of distinct sources.
 #' @param values a vector observation values.
 #' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param names a character vector. The source of each observation. By default, the names of \code{values} are used.
+#' @param sources a character vector. The matching source name (e.g. person, country, etc.) of each observation. By default, the names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_wide}}
@@ -191,25 +191,25 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 #' uts_vector_long(values, times)
 #' 
 #' uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
-#'   names=rep(c("a", "b", "c"), length=10))
-uts_vector_long <- function(values, times, names=base::names(values))
+#'   sources=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b"))
+uts_vector_long <- function(values, times, sources=names(values))
 {
   # Argument checking
   if (length(values) != length(times))
     stop("The number of observation values does not match the number of observation times")
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
-  if (length(values) != length(names))
-    stop("The length of the observation names does not match the number of observation values")
+  if (length(values) != length(sources))
+    stop("The length of the source names does not match the number of observation values")
   
   # Order data chronologically
   o <- order(times)
   times <- times[o]
   values <- values[o] 
-  names <- names[o]
+  sources <- sources[o]
   
   # Determine list of indices for each unique name
-  indices <- split(seq_along(names), names)
+  indices <- split(seq_along(sources), sources)
 
   # Insert data
   out <- uts_vector()
