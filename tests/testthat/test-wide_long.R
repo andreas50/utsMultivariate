@@ -34,6 +34,13 @@ test_that("uts_vector_long works",{
     uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(10:1), names=rep(c("a", "b", "c"), length=10)),
     file="test-uts_vector_long_2.rds"
   )
+  #
+  values <- c(a=5, b=6, a=6, a=7)
+  times <- as.POSIXct("2016-01-01") + dhours(1:4)
+  expect_equal_to_reference(
+    uts_vector_long(values, times),
+    file="test-uts_vector_long_3.rds"
+  )
 })
 
 

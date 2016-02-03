@@ -181,21 +181,26 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 #' @return An object of class \code{"uts_vector"} with length given by to the number of distinct \code{names}.
 #' @param values a vector observation values.
 #' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param names a character vector. Thehe source of each observation.
+#' @param names a character vector. The source of each observation. By default, the names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_wide}}
 #' @examples 
-#' uts_vector_long(values=1:10, times=as.POSIXct("2010-01-01") + days(1:10), names=rep(c("a", "b", "c"), length=10))
-uts_vector_long <- function(values, times, names)
+#' values <- c(a=5, b=6, a=6, a=7)
+#' times <- as.POSIXct("2016-01-01") + dhours(1:4)
+#' uts_vector_long(values, times)
+#' 
+#' uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
+#'   names=rep(c("a", "b", "c"), length=10))
+uts_vector_long <- function(values, times, names=base::names(values))
 {
   # Argument checking
   if (length(values) != length(times))
     stop("The number of observation values does not match the number of observation times")
-  if (length(values) != length(names))
-    stop("The length of the observation names does not match the number of observation values")
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
+  if (length(values) != length(names))
+    stop("The length of the observation names does not match the number of observation values")
   
   # Order data chronologically
   o <- order(times)
