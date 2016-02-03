@@ -136,34 +136,34 @@ rep.uts_vector <- function(x, ...)
 
 #' Create uts_vector from wide tabular data
 #' 
-#' Create a \code{"uts_vector"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, values in the same row are measurements at the same point in time, while values in the same column are measurements of the same variable.
+#' Create a \code{"uts_vector"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, values in the same row are measurements at the same time point, either across multiple entities (e.g. persons, countries) or of multiple attributes (e.g. several economic indicators, blood work results). Values in the same column are measurements of the same entity or attribute over time.
 #' 
 #' @return An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
-#' @param values a matrix or data.frame. Each row represents a vector of observations at a specific time point.
+#' @param values a matrix or data.frame. Each row is a vector of observations at a specific time point.
 #' @param times a \code{\link{POSIXct}} object. The observation times of the rows of \code{values}.
-#' @param names a character vector. The source (e.g. person, country, etc.) of each column in \code{values}. By default, the column names of \code{values} are used.
+#' @param names a character vector. The entity/attribute names (e.g. person, country, economic indicator) of the columns of \code{values}. By default, the column names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_long}}
 #' @examples 
-#' data <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10])
-#' uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10))
+#' values <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10], stringsAsFactors=FALSE)
+#' uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10))
 uts_vector_wide <- function(values, times, names=colnames(values))
 {
   # Argument checking
   if (!is.matrix(values) && !is.data.frame(values))
     stop("The data is not in matrix or data.frame format")
   if (nrow(values) != length(times))
-    stop("The number of observation values does not match the number of observation times")
+    stop("The number of sources values does not match the number of observation times")
   if (!is.null(names) && (length(names) != ncol(values)))
-    stop("The numnber of observation variables does not match the number of variable names")
+    stop("The number of observation entities does not match the number of source names")
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
   
   # Order data chronologically
   o <- order(times)
   times <- times[o]
-  values <- values[o,,drop=FALSE]  
+  values <- values[o,,drop=FALSE]
 
   # Generate "uts_vector"
   out <- uts_vector()
@@ -176,12 +176,12 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 
 #' Create uts_vector from long tabular data
 #' 
-#' Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the source name of each observation.
+#' Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the entity/attribute name (e.g. person, country, economic indicator) of each observation.
 #' 
 #' @return An object of class \code{"uts_vector"} with length given by to the number of distinct sources.
 #' @param values a vector observation values.
 #' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param sources a character vector. The matching source name (e.g. person, country, etc.) of each observation. By default, the names of \code{values} are used.
+#' @param names a character vector. The matching entity/attribute names (e.g. persons, countries, economic indicators) of each observation. By default, the names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_wide}}
@@ -191,25 +191,25 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 #' uts_vector_long(values, times)
 #' 
 #' uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
-#'   sources=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b"))
-uts_vector_long <- function(values, times, sources=names(values))
+#'   names=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b"))
+uts_vector_long <- function(values, times, names=base::names(values))
 {
   # Argument checking
   if (length(values) != length(times))
     stop("The number of observation values does not match the number of observation times")
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
-  if (length(values) != length(sources))
+  if (length(values) != length(names))
     stop("The length of the source names does not match the number of observation values")
   
   # Order data chronologically
   o <- order(times)
   times <- times[o]
   values <- values[o] 
-  sources <- sources[o]
+  names <- names[o]
   
   # Determine list of indices for each unique name
-  indices <- split(seq_along(sources), sources)
+  indices <- split(seq_along(names), names)
 
   # Insert data
   out <- uts_vector()

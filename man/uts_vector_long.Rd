@@ -11,13 +11,13 @@ uts_vector_long(values, times, names = base::names(values))
 
 \item{times}{a \code{\link{POSIXct}} object. The matching observation times.}
 
-\item{names}{a character vector. The source of each observation. By default, the names of \code{values} are used.}
+\item{names}{a character vector. The matching entity/attribute names (e.g. persons, countries, economic indicators) of each observation. By default, the names of \code{values} are used.}
 }
 \value{
-An object of class \code{"uts_vector"} with length given by to the number of distinct \code{names}.
+An object of class \code{"uts_vector"} with length given by to the number of distinct sources.
 }
 \description{
-Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the source of each observation.
+Create a \code{"uts_vector"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has three different columns; the observation values, the observation times, and the entity/attribute name (e.g. person, country, economic indicator) of each observation.
 }
 \examples{
 values <- c(a=5, b=6, a=6, a=7)
@@ -25,7 +25,7 @@ times <- as.POSIXct("2016-01-01") + dhours(1:4)
 uts_vector_long(values, times)
 
 uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
-  names=rep(c("a", "b", "c"), length=10))
+  names=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b"))
 }
 \seealso{
 \code{\link{uts_vector_wide}}

@@ -8,13 +8,13 @@ test_that("uts_vector_wide works",{
   expect_error(uts_vector_wide(matrix(1:4, 2, 2), 1:2))
   
   # Regression tests
-  data <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10])
+  values <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10], stringsAsFactors=FALSE)
   expect_equal_to_reference(
-    uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(1:10)),
+    uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10)),
     file="test-uts_vector_wide_1.rds"
   )
   expect_equal_to_reference(
-    uts_vector_wide(data, times=as.POSIXct("2015-01-01") + ddays(10:1)),
+    uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(10:1)),
     file="test-uts_vector_wide_2.rds"
   )
 })
@@ -28,12 +28,12 @@ test_that("uts_vector_long works",{
   # Regression tests
   expect_equal_to_reference(
     uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
-      sources=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b")),
+      names=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b")),
     file="test-uts_vector_long_1.rds"
   )
   expect_equal_to_reference(
     uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(10:1),
-      sources=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b")),
+      names=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b")),
     file="test-uts_vector_long_2.rds"
   )
   #
