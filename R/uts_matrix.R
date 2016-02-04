@@ -88,26 +88,27 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
 
 #' Create uts_matrix from long tabular data
 #' 
-#' Create a \code{"uts_matrix"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, and the row and column name (also known as \emph{record} and \emph{field}) of each observation.
+#' Create a \code{"uts_matrix"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, the entity name of each observation (e.g. person, country), and the attribute/field name of each observation (e.g. which one of serveral economic indicators, which one of several blood measurement values).
 #' 
-#' @return An object of class \code{"uts_matrix"}. The number of rows is given by to the number of records (distinct \code{rownames}), while the number of columns is given by the number of fields (distinct \code{colnames}).
+#' @return An object of class \code{"uts_matrix"}. The time series in row \code{entity_name} and column \code{field_name} contains all observations of such entity for such field.
+#' @return The number of rows is given by to the number of distinct entity names (parameter \code{names}), while the number of columns is given by the number of distinct attribute/field names (parameter \code{fields}).
 #' @param values a vector observation values.
 #' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param rownames a character vector. The the row name (also known as \emph{record}) of each observation.
-#' @param colnames a character vector. The the column names (also known as \emph{field}) of each observation.
+#' @param names a character vector. The the matching entity names of the observations.
+#' @param fields a character vector. The the matching attribute/field names the observations.
 #' 
 #' @keywords ts classes
 #' @examples 
 #' uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
-#'   colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d"))
-uts_matrix_long <- function(values, times, rownames, colnames)
+#'   names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d"))
+uts_matrix_long <- function(values, times, names, fields)
 {
   # Argument checking
   if (length(values) != length(times))
     stop("The number of observation values does not match the number of observation times")
-  if (length(values) != length(rownames))
+  if (length(values) != length(names))
     stop("The number of observation values does not match the number of row names")
-  if (length(values) != length(colnames))
+  if (length(values) != length(fields))
     stop("The number of observation values does not match the number of column names")
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
@@ -116,19 +117,19 @@ uts_matrix_long <- function(values, times, rownames, colnames)
   o <- order(times)
   times <- times[o]
   values <- values[o] 
-  rownames <- rownames[o]
-  colnames <- colnames[o]
+  names <- names[o]
+  fields <- fields[o]
   
   # Allocate memory for output
-  rnames <- unique(rownames)
-  cnames <- unique(colnames)
+  rnames <- sort(unique(names))
+  cnames <- sort(unique(fields))
   nrows <- length(rnames)
   ncols <- length(cnames)
   out <- uts_matrix(uts(), ncol=ncols, nrow=nrows, dimnames=list(rnames, cnames))
   
   # Determine values and times for each (row,column) pair
   keys <- paste(rep(rnames, ncols), rep(cnames, each=nrows), sep="$$$")
-  all_keys <- paste(rownames, colnames, sep="$$$")
+  all_keys <- paste(names, fields, sep="$$$")
   pos <- match(all_keys, keys)
   values_ij <- split(values, pos)
   times_ij <- split(times, pos)

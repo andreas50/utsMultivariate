@@ -4,26 +4,28 @@
 \alias{uts_matrix_long}
 \title{Create uts_matrix from long tabular data}
 \usage{
-uts_matrix_long(values, times, rownames, colnames)
+uts_matrix_long(values, times, names, fields)
 }
 \arguments{
 \item{values}{a vector observation values.}
 
 \item{times}{a \code{\link{POSIXct}} object. The matching observation times.}
 
-\item{rownames}{a character vector. The the row name (also known as \emph{record}) of each observation.}
+\item{names}{a character vector. The the matching entity names of the observations.}
 
-\item{colnames}{a character vector. The the column names (also known as \emph{field}) of each observation.}
+\item{fields}{a character vector. The the matching attribute/field names the observations.}
 }
 \value{
-An object of class \code{"uts_matrix"}. The number of rows is given by to the number of records (distinct \code{rownames}), while the number of columns is given by the number of fields (distinct \code{colnames}).
+An object of class \code{"uts_matrix"}. The time series in row \code{entity_name} and column \code{field_name} contains all observations of such entity for such field.
+
+The number of rows is given by to the number of distinct entity names (parameter \code{names}), while the number of columns is given by the number of distinct attribute/field names (parameter \code{fields}).
 }
 \description{
-Create a \code{"uts_matrix"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, and the row and column name (also known as \emph{record} and \emph{field}) of each observation.
+Create a \code{"uts_matrix"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, the entity name of each observation (e.g. person, country), and the attribute/field name of each observation (e.g. which one of serveral economic indicators, which one of several blood measurement values).
 }
 \examples{
 uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
-  colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d"))
+  names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d"))
 }
 \keyword{classes}
 \keyword{ts}

@@ -55,12 +55,12 @@ test_that("uts_matrix_long works",{
   # Regression tests
   expect_equal_to_reference(
     uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
-      colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d")),
+      names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d")),
     file="test-uts_matrix_long_1.rds"
   )
   expect_equal_to_reference(
     uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(5:1),
-      colnames=c("A", "A", "B", "B", "A"), rownames=c("c", "d", "d", "d", "d")),
+      names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d")),
     file="test-uts_matrix_long_2.rds"
   )
 })
