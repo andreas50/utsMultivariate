@@ -141,12 +141,13 @@ rep.uts_vector <- function(x, ...)
 #' @return An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
 #' @param values a matrix or data.frame. Each row is a vector of observations at a specific time point.
 #' @param times a \code{\link{POSIXct}} object. The observation times of the rows of \code{values}.
-#' @param names a character vector. The entity/attribute names (e.g. person, country, economic indicator) of the columns of \code{values}. By default, the column names of \code{values} are used.
+#' @param names a character vector. The entity/attribute names of the columns of \code{values}. By default, the column names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_long}}
 #' @examples 
-#' values <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10], stringsAsFactors=FALSE)
+#' values <- data.frame(apples=1:10, oranges=letters[1:10],
+#'   bananas=month.name[1:10], stringsAsFactors=FALSE)
 #' uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10))
 uts_vector_wide <- function(values, times, names=colnames(values))
 {
@@ -181,7 +182,7 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 #' @return An object of class \code{"uts_vector"} with length given by to the number of distinct sources.
 #' @param values a vector observation values.
 #' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param names a character vector. The matching entity/attribute names (e.g. persons, countries, economic indicators) of each observation. By default, the names of \code{values} are used.
+#' @param names a character vector. The matching entity/attribute names of the observations. By default, the names of \code{values} are used.
 #' 
 #' @keywords ts classes
 #' @seealso \code{\link{uts_vector_wide}}

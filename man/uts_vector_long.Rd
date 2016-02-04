@@ -11,7 +11,7 @@ uts_vector_long(values, times, names = base::names(values))
 
 \item{times}{a \code{\link{POSIXct}} object. The matching observation times.}
 
-\item{names}{a character vector. The matching entity/attribute names (e.g. persons, countries, economic indicators) of each observation. By default, the names of \code{values} are used.}
+\item{names}{a character vector. The matching entity/attribute names of the observations. By default, the names of \code{values} are used.}
 }
 \value{
 An object of class \code{"uts_vector"} with length given by to the number of distinct sources.

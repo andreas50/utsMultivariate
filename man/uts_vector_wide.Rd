@@ -11,7 +11,7 @@ uts_vector_wide(values, times, names = colnames(values))
 
 \item{times}{a \code{\link{POSIXct}} object. The observation times of the rows of \code{values}.}
 
-\item{names}{a character vector. The entity/attribute names (e.g. person, country, economic indicator) of the columns of \code{values}. By default, the column names of \code{values} are used.}
+\item{names}{a character vector. The entity/attribute names of the columns of \code{values}. By default, the column names of \code{values} are used.}
 }
 \value{
 An object of class \code{"uts_vector"}. The number of time series is equal to the number of columns of \code{values}. The length of each time series is equal to the number of rows of \code{values}.
@@ -20,7 +20,8 @@ An object of class \code{"uts_vector"}. The number of time series is equal to th
 Create a \code{"uts_vector"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, values in the same row are measurements at the same time point, either across multiple entities (e.g. persons, countries) or of multiple attributes (e.g. several economic indicators, blood work results). Values in the same column are measurements of the same entity or attribute over time.
 }
 \examples{
-values <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10], stringsAsFactors=FALSE)
+values <- data.frame(apples=1:10, oranges=letters[1:10],
+  bananas=month.name[1:10], stringsAsFactors=FALSE)
 uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10))
 }
 \seealso{
