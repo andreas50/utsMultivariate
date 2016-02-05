@@ -17,7 +17,7 @@ test_that("uts_matrix argument checking works",{
 
 
 test_that("uts_matrix works",{
-  # Case of zero rows and/or columns
+  # Zero rows and/or columns
   expect_equal(
     uts_matrix(nrow=0),
     uts_matrix(nrow=0, ncol=0)
