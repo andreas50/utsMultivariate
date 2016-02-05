@@ -24,13 +24,10 @@
 #' # Print "uts_data_frame"
 print.uts_vector <- function(x, ...)
 {
-  # Special case of empty "uts_vector"
+  # Special case of zero length
   num_uts <- length(x)
   if (num_uts == 0) {
-    cat("-----------------\n")
-    cat("uts_vector object\n")
-    cat("-----------------\n")
-    cat("No time series available at this time\n")
+    cat("uts_vector(0)")
     return(invisible(x))
   }
   
@@ -47,8 +44,6 @@ print.uts_vector <- function(x, ...)
   rownames(stats) <- 1:num_uts
 
   # Print nice description
-  cat("\nIndividual time series characteristics:\n")
-  cat("---------------------------------------\n")
   print(stats)
   invisible(x)
 }
@@ -57,14 +52,11 @@ print.uts_vector <- function(x, ...)
 #' @rdname print.uts_vector
 print.uts_matrix <- function(x, print_times=FALSE, ...)
 {
-    # Special case of empty "uts_matrix"
-  if (length(x) == 0) {
-    cat("-----------------\n")
-    cat("uts_matrix object\n")
-    cat("-----------------\n")
-    cat("No time series available at this time\n")
+  # Special case of 0x0 dimension
+  if ((nrow(x) == 0) && (ncol(x) == 0)) {
+    cat("<0 x 0 uts_matrix>")
     return(invisible(x))
-  }
+  }  
   
   # Determine time series stats
   start <- as.character(start(x), usetz=TRUE)
