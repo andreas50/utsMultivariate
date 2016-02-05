@@ -159,15 +159,14 @@ uts_matrix_long <- function(values, times, names=base::names(values), fields)
 #' 
 #' @keywords ts classes
 #' @examples 
-#' values <- matrix(1:15, 5, 3)
-#' rownames(values) <- c("A", "A", "B", "B", "C")
-#' colnames(values) <- c("a", "b", "c")
-#' times <- as.POSIXct("2016-01-01") + days(1:5)
+#' values <- matrix(1:8, 4, 2)
+#' rownames(values) <- c("CH", "CH", "FR", "US")
+#' colnames(values) <- c("population", "size")
+#' times <- as.POSIXct("2016-01-01") + days(1:4)
 #' uts_matrix_wide(values, times)
 #' 
-#' # Same, but with manually provided entity and attribute names
-#' uts_matrix_wide(values, times, names=c("CA", "CA", "FR", "US", "US"),
-#'   fields=c("apple", "banana", "orange"))
+#' # Same, but manually provide entity names
+#' uts_matrix_wide(values, times, names=c("China", "China", "France", "USA"))
 uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=base::colnames(values))
 {
   # Argument checking
@@ -189,29 +188,12 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
   nrows <- length(rnames)
   ncols <- length(cnames)
   out <- uts_matrix(uts(), ncol=ncols, nrow=nrows, dimnames=list(rnames, cnames))
-  
-  # Determine list of indices for each unique name & allocate memory
-  indices <- split(1:length(names), names)
-  
-  # Insert data
-  for (i in 1:ncol(values)) {
-    # Allocate memory for column i
-    x <- uts_vector()
 
-    # Generate column time series
-    for (j in 1:length(indices)) {
-      # Order time points
-      pos <- indices[[j]]
-      values_ji <- values[pos, i]
-      times_ji <- times[pos]
-      o <- order(times_ji)
-      values_ji <- values_ji[o]
-      times_ji <- times_ji[o]
-      
-      # Insert time series
-      x[[j]] <- uts(values_ji, times_ji)
-    }
-    out[[i]] <- x
+  # Insert data one column at a time
+  for (col in seq_len(ncols)) {
+    out_col <- uts_vector_long(values[, col], times, names=names)
+    for (row in seq_len(nrows))
+      out[[row + (col-1)*nrows]] <- out_col[[row]]
   }
   out
 }

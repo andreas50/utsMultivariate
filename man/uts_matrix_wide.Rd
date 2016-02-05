@@ -23,15 +23,14 @@ An object of class \code{"uts_matrix"}. The number of rows is given by to the nu
 Create a \code{"uts_matrix"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, each row is a vector of observations (also known as \emph{record}) at specific time point.
 }
 \examples{
-values <- matrix(1:15, 5, 3)
-rownames(values) <- c("A", "A", "B", "B", "C")
-colnames(values) <- c("a", "b", "c")
-times <- as.POSIXct("2016-01-01") + days(1:5)
+values <- matrix(1:8, 4, 2)
+rownames(values) <- c("CH", "CH", "FR", "US")
+colnames(values) <- c("population", "size")
+times <- as.POSIXct("2016-01-01") + days(1:4)
 uts_matrix_wide(values, times)
 
-# Same, but with manually provided entity and attribute names
-uts_matrix_wide(values, times, names=c("CA", "CA", "FR", "US", "US"),
-  fields=c("apple", "banana", "orange"))
+# Same, but manually provide entity names
+uts_matrix_wide(values, times, names=c("China", "China", "France", "USA"))
 }
 \keyword{classes}
 \keyword{ts}
