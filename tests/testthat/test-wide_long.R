@@ -81,6 +81,33 @@ test_that("uts_matrix_wide works",{
   expect_error(uts_matrix_wide(values, Sys.time() + ddays(1:2), "A", c("a", "b")))
   expect_error(uts_matrix_wide(values, Sys.time(), c("A", "B"), c("a", "b")))
   expect_error(uts_matrix_wide(values, Sys.time(), "A", "a"))
+  
+  # Case of zero rows
+  expect_equal(
+    uts_matrix_wide(matrix(numeric(), 0, 2), as.POSIXct(character()), fields=c("a", "b")), 
+    uts_matrix(nrow=0, ncol=2, dimnames=list(NULL, c("a", "b")))
+  )
+  
+  # Case of zero columns
+  expect_equal(
+    uts_matrix_wide(matrix(numeric(), 2, 0), Sys.time() + ddays(1:2), names=c("a", "b")),
+    uts_matrix(nrow=2, ncol=0, dimnames=list(c("a", "b"), NULL))
+  )
+  
+  # Regression tests
+  values <- matrix(1:8, 4, 2)
+  rownames(values) <- c("CH", "CH", "FR", "US")
+  colnames(values) <- c("population", "size")
+  times <- as.POSIXct("2016-01-01") + days(1:4)
+  #
+  expect_equal_to_reference(
+    uts_matrix_wide(values, times),
+    file="test-uts_matrix_wide_1.rds"
+  )
+  expect_equal_to_reference(
+    uts_matrix_wide(values, times, names=c("China", "China", "France", "USA")),
+    file="test-uts_matrix_wide_2.rds"
+  )
 })
 
 
