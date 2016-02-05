@@ -32,10 +32,10 @@
 #' # Empty "uts_matrix"
 #' uts_matrix(nrow=2, ncol=3, dimnames=list(c("a", "b"), c("X", "Y", "Z")))
 #' 
-#' # One of the dimensions has length zero
+#' # One of the dimensions is of length zero
 #' uts_matrix(nrow=0, ncol=4)
 #' uts_matrix(nrow=4, ncol=0)
-#' uts_matrix(nrow=0, ncol=0)
+#' uts_matrix(nrow=0)
 #' 
 #' # The first tests returns TRUE, the others return FALSE
 #' is.uts_matrix(uts_matrix())
@@ -51,24 +51,24 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
   
   # Determine number of time series to work with
   if (is.uts(data))
-    num_ts <- 1
+    num_ts <- 1 * (nrow * ncol > 0)
   else if (is.uts_vector(data))
     num_ts <- length(data)
   else
     stop("The 'data' for a 'uts_matrix' needs to be a 'uts' or 'uts_vector'")
   
   # Check that nrow/ncol value compatible with the number of time series
-  if (!missing(nrow) && (nrow > 1) && ((nrow * ncol) %% num_ts > 0))
+  if (!missing(nrow) && (nrow > 1) && ((nrow * ncol) %% max(1, num_ts) > 0))
     stop("'data' length not a multiple or sub-multiple of the number of rows")
-  if (!missing(ncol) && (ncol > 1) && ((nrow * ncol) %% num_ts > 0))
+  if (!missing(ncol) && (ncol > 1) && ((nrow * ncol) %% max(1, num_ts) > 0))
     stop("'data' length not a multiple or sub-multiple of the number of columns")
   
-  # Guess nrows and ncols
-  if (missing(nrow) && (ncol > 0))
-    nrow <- num_ts / ncol
-  else if (missing(ncol) && (nrow > 0))
-    ncol <- num_ts / nrow
-  if ((num_ts > nrow * ncol) && (nrow * ncol > 0))
+  # In case not provided, guess nrows and ncols
+  if (missing(nrow) && (num_ts >= ncol))
+    nrow <- num_ts / max(1, ncol)
+  else if (missing(ncol) && (num_ts >= nrow))
+    ncol <- num_ts / max(1, nrow)
+  if (num_ts > nrow * ncol)
     stop("'data' too long to fit into 'uts_matrix' of provided dimensions")
   
   # Recycle data

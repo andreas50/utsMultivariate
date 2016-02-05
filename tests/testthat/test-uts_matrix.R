@@ -17,6 +17,21 @@ test_that("uts_matrix argument checking works",{
 
 
 test_that("uts_matrix works",{
+  # Case of zero rows and/or columns
+  expect_equal(
+    uts_matrix(nrow=0),
+    uts_matrix(nrow=0, ncol=0)
+  )
+  expect_equal(
+    uts_matrix(ncol=0),
+    uts_matrix(nrow=0, ncol=0)
+  )
+  expect_equal(
+    uts_matrix(nrow=0, ncol=3),
+    t(uts_matrix(nrow=3, ncol=0))
+  )
+  
+  # Regression testing
   expect_equal_to_reference(
     uts_matrix(ex_uts(), 2, 3),
     file="test-uts_matrix_1.rds"

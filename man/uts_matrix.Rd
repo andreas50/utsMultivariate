@@ -51,10 +51,10 @@ uts_matrix(ex_uts_vector(), ncol=2)
 # Empty "uts_matrix"
 uts_matrix(nrow=2, ncol=3, dimnames=list(c("a", "b"), c("X", "Y", "Z")))
 
-# One of the dimensions has length zero
+# One of the dimensions is of length zero
 uts_matrix(nrow=0, ncol=4)
 uts_matrix(nrow=4, ncol=0)
-uts_matrix(nrow=0, ncol=0)
+uts_matrix(nrow=0)
 
 # The first tests returns TRUE, the others return FALSE
 is.uts_matrix(uts_matrix())
