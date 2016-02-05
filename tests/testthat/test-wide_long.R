@@ -1,5 +1,9 @@
 context("wide_long")
 
+##############
+# UTS_VECTOR #
+##############
+
 test_that("uts_vector_wide works",{
   # Argument checking
   expect_error(uts_vector_wide(1, Sys.time()))
@@ -46,6 +50,10 @@ test_that("uts_vector_long works",{
 })
 
 
+##############
+# UTS_MATRIX #
+##############
+
 test_that("uts_matrix_long works",{
   # Argument checking
   expect_error(uts_matrix_long(1, times=Sys.time() + days(1:2), "A", "a"))
@@ -64,4 +72,15 @@ test_that("uts_matrix_long works",{
     file="test-uts_matrix_long_2.rds"
   )
 })
+
+
+test_that("uts_matrix_wide works",{
+  # Argument checking
+  values <- matrix(1:2, ncol=2)
+  expect_error(uts_matrix_wide(1, Sys.time(), "A", c("a", "b")))
+  expect_error(uts_matrix_wide(values, Sys.time() + ddays(1:2), "A", c("a", "b")))
+  expect_error(uts_matrix_wide(values, Sys.time(), c("A", "B"), c("a", "b")))
+  expect_error(uts_matrix_wide(values, Sys.time(), "A", "a"))
+})
+
 

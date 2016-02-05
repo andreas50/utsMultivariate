@@ -4,14 +4,14 @@
 \alias{uts_matrix_long}
 \title{Create uts_matrix from long tabular data}
 \usage{
-uts_matrix_long(values, times, names, fields)
+uts_matrix_long(values, times, names = base::names(values), fields)
 }
 \arguments{
 \item{values}{a vector observation values.}
 
 \item{times}{a \code{\link{POSIXct}} object. The matching observation times.}
 
-\item{names}{a character vector. The the matching entity names of the observations.}
+\item{names}{a character vector. The the matching entity names of the observations. By default, the names of \code{values} are used.}
 
 \item{fields}{a character vector. The the matching attribute/field names the observations.}
 }
@@ -24,6 +24,11 @@ The number of rows is given by to the number of distinct entity names (parameter
 Create a \code{"uts_matrix"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, the entity name of each observation (e.g. person, country), and the attribute/field name of each observation (e.g. which one of serveral economic indicators, which one of several blood measurement values).
 }
 \examples{
+values <- c(A=1, A=2, B=3, B=4, A=5)
+times <- as.POSIXct("2016-01-01") + dhours(1:5)
+uts_matrix_long(values, times, fields=c("c", "d", "d", "d", "d"))
+
+
 uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
   names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d"))
 }
