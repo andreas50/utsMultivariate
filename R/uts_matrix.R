@@ -32,6 +32,11 @@
 #' # Empty "uts_matrix"
 #' uts_matrix(nrow=2, ncol=3, dimnames=list(c("a", "b"), c("X", "Y", "Z")))
 #' 
+#' # One of the dimensions has length zero
+#' uts_matrix(nrow=0, ncol=4)
+#' uts_matrix(nrow=4, ncol=0)
+#' uts_matrix(nrow=0, ncol=0)
+#' 
 #' # The first tests returns TRUE, the others return FALSE
 #' is.uts_matrix(uts_matrix())
 #' is.uts_matrix(uts_vector())
@@ -39,19 +44,17 @@
 uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
 {
   # Argument checking
-  if (is.na(nrow) || nrow <= 0 || is.infinite(nrow))
+  if (is.na(nrow) || nrow < 0 || is.infinite(nrow))
     stop("Invalid 'nrow' value")
-  if (is.na(ncol) || ncol <= 0 || is.infinite(ncol))
+  if (is.na(ncol) || ncol < 0 || is.infinite(ncol))
     stop("Invalid 'ncol' value")
   
   # Determine number of time series to work with
   if (is.uts(data))
     num_ts <- 1
-  else if (is.uts_vector(data)) {
+  else if (is.uts_vector(data))
     num_ts <- length(data)
-    if (num_ts == 0)
-      stop("The 'data' needs to contain at least one time series")
-  } else
+  else
     stop("The 'data' for a 'uts_matrix' needs to be a 'uts' or 'uts_vector'")
   
   # Check that nrow/ncol value compatible with the number of time series
@@ -61,11 +64,11 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
     stop("'data' length not a multiple or sub-multiple of the number of columns")
   
   # Guess nrows and ncols
-  if (missing(nrow))
+  if (missing(nrow) && (ncol > 0))
     nrow <- num_ts / ncol
-  else if (missing(ncol))
+  else if (missing(ncol) && (nrow > 0))
     ncol <- num_ts / nrow
-  if (num_ts > nrow * ncol)
+  if ((num_ts > nrow * ncol) && (nrow * ncol > 0))
     stop("'data' too long to fit into 'uts_matrix' of provided dimensions")
   
   # Recycle data
@@ -94,9 +97,10 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
 #' @return The number of rows is given by to the number of distinct entity names (parameter \code{names}), while the number of columns is given by the number of distinct attribute/field names (parameter \code{fields}).
 #' @param values a vector observation values.
 #' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param names a character vector. The the matching entity names of the observations. By default, the names of \code{values} are used.
-#' @param fields a character vector. The the matching attribute/field names the observations.
+#' @param names a character vector. The the matching entity names for the observations. By default, the names of \code{values} are used.
+#' @param fields a character vector. The the matching attribute/field names for the observations.
 #' 
+#' @seealso \code{\link{uts_matrix_wide}}
 #' @keywords ts classes
 #' @examples
 #' values <- c(A=1, A=2, B=3, B=4, A=5)
@@ -149,14 +153,16 @@ uts_matrix_long <- function(values, times, names=base::names(values), fields)
 
 #' Create uts_matrix from wide tabular data
 #' 
-#' Create a \code{"uts_matrix"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, each row is a vector of observations (also known as \emph{record}) at specific time point.
+#' Create a \code{"uts_matrix"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, each row is a vector of observations (also known as a \emph{record}) for a specific entity (e.g. person, country) at a specific time point. The record consists of measurements across multiple attributes/fields (e.g. several economic indicators, several blood measurement values).
 #' 
-#' @return An object of class \code{"uts_matrix"}. The number of rows is given by to the number of records (distinct \code{rownames}), while the number of columns is given by the number of fields (distinct \code{colnames}).
+#' @return An object of class \code{"uts_matrix"}. The time series in row \code{entity_name} and column \code{field_name} contains all observations of such entity for such field.
+#' @return The number of rows is given by to the number of distinct entity names (parameter \code{names}), while the number of columns is given by the number of attributes/fields, i.e. the  number of columns of \code{values}.
 #' @param values a matrix or data.frame of observation values.
-#' @param times a \code{\link{POSIXct}} object. The observation time for each row of \code{values}.
-#' @param names a character vector. The the row name (also known as \emph{record}) of each row of \code{values}.
-#' @param fields a character vector. The the column names (also known as \emph{field}) of each column of \code{values}.
+#' @param times a \code{\link{POSIXct}} object. The matching observation times for the records (i.e. rows of \code{values}).
+#' @param names a character vector. The the matching entity names for the records. By default, the row names of \code{values} are used.
+#' @param fields a character vector. The the attribute/field names of the records. By default, the column names of \code{values} are used.
 #' 
+#' @seealso \code{\link{uts_matrix_long}}
 #' @keywords ts classes
 #' @examples 
 #' values <- matrix(1:8, 4, 2)
@@ -172,6 +178,8 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
   # Argument checking
   if (!is.matrix(values) && !is.data.frame(values))
     stop("The observation values are not stored in a matrix or data.frame")
+  if ((nrow(values) == 0) || (ncol(values) == 0))
+    stop("Need to have at least one observation")
   if (nrow(values) != length(times))
     stop("The number of observation rows does not match the number of observation times")
   if (nrow(values) != length(names))
@@ -180,7 +188,6 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
     stop("The number of observation columns does not match the number of attribute/field names")
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
-  
   
   # Allocate memory for output
   rnames <- sort(unique(names))

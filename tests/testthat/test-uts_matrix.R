@@ -2,14 +2,11 @@ context("uts_matrix")
 
 test_that("uts_matrix argument checking works",{
   expect_error(uts_matrix("a"))
-  expect_error(uts_matrix(uts_vector()))
-  
+  #
   expect_error(uts_matrix(nrow=NA))
-  expect_error(uts_matrix(nrow=0))
   expect_error(uts_matrix(nrow=Inf))
-  
+  #
   expect_error(uts_matrix(ncol=NA))
-  expect_error(uts_matrix(ncol=0))
   expect_error(uts_matrix(nrow=Inf))
   
   # Dimension checking
