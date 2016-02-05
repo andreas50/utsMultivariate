@@ -11,9 +11,9 @@ uts_matrix_long(values, times, names = base::names(values), fields)
 
 \item{times}{a \code{\link{POSIXct}} object. The matching observation times.}
 
-\item{names}{a character vector. The the matching entity names of the observations. By default, the names of \code{values} are used.}
+\item{names}{a character vector. The the matching entity names for the observations. By default, the names of \code{values} are used.}
 
-\item{fields}{a character vector. The the matching attribute/field names the observations.}
+\item{fields}{a character vector. The the matching attribute/field names for the observations.}
 }
 \value{
 An object of class \code{"uts_matrix"}. The time series in row \code{entity_name} and column \code{field_name} contains all observations of such entity for such field.
@@ -31,6 +31,9 @@ uts_matrix_long(values, times, fields=c("c", "d", "d", "d", "d"))
 
 uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
   names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d"))
+}
+\seealso{
+\code{\link{uts_matrix_wide}}
 }
 \keyword{classes}
 \keyword{ts}

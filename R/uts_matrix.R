@@ -178,8 +178,6 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
   # Argument checking
   if (!is.matrix(values) && !is.data.frame(values))
     stop("The observation values are not stored in a matrix or data.frame")
-  if ((nrow(values) == 0) || (ncol(values) == 0))
-    stop("Need to have at least one observation")
   if (nrow(values) != length(times))
     stop("The number of observation rows does not match the number of observation times")
   if (nrow(values) != length(names))
@@ -190,8 +188,14 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
     stop("The observation time vector is not a POSIXct object")
   
   # Allocate memory for output
-  rnames <- sort(unique(names))
-  cnames <- sort(unique(fields))
+  if (length(names) > 0)
+    rnames <- sort(unique(names))
+  else
+    rnames <- NULL
+  if (length(fields) > 0)
+    cnames <- sort(unique(fields))
+  else
+    cnames <- NULL
   nrows <- length(rnames)
   ncols <- length(cnames)
   out <- uts_matrix(uts(), ncol=ncols, nrow=nrows, dimnames=list(rnames, cnames))

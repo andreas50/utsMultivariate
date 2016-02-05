@@ -10,17 +10,19 @@ uts_matrix_wide(values, times, names = base::rownames(values),
 \arguments{
 \item{values}{a matrix or data.frame of observation values.}
 
-\item{times}{a \code{\link{POSIXct}} object. The observation time for each row of \code{values}.}
+\item{times}{a \code{\link{POSIXct}} object. The matching observation times for the records (i.e. rows of \code{values}).}
 
-\item{names}{a character vector. The the row name (also known as \emph{record}) of each row of \code{values}.}
+\item{names}{a character vector. The the matching entity names for the records. By default, the row names of \code{values} are used.}
 
-\item{fields}{a character vector. The the column names (also known as \emph{field}) of each column of \code{values}.}
+\item{fields}{a character vector. The the attribute/field names of the records. By default, the column names of \code{values} are used.}
 }
 \value{
-An object of class \code{"uts_matrix"}. The number of rows is given by to the number of records (distinct \code{rownames}), while the number of columns is given by the number of fields (distinct \code{colnames}).
+An object of class \code{"uts_matrix"}. The time series in row \code{entity_name} and column \code{field_name} contains all observations of such entity for such field.
+
+The number of rows is given by to the number of distinct entity names (parameter \code{names}), while the number of columns is given by the number of attributes/fields, i.e. the  number of columns of \code{values}.
 }
 \description{
-Create a \code{"uts_matrix"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, each row is a vector of observations (also known as \emph{record}) at specific time point.
+Create a \code{"uts_matrix"} from \emph{wide} tabular data (see \href{https://en.wikipedia.org/wiki/Wide_and_narrow_data}{Wikipedia}). For data in this format, each row is a vector of observations (also known as a \emph{record}) for a specific entity (e.g. person, country) at a specific time point. The record consists of measurements across multiple attributes/fields (e.g. several economic indicators, several blood measurement values).
 }
 \examples{
 values <- matrix(1:8, 4, 2)
@@ -31,6 +33,9 @@ uts_matrix_wide(values, times)
 
 # Same, but manually provide entity names
 uts_matrix_wide(values, times, names=c("China", "China", "France", "USA"))
+}
+\seealso{
+\code{\link{uts_matrix_long}}
 }
 \keyword{classes}
 \keyword{ts}
