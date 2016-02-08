@@ -7,7 +7,7 @@
 \method{is.na}{uts_vector}(x)
 }
 \arguments{
-\item{x}{a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"} object.}
+\item{x}{a \code{"uts_vector"} or \code{"uts_matrix"} object.}
 }
 \value{
 An object of the same class as \code{x}, but with observation values replaced with \code{TRUE} or \code{FALSE}, indicating which observation values of \code{x} are \code{NA}.

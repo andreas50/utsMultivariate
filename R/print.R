@@ -20,8 +20,6 @@
 #' # Print "uts_matrix"
 #' ex_uts_matrix()
 #' print(ex_uts_matrix(), print_times=TRUE)
-#' 
-#' # Print "uts_data_frame"
 print.uts_vector <- function(x, ...)
 {
   # Special case of zero length

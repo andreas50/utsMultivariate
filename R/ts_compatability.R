@@ -4,7 +4,7 @@
 
 #' Compatability with ts class
 #' 
-#' These methods exist solely to ensure that methods intended for \code{"ts"} objects in base \R are not accidentally applied to \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} objects.
+#' These methods exist solely to ensure that methods intended for \code{"ts"} objects in base \R are not accidentally applied to \code{"uts_vector"} and \code{"uts_matrix"} objects.
 #'
 #' @param \dots further arguments passed to or from methods.
 #' 
@@ -16,7 +16,7 @@ NULL
 
 #' @rdname compatability
 #' 
-#' @return \code{cycle()} and \code{frequency()} give an error message, because  \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} objects objects, by definition, do not have a fixed number of observations in a given time interval.
+#' @return \code{cycle()} and \code{frequency()} give an error message, because  \code{"uts_vector"} and \code{"uts_matrix"} objects objects, by definition, do not have a fixed number of observations in a given time interval.
 #' 
 #' @examples
 #' \dontrun{frequency(ex_uts_vector())}

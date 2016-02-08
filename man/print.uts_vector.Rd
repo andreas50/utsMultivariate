@@ -27,8 +27,6 @@ print(uts_vector(a=ex_uts(), b=ex_uts2()))
 # Print "uts_matrix"
 ex_uts_matrix()
 print(ex_uts_matrix(), print_times=TRUE)
-
-# Print "uts_data_frame"
 }
 \seealso{
 \code{\link[base:print]{print}} in base \R.

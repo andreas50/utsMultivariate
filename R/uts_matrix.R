@@ -10,7 +10,7 @@
 #' 
 #' Class \code{"uts_matrix"} inherits from class \code{"uts_vector"}. Hence, a \code{"uts_matrix"} supports all of the methods of a \code{"uts_vector"}, such as \code{\link{first}}, \code{\link{last}}, \code{\link{start}}, \code{\link{end}}, etc., even though no such methods exist specifically for a \code{"uts_matrix"}.
 #' 
-#' @note A pure virtual (abstract) class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
+#' @note A pure virtual (abstract) class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, and \code{"uts_matrix"} inherit: it is used to allow operations such as subtraction to mix the classes.
 #'
 #' @return An object of class \code{"uts_matrix"}.
 #' @param data a \code{\link{uts}}, or a \code{\link{uts_vector}} containing at least one time series.

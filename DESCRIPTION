@@ -10,10 +10,9 @@ Depends:
 Suggests:
     testthat
 Description: S3 classes for multivariate unevenly spaced time series. R users
-    familiar with vectors, matrices, and data frames should find it
-    straightforward to work with the corresponding time series objects, because
-    the usage of many functions (such as [, [[, length, etc.) is completely
-    analogous.
+    familiar with vectors and matrices should find it straightforward to work
+    with the corresponding time series objects, because the usage of many
+    functions (such as [, [[, length, etc.) is completely analogous.
 License: GPL-2 | GPL-3
 URL: www.eckner.com
 RoxygenNote: 5.0.1

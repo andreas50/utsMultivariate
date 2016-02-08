@@ -225,36 +225,3 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
   }
   out
 }
-
-
-
-##################
-# uts_data_frame #
-##################
-
-#' Create uts_data_frame from long tabular data
-#' 
-#' Create a \code{"uts_data_frame"} from \emph{long} (also known as \emph{narrow}) tabular data. Data in this format has four different columns; the observation values, the observation times, the entity name of each observation (e.g. person, country), and the attribute/field name of each observation (e.g. which one of serveral economic indicators, which one of several blood measurement values).
-#' 
-#' @return An object of class \code{"uts_data_frame"}. The time series in row \code{entity_name} and column \code{field_name} contains all observations of such entity for such field.
-#' @return The number of rows is given by to the number of distinct entity names (parameter \code{names}), while the number of columns is given by the number of distinct attribute/field names (parameter \code{fields}).
-#' @param values a vector observation values.
-#' @param times a \code{\link{POSIXct}} object. The matching observation times.
-#' @param names a character vector. The the matching entity names for the observations. By default, the names of \code{values} are used.
-#' @param fields a character vector. The the matching attribute/field names for the observations.
-#' 
-#' @seealso \code{\link{uts_matrix_long}}
-#' @keywords ts classes
-#' @examples
-#' values <- c(A=1, A=2, B=3, B=4, A=5)
-#' times <- as.POSIXct("2016-01-01") + dhours(1:5)
-#' uts_data_frame_long(values, times, fields=c("c", "d", "d", "d", "d"))
-#' 
-#' 
-#' uts_data_frame_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
-#'   names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d"))
-uts_data_frame_long <- function(values, times, names=base::names(values), fields)
-{
-  
-}
-

@@ -6,7 +6,7 @@
 #' 
 #' Returns the object with incomplete cases removed.
 #' 
-#' @param object a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"} object.
+#' @param object a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
 #' @seealso \code{\link{is.na}}
@@ -29,7 +29,7 @@ na.omit.uts_vector <- function(object, ...)
 #' Find missing values.
 #' 
 #' @return An object of the same class as \code{x}, but with observation values replaced with \code{TRUE} or \code{FALSE}, indicating which observation values of \code{x} are \code{NA}.
-#' @param x a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"} object.
+#' @param x a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' 
 #' @seealso \code{\link{na.omit}}
 #' @seealso \code{\link[uts:is.na.uts]{is.na}}, \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.

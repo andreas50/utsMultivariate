@@ -23,7 +23,7 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 
 #' Apply a Function over a Multivariate Time Series
 #' 
-#' A wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"}, \code{"uts_matrix"}, or \code{"uts_data_frame"}.
+#' A wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"}.
 #' 
 #' @param X a \code{"uts_vector"} object.
 #' @param \ldots arguments passed to \code{sapply} in base \R.
