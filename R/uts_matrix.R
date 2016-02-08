@@ -10,7 +10,7 @@
 #' 
 #' Class \code{"uts_matrix"} inherits from class \code{"uts_vector"}. Hence, a \code{"uts_matrix"} supports all of the methods of a \code{"uts_vector"}, such as \code{\link{first}}, \code{\link{last}}, \code{\link{start}}, \code{\link{end}}, etc., even though no such methods exist specifically for a \code{"uts_matrix"}.
 #' 
-#' @note A virtual class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
+#' @note A pure virtual (abstract) class \code{"uts_virtual"} exists from which \code{"uts"}, \code{"uts_vector"}, \code{"uts_matrix"}, and \code{"uts_data_frame"} inherit: it is used to allow operations such as subtraction to mix the classes.
 #'
 #' @return An object of class \code{"uts_matrix"}.
 #' @param data a \code{\link{uts}}, or a \code{\link{uts_vector}} containing at least one time series.
@@ -49,25 +49,37 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
   if (is.na(ncol) || ncol < 0 || is.infinite(ncol))
     stop("Invalid 'ncol' value")
   
+  # Special case of zero rows and/or columns
+  if (nrow == 0 || ncol == 0) {
+    # Return 0x0 matrix, if the other dimension has not been provided
+    if (missing(nrow) || missing(ncol))
+      nrow <- ncol <- 0
+    out <- list()
+    dim(out) <- c(nrow, ncol)
+    dimnames(out) <- dimnames
+    class(out) <- c("uts_matrix", class(uts_vector()))
+    return(out)
+  }
+  
   # Determine number of time series to work with
   if (is.uts(data))
-    num_ts <- 1 * (nrow * ncol > 0)
+    num_ts <- 1
   else if (is.uts_vector(data))
     num_ts <- length(data)
   else
     stop("The 'data' for a 'uts_matrix' needs to be a 'uts' or 'uts_vector'")
   
   # Check that nrow/ncol value compatible with the number of time series
-  if (!missing(nrow) && (nrow > 1) && ((nrow * ncol) %% max(1, num_ts) > 0))
+  if (!missing(nrow) && (nrow > 1) && ((nrow * ncol) %% num_ts > 0))
     stop("'data' length not a multiple or sub-multiple of the number of rows")
-  if (!missing(ncol) && (ncol > 1) && ((nrow * ncol) %% max(1, num_ts) > 0))
+  if (!missing(ncol) && (ncol > 1) && ((nrow * ncol) %% num_ts > 0))
     stop("'data' length not a multiple or sub-multiple of the number of columns")
   
   # In case not provided, guess nrows and ncols
   if (missing(nrow) && (num_ts >= ncol))
-    nrow <- num_ts / max(1, ncol)
+    nrow <- num_ts / ncol
   else if (missing(ncol) && (num_ts >= nrow))
-    ncol <- num_ts / max(1, nrow)
+    ncol <- num_ts / nrow
   if (num_ts > nrow * ncol)
     stop("'data' too long to fit into 'uts_matrix' of provided dimensions")
   
