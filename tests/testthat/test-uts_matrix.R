@@ -17,6 +17,11 @@ test_that("uts_matrix argument checking works",{
 
 
 test_that("uts_matrix works",{
+  # Class hierarchy
+  expect_true(is.uts_matrix(uts_matrix()))
+  expect_false(is.uts_matrix(uts_vector()))
+  expect_false(is.uts_matrix(uts()))
+  
   # Zero rows and/or columns
   expect_equal(
     uts_matrix(nrow=0),

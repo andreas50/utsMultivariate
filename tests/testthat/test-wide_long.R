@@ -1,4 +1,4 @@
-context("wide_long")
+context("wide_long_constructors")
 
 ##############
 # UTS_VECTOR #
@@ -10,6 +10,12 @@ test_that("uts_vector_wide works",{
   expect_error(uts_vector_wide(matrix(1:4, 2, 2), Sys.time()))
   expect_error(uts_vector_wide(matrix(1:4, 2, 2), Sys.time() + ddays(1:2), names="a"))
   expect_error(uts_vector_wide(matrix(1:4, 2, 2), 1:2))
+  
+  # Zero observations
+  expect_equal(
+    uts_vector_wide(data.frame(a=numeric(), b=numeric()), times=as.POSIXct(character(0))),
+    c(a=uts(), b=uts())
+  )
   
   # Regression tests
   values <- data.frame(apples=1:10, oranges=letters[1:10], bananas=month.name[1:10], stringsAsFactors=FALSE)
@@ -28,6 +34,12 @@ test_that("uts_vector_long works",{
   # Argument checking
   expect_error(uts_vector_long(1:2, Sys.time(), "a"))
   expect_error(uts_vector_long(1, Sys.time(), c("a", "b")))
+  
+  # Zero observations
+  expect_equal(
+    uts_vector_long(values=numeric(), times=as.POSIXct(character(0))),
+    uts_vector()
+  )
   
   # Regression tests
   expect_equal_to_reference(
@@ -59,6 +71,12 @@ test_that("uts_matrix_long works",{
   expect_error(uts_matrix_long(1, times=Sys.time() + days(1:2), "A", "a"))
   expect_error(uts_matrix_long(1, times=Sys.time(), 1:2, "a"))
   expect_error(uts_matrix_long(1, times=Sys.time(), "A", 1:2))
+  
+  # Zero observations
+  expect_equal(
+    uts_matrix_long(values=numeric(), times=as.POSIXct(character()), fields=character()),
+    uts_matrix(nrow=0, ncol=0)
+  )
   
   # Regression tests
   expect_equal_to_reference(

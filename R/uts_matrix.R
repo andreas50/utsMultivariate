@@ -122,6 +122,10 @@ uts_matrix_long <- function(values, times, names=base::names(values), fields)
   if (!is.POSIXct(times))
     stop("The observation time vector is not a POSIXct object")
   
+  # Special case of zero observations
+  if (length(values) == 0)
+    return(uts_matrix(nrow=0, ncol=0))
+  
   # Order data chronologically
   o <- order(times)
   times <- times[o]

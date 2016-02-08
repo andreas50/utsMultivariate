@@ -219,6 +219,7 @@ uts_vector_long <- function(values, times, names=base::names(values))
     pos <- indices[[j]]
     out[[j]] <- uts(values[pos], times[pos])
   }
-  names(out) <- names(indices)
+  if (length(out) > 0)
+    names(out) <- names(indices)
   out  
 }
