@@ -1,6 +1,6 @@
 context("apply")
 
-test_that("sapply works",{
+test_that("sapply works for uts_vector",{
   # Trival case of empty uts_vector
   expect_identical(
     sapply(uts_vector(), length),
@@ -21,4 +21,18 @@ test_that("sapply works",{
   # Regression tests
   expect_equal_to_reference(sapply(ex_uts_vector(), log), file="test-sapply_1.rds")
   expect_equal_to_reference(sapply(ex_uts_vector2(), lag_t, ddays(1)), file="test-sapply_2.rds")
+})
+
+
+test_that("sapply works for uts_matrix",{
+  x <- ex_uts_matrix()
+    
+  expect_identical(
+    sapply(x, length),
+    matrix(base::sapply(x, length), nrow=nrow(x), dimnames=dimnames(x))
+  )
+  
+  # Regression tests
+  expect_equal_to_reference(sapply(x, log), file="test-sapply_3.rds")
+  expect_equal_to_reference(sapply(x, lag_t, ddays(1)), file="test-sapply_4.rds")
 })

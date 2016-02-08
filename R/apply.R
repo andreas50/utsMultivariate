@@ -25,7 +25,7 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 #' 
 #' A wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"}.
 #' 
-#' @param X a \code{"uts_vector"} object.
+#' @param X a \code{"uts_vector"} or \code{"uts_amtrixr"} object.
 #' @param \ldots arguments passed to \code{sapply} in base \R.
 #' 
 #' @examples
@@ -36,6 +36,10 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 #' # Results that are further simplified to a "uts_vector"
 #' sapply(ex_uts_vector(), log)
 #' sapply(ex_uts_vector2(), lag_t, ddays(1))
+#' 
+#' # Results that are further simplified to a matrix "uts_matrix"
+#' sapply(ex_uts_matrix(), length)
+#' sapply(ex_uts_matrix(), sqrt)
 sapply.uts_vector <- function(X, ...)
 {
   out <- base::sapply(X, ...)
@@ -44,6 +48,27 @@ sapply.uts_vector <- function(X, ...)
   is_uts <- sapply(out, is.uts)
   if (all(is_uts) && (length(out) > 0))
     out <- do.call("c", out)
+  out
+}
+
+
+#' @rdname sapply.uts_vector
+sapply.uts_matrix <- function(X, ...)
+{
+  out <- NextMethod()
+  
+  # Return result if cannot simpified further
+  if (length(X) != length(out))
+    return(out)
+  is_uts <- sapply(out, is.uts)
+  is_atomic <- sapply(out, is.atomic)
+  if (!all(is_atomic) && !all(is_uts))
+    return(out)
+  
+  # If possible, simplify output to matrix or uts_matrix
+  attributes(out) <- attributes(X)
+  if (!all(is_uts))  # coerce from uts_matrix to matrix
+    class(out) <- "matrix"
   out
 }
 

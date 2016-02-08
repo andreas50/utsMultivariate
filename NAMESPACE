@@ -28,6 +28,7 @@ S3method(print, uts_vector)
 S3method(rep, uts)
 S3method(rep, uts_vector)
 S3method(sapply, default)
+S3method(sapply, uts_matrix)
 S3method(sapply, uts_vector)
 S3method(start, uts_vector)
 
