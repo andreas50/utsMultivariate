@@ -37,7 +37,7 @@
 #' uts_matrix(nrow=4, ncol=0)
 #' uts_matrix(nrow=0)
 #' 
-#' # The first tests returns TRUE, the others return FALSE
+#' # The first test returns TRUE, the others return FALSE
 #' is.uts_matrix(uts_matrix())
 #' is.uts_matrix(uts_vector())
 #' is.uts_matrix(ex_uts())
