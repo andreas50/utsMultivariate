@@ -29,5 +29,6 @@ sapply(ex_uts_vector2(), lag_t, ddays(1))
 # Results that are further simplified to a matrix "uts_matrix"
 sapply(ex_uts_matrix(), length)
 sapply(ex_uts_matrix(), sqrt)
+sapply(ex_uts_matrix(), function(x) "a")
 }
 

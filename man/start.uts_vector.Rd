@@ -25,5 +25,8 @@ Get the first and last observation time, respectively, of each time series.
 \examples{
 start(ex_uts_vector())
 end(ex_uts_vector2())
+
+# Return vector, because POSIXct objects cannot be stored in a matrix
+start(ex_uts_matrix())
 }
 

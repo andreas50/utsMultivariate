@@ -35,4 +35,7 @@ test_that("sapply works for uts_matrix",{
   # Regression tests
   expect_equal_to_reference(sapply(x, log), file="test-sapply_3.rds")
   expect_equal_to_reference(sapply(x, lag_t, ddays(1)), file="test-sapply_4.rds")
+  expect_equal_to_reference(sapply(x, function(x) "a"), file="test-sapply_5.rds")
+  expect_equal_to_reference(sapply(x, function(x) length(x) > 5), file="test-sapply_6.rds")
+  expect_equal_to_reference(sapply(x, function(x) list(a=5)), file="test-sapply_7.rds")
 })

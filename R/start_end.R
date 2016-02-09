@@ -12,10 +12,14 @@
 #' 
 #' @examples
 #' start(ex_uts_vector())
+#' end(ex_uts_vector2())
+#' 
+#' # Return vector, because POSIXct objects cannot be stored in a matrix
+#' start(ex_uts_matrix())
 start.uts_vector <- function(x, ...)
 {
   if (length(x) > 0) {
-    # cannot use sapply() because the class attribute gets lost
+    # cannot use sapply() because the attributes are dropped by the call to unlist()
     tmp <- lapply(x, start)
     out <- do.call("c", tmp)
     with_tz(out, tz(tmp[[1]]))
@@ -27,9 +31,6 @@ start.uts_vector <- function(x, ...)
 #' @rdname start.uts_vector
 #' 
 #' @return \code{end()} returns the last observation time of each time series as a \code{\link{POSIXct}} object. The time zone is determined by the first time series.
-#' 
-#' @examples 
-#' end(ex_uts_vector2())
 end.uts_vector <- function(x, ...)
 {
   if (length(x) > 0) {

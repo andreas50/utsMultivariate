@@ -40,6 +40,7 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 #' # Results that are further simplified to a matrix "uts_matrix"
 #' sapply(ex_uts_matrix(), length)
 #' sapply(ex_uts_matrix(), sqrt)
+#' sapply(ex_uts_matrix(), function(x) "a")
 sapply.uts_vector <- function(X, ...)
 {
   out <- base::sapply(X, ...)
@@ -61,8 +62,8 @@ sapply.uts_matrix <- function(X, ...)
   if (length(X) != length(out))
     return(out)
   is_uts <- sapply(out, is.uts)
-  is_atomic <- sapply(out, is.atomic)
-  if (!all(is_atomic) && !all(is_uts))
+  is_base_type <- sapply(out, function(x) is.atomic(x) && !is.object(x))
+  if (!all(is_uts) && !all(is_base_type))
     return(out)
   
   # If possible, simplify output to matrix or uts_matrix
