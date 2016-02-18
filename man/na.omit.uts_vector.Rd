@@ -7,7 +7,7 @@
 \method{na.omit}{uts_vector}(object, ...)
 }
 \arguments{
-\item{object}{a \code{"uts_vector"} or \code{"uts_matrix"} object.}
+\item{object}{a \code{"uts_vector"} object.}
 
 \item{\dots}{further arguments passed to or from methods.}
 }
