@@ -24,7 +24,12 @@ test_that("first works",{
     first(ex_uts_matrix()),
     file="test-uts_first_last_3.rds"
   )
+  expect_equal_to_reference(
+    last(sapply(ex_uts_vector2(), head, 2)),
+    file="test-uts_first_last_4.rds"
+  )
 })
+
 
 test_that("last works",{
   # Regressions tests
