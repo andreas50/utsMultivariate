@@ -59,7 +59,7 @@ sapply.uts_matrix <- function(X, ...)
   out <- NextMethod()
   
   # Return result if cannot simpified further
-  if (length(X) != length(out))
+  if ((length(X) != length(out)) || (length(out) == 0))
     return(out)
   is_uts <- sapply(out, is.uts)
   is_base_type <- sapply(out, function(x) is.atomic(x) && !is.object(x))

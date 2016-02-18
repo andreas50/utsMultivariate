@@ -6,7 +6,7 @@
 #' 
 #' Returns the object with incomplete cases removed.
 #' 
-#' @param object a \code{"uts_vector"} or \code{"uts_matrix"} object.
+#' @param object a \code{"uts_vector"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
 #' @seealso \code{\link{is.na}}

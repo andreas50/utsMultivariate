@@ -25,8 +25,13 @@ test_that("sapply works for uts_vector",{
 
 
 test_that("sapply works for uts_matrix",{
+  # Trival case of 0x0 uts_matrix
+  expect_identical(
+    sapply(uts_matrix(nrow=0), length),
+    sapply(list(), length)
+  )
+  
   x <- ex_uts_matrix()
-    
   expect_identical(
     sapply(x, length),
     matrix(base::sapply(x, length), nrow=nrow(x), dimnames=dimnames(x))

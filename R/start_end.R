@@ -14,7 +14,7 @@
 #' start(ex_uts_vector())
 #' end(ex_uts_vector2())
 #' 
-#' # Return vector, because POSIXct objects cannot be stored in a matrix
+#' # Returns a vector, because POSIXct objects cannot be stored in a matrix
 #' start(ex_uts_matrix())
 start.uts_vector <- function(x, ...)
 {
