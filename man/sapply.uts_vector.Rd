@@ -15,7 +15,7 @@
 \item{\ldots}{arguments passed to \code{sapply} in base \R.}
 }
 \description{
-A wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"}.
+Same as \code{\link[base:sapply]{sapply}} in base \R, but further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
 }
 \examples{
 # Same results as sapply() in base R
@@ -26,9 +26,8 @@ sapply(ex_uts_vector(), range)
 sapply(ex_uts_vector(), log)
 sapply(ex_uts_vector2(), lag_t, ddays(1))
 
-# Results that are further simplified to a matrix "uts_matrix"
+# Results that are further simplified to a "uts_matrix"
 sapply(ex_uts_matrix(), length)
 sapply(ex_uts_matrix(), sqrt)
-sapply(ex_uts_matrix(), function(x) "a")
 }
 

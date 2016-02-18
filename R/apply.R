@@ -23,7 +23,7 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 
 #' Apply a Function over a Multivariate Time Series
 #' 
-#' A wrapper around \code{\link[base:sapply]{sapply}} in base \R. If possible, it further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"}.
+#' Same as \code{\link[base:sapply]{sapply}} in base \R, but further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
 #' 
 #' @param X a \code{"uts_vector"} or \code{"uts_amtrixr"} object.
 #' @param \ldots arguments passed to \code{sapply} in base \R.
@@ -37,17 +37,24 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 #' sapply(ex_uts_vector(), log)
 #' sapply(ex_uts_vector2(), lag_t, ddays(1))
 #' 
-#' # Results that are further simplified to a matrix "uts_matrix"
+#' # Results that are further simplified to a "uts_matrix"
 #' sapply(ex_uts_matrix(), length)
 #' sapply(ex_uts_matrix(), sqrt)
-#' sapply(ex_uts_matrix(), function(x) "a")
 sapply.uts_vector <- function(X, ...)
 {
-  out <- base::sapply(X, ...)
+  # Cannot call base::sapply(), because base::simplify2array() over-simplifies for certain output dimensions (see unit tests)
+  out <- base::lapply(X, ...)
+  if (length(out) == 0)
+    return(out)
 
-  # Simpify output further, if possible
+  # Simplify output only if no time series involved
   is_uts <- sapply(out, is.uts)
-  if (all(is_uts) && (length(out) > 0))
+  is_uts_vector <- sapply(out, is.uts_vector)
+  if (!any(is_uts) && !any(is_uts_vector))
+    return(simplify2array(out))
+  
+  # Simpify output further, if possible
+  if (all(is_uts))
     out <- do.call("c", out)
   out
 }

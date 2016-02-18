@@ -18,6 +18,17 @@ test_that("sapply works for uts_vector",{
     base::sapply(ex_uts_vector(), range)
   )
   
+  # Case where base::sapply() oversimpifies
+  x <- ex_uts_vector()
+  expect_identical(
+    sapply(x, head, 1),
+    c(apples=head(x[[1]], 1L), oranges=head(x[[2]], 1L))
+  )
+  expect_identical(
+    sapply(x, head, 2),
+    c(apples=head(x[[1]], 2L), oranges=head(x[[2]], 2L))
+  )
+  
   # Regression tests
   expect_equal_to_reference(sapply(ex_uts_vector(), log), file="test-sapply_1.rds")
   expect_equal_to_reference(sapply(ex_uts_vector2(), lag_t, ddays(1)), file="test-sapply_2.rds")
