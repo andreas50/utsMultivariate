@@ -25,7 +25,7 @@ print.uts_vector <- function(x, ...)
   # Special case of zero length
   num_uts <- length(x)
   if (num_uts == 0) {
-    cat("uts_vector(0)")
+    cat("uts_vector(0)\n")
     return(invisible(x))
   }
   
@@ -52,7 +52,7 @@ print.uts_matrix <- function(x, print_times=FALSE, ...)
 {
   # Special case of 0x0 dimension
   if ((nrow(x) == 0) && (ncol(x) == 0)) {
-    cat("<0 x 0 uts_matrix>")
+    cat("<0 x 0 uts_matrix>\n")
     return(invisible(x))
   }  
   

@@ -14,10 +14,12 @@ export(uts_vector_wide)
 
 
 # Export generic methods
+export(as.uts_vector)
 export(sapply)
 
 
 # Register S3 methods (needed if a package is imported but not attached to the search path)
+S3method(as.uts_vector, ts)
 S3method(c, uts)
 S3method(c, uts_vector)
 S3method(end, uts_vector)
