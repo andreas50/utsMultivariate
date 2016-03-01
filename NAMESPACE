@@ -19,6 +19,7 @@ export(sapply)
 
 
 # Register S3 methods (needed if a package is imported but not attached to the search path)
+S3method(as.data.frame, uts_vector)
 S3method(as.uts_vector, ts)
 S3method(as.uts_vector, zoo)
 S3method(c, uts)
@@ -36,9 +37,16 @@ S3method(sapply, default)
 S3method(sapply, uts_matrix)
 S3method(sapply, uts_vector)
 S3method(start, uts_vector)
+S3method(time, uts_vector)
 
 
-# Sample multivariate time series
+# S3 methods that cause problems when registered with S3method() instead of export():
+# 1.) A method for a generic in an enhanced/suggested package cannot be registered.
+#     See chapter 8 of "R packages" by Hadley Wickham.
+export(as.zoo.uts_vector)    # would need to create "zoo" package dependency
+
+
+# Examples of multivariate time series
 export(ex_uts_matrix)
 export(ex_uts_vector)
 export(ex_uts_vector2)

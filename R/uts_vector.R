@@ -133,3 +133,28 @@ rep.uts_vector <- function(x, ...)
   do.call(c.uts_vector, out)
 }
 
+
+#' Observation Times
+#' 
+#' Get the sorted union of observation times of a \code{"uts_vector"} object.
+#' 
+#' @param x a \code{"uts_vector"} object.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @seealso \code{\link[uts:time.uts]{time.uts}}
+#' @examples
+#' time(ex_uts_vector())
+#' time(ex_uts_vector2())
+time.uts_vector <- function(x, ...)
+{
+  # Merge time points
+  times <- uts()$time
+  for (x_j in x)
+    times <- sorted_union(times, x_j$times, tolerance=.Machine$double.eps ^ 0.5)
+  
+  # Use POSIXTct attributes from first time series
+  if (length(x) > 0)
+    attributes(times) <- attributes(x[[1]]$times)
+  times
+}
+

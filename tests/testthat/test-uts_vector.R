@@ -35,3 +35,21 @@ test_that("uts_vector constructors work",{
   )
 })
 
+
+test_that("time point extraction works",{
+  # Trivial case of empty uts_vector
+  expect_equal(time(uts_vector()), uts()$times)
+  expect_equal(time(c(uts(), uts())), uts()$times)
+  
+  # Regression testing
+  expect_equal_to_reference(
+    time(ex_uts_vector()),
+    file="test-time_1.rds"
+  )
+  expect_equal_to_reference(
+    time(ex_uts_vector2()),
+    file="test-time_2.rds"
+  )
+  
+})
+
