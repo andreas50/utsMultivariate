@@ -158,3 +158,55 @@ time.uts_vector <- function(x, ...)
   times
 }
 
+
+#' Coerce to a Data Frame
+#'
+#' Flatten a \code{"uts_vector"} to a \code{data.frame}.
+#' 
+#' @note Only time series with atomic observation values can be coerced to a \code{data.frame}.
+#' 
+#' @param x a \code{"uts_vector"} object.
+#' @param method either \code{"long"} or \code{"wide"}, determining the shape of the output:
+#' \itemize{
+#'   \item \code{"long"}: a \code{data.frame} with one row for each observation from one of the time series in \code{x}. The \code{data.frame} has three columns denoting the source of each observation (i.e. from which time series of \code{x} is the observation from)?, the observation time, and the observation value.
+#'   \item code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
+#' }
+#' @param \dots arguments passed to \code{\link{format.POSIXct}}.
+#' 
+#' @seealso The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in "long" and "wide" format, respectively, to a \code{uts_vector}.
+#' @examples
+#' as.data.frame(ex_uts_vector())
+#' as.data.frame(ex_uts_vector(), method="long", format="%Y-%m-%d")
+as.data.frame.uts_vector <- function(x, method="wide", ...)
+{
+  # Argument checking
+  if (!all(sapply(ex_uts_vector(), function(x) is.atomic(x$values))))
+    stop("Only time series with atomic observation values can be coerced to a data.frame")
+  
+  # Extract time series names
+  num_ts <- length(x)
+  ts_names <- names(x)
+  if (is.null(ts_names))
+    ts_names <- as.character(seq_len(num_ts))
+  
+  # Flatten the data
+  if (method == "wide") {
+    # Extract observation values
+    times <- time(x)
+    stop("Not working yet. Need sample_values.uts_vector()")
+    out <- as.data.frame(sample_values(x, times, drop=FALSE, max_dt=ddays(0)))
+    colnames(out) <- ts_names
+    
+    # Combine with observation times
+    out <- cbind(time=format(times, ...), out)
+  } else if (method == "long") {
+    out <- lapply(x, as.data.frame, ...)
+    for (j in 1:num_ts)
+      out[[j]] <- cbind(name=ts_names[j], out[[j]], stringsAsFactors=FALSE)
+    out <- do.call(rbind, out)
+    rownames(out) <- NULL
+  } else
+    stop("Unknown 'method'")
+  out
+}
+
