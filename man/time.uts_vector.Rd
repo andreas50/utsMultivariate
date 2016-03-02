@@ -4,10 +4,12 @@
 \alias{time.uts_vector}
 \title{Observation Times}
 \usage{
-\method{time}{uts_vector}(x, ...)
+\method{time}{uts_vector}(x, tolerance = .Machine$double.eps^0.5, ...)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object.}
+
+\item{tolerance}{a non-negative number, indicating the tolerance for numerical noise in the observation times. Observation times less than this threshold apart are treated as identical.}
 
 \item{\dots}{further arguments passed to or from methods.}
 }
@@ -19,6 +21,6 @@ time(ex_uts_vector())
 time(ex_uts_vector2())
 }
 \seealso{
-\code{\link[uts:time.uts]{time.uts}}
+\code{\link[uts:time.uts]{time.uts}}, \code{\link[uts:sorted_union]{sorted_union}}
 }
 

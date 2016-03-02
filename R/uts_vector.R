@@ -139,18 +139,19 @@ rep.uts_vector <- function(x, ...)
 #' Get the sorted union of observation times of a \code{"uts_vector"} object.
 #' 
 #' @param x a \code{"uts_vector"} object.
+#' @param tolerance a non-negative number, indicating the tolerance for numerical noise in the observation times. Observation times less than this threshold apart are treated as identical.
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso \code{\link[uts:time.uts]{time.uts}}
+#' @seealso \code{\link[uts:time.uts]{time.uts}}, \code{\link[uts:sorted_union]{sorted_union}}
 #' @examples
 #' time(ex_uts_vector())
 #' time(ex_uts_vector2())
-time.uts_vector <- function(x, ...)
+time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 {
   # Merge time points
   times <- uts()$time
   for (x_j in x)
-    times <- sorted_union(times, x_j$times, tolerance=.Machine$double.eps ^ 0.5)
+    times <- sorted_union(times, x_j$times, tolerance=tolerance)
   
   # Use POSIXTct attributes from first time series
   if (length(x) > 0)

@@ -45,6 +45,6 @@ if (requireNamespace("zoo", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link[uts:as.uts]{as.uts}} (in package \code{uts}) for converting just univariate time series.
+\code{\link[uts:as.uts]{as.uts}} for converting just univariate time series.
 }
 

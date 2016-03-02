@@ -41,6 +41,14 @@ test_that("time point extraction works",{
   expect_equal(time(uts_vector()), uts()$times)
   expect_equal(time(c(uts(), uts())), uts()$times)
   
+  # Order of individual time series does not matter
+  a <- ex_uts()
+  b <- ex_uts2()
+  expect_identical(
+    time(c(a, b)),
+    time(c(b, a))
+  )
+  
   # Regression testing
   expect_equal_to_reference(
     time(ex_uts_vector()),
