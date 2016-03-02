@@ -4,7 +4,7 @@
 \alias{sample_values.uts_vector}
 \title{Sample Values}
 \usage{
-\method{sample_values}{uts_vector}(x, time_points, ...)
+\method{sample_values}{uts_vector}(x, time_points, ..., drop = TRUE)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object where each individual \code{"uts"} as atomic observation values.}
@@ -16,18 +16,21 @@
 \item{\dots}{arguments passed to \code{\link[uts:sample_values]{sample_values.uts}} for sampling from the individual time series.}
 }
 \value{
-A \code{matrix} if all sampled observation values are numeric, and a \code{data.frame} otherwise. However, when using argument \code{drop=TRUE} the result may be simplified further.
+A \code{matrix} if all sampled observation values are of the same \code{\link{type}}, and a \code{data.frame} otherwise. However, when using argument \code{drop=TRUE} the result may be simplified further.
 }
 \description{
 Sample observation values from a \code{"uts_vector"} at given sampling times.
 }
 \examples{
-# Sample the most recent observation
 times <- as.POSIXct(c("2007-11-09", "2007-11-10"))
-sample_values(ex_uts_vector(), times)
 
-# Sample with linear interpolation
+# Sample with last-point and linear interpolation
+sample_values(ex_uts_vector(), times)
 sample_values(ex_uts_vector(), times, method="linear")
+
+# Sample with and without dropping of length-one dimensions
+sample_values(ex_uts_vector(), times[1])
+sample_values(ex_uts_vector(), times[1], drop=FALSE)
 
 # Error, because cannot sample a time series with non-atomic observation values
 \dontrun{sample_values(ex_uts_vector2(), times)}
