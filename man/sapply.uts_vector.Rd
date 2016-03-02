@@ -10,7 +10,7 @@
 \method{sapply}{uts_matrix}(X, ...)
 }
 \arguments{
-\item{X}{a \code{"uts_vector"} or \code{"uts_amtrixr"} object.}
+\item{X}{a \code{"uts_vector"} or \code{"uts_matrix"} object.}
 
 \item{\ldots}{arguments passed to \code{sapply} in base \R.}
 }

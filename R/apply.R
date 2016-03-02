@@ -25,7 +25,7 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 #' 
 #' Same as \code{\link[base:sapply]{sapply}} in base \R, but further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
 #' 
-#' @param X a \code{"uts_vector"} or \code{"uts_amtrixr"} object.
+#' @param X a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' @param \ldots arguments passed to \code{sapply} in base \R.
 #' 
 #' @examples
