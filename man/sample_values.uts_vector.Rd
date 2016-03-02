@@ -19,7 +19,7 @@
 A \code{matrix} if all sampled observation values are of the same \code{\link{type}}, and a \code{data.frame} otherwise. However, when using argument \code{drop=TRUE} the result may be simplified further.
 }
 \description{
-Sample observation values from a \code{"uts_vector"} at given sampling times.
+Sample each time series in a \code{"uts_vector"} at given sampling times and combine the sampled values into a \code{matrix} or \code{data.frame}.
 }
 \examples{
 times <- as.POSIXct(c("2007-11-09", "2007-11-10"))
@@ -32,10 +32,13 @@ sample_values(ex_uts_vector(), times, method="linear")
 sample_values(ex_uts_vector(), times[1])
 sample_values(ex_uts_vector(), times[1], drop=FALSE)
 
-# Error, because cannot sample a time series with non-atomic observation values
-\dontrun{sample_values(ex_uts_vector2(), times)}
+# Store sampled values in data.frame if of different type
+x <- ex_uts()
+y <- uts(letters[1:6], uts1$times)
+utsv <- c(x, y)
+sample_values(utsv, times)
 
-# Error, because only numeric time series can be linearly interpolated
-\dontrun{sample_values(ex_uts2(), as.POSIXct("2007-01-01"), method="linear")}
+# Error, because not all time series have atomic observation values
+\dontrun{sample_values(ex_uts_vector2(), times)}
 }
 

@@ -4,7 +4,7 @@
 
 #' Sample Values
 #' 
-#' Sample observation values from a \code{"uts_vector"} at given sampling times.
+#' Sample each time series in a \code{"uts_vector"} at given sampling times and combine the sampled values into a \code{matrix} or \code{data.frame}.
 #'
 #' @return A \code{matrix} if all sampled observation values are of the same \code{\link{type}}, and a \code{data.frame} otherwise. However, when using argument \code{drop=TRUE} the result may be simplified further.
 #' @param x a \code{"uts_vector"} object where each individual \code{"uts"} as atomic observation values.
@@ -23,11 +23,14 @@
 #' sample_values(ex_uts_vector(), times[1])
 #' sample_values(ex_uts_vector(), times[1], drop=FALSE)
 #' 
-#' # Error, because cannot sample a time series with non-atomic observation values
-#' \dontrun{sample_values(ex_uts_vector2(), times)}
+#' # Store sampled values in data.frame if of different type
+#' x <- ex_uts()
+#' y <- uts(letters[1:6], x$times)
+#' utsv <- c(x, y)
+#' sample_values(utsv, times)
 #' 
-#' # Error, because only numeric time series can be linearly interpolated
-#' \dontrun{sample_values(ex_uts2(), as.POSIXct("2007-01-01"), method="linear")}
+#' # Error, because not all time series have atomic observation values
+#' \dontrun{sample_values(ex_uts_vector2(), times)}
 sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 { 
   # Argument checking
@@ -44,6 +47,12 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
     out <- do.call(cbind, out)
   else
     out <- do.call(data.frame, out)
+  
+  # Pick sensible column names
+  cnames <- names(x)
+  if (is.null(cnames))
+    cnames <- paste0("uts", seq_along(x))
+  colnames(out) <- cnames
   
   # Drop length-one dimensions
   if (drop)

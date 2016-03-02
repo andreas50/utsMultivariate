@@ -1,7 +1,10 @@
 context("sampling")
 
 test_that("sample_values argument checking works",{
-
+  times <- as.POSIXct(c("2007-11-09", "2007-11-10"))
+  
+  # Can only sample atomic time series
+  expect_error(sample_values(ex_uts_vector2(), times))
 })
 
 
@@ -28,5 +31,20 @@ test_that("sample_values works",{
   expect_equal_to_reference(
     sample_values(x, times[1], drop=FALSE),
     file="test-sampling_4.rds"
+  )
+  
+  # data.frame result
+  x <- ex_uts()
+  y <- uts(letters[1:6], x$times)
+  utsv <- c(x, y)
+  expect_equal_to_reference(
+    sample_values(utsv, times),
+    file="test-sampling_5.rds"
+  )
+  #
+  names(utsv) <- c("a", "b")
+  expect_equal_to_reference(
+    sample_values(utsv, times),
+    file="test-sampling_6.rds"
   )
 })
