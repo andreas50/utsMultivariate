@@ -28,7 +28,7 @@
 #'   utsv[[1]]
 #' }
 #' 
-#' @seealso \code{\link[uts:as.uts]{as.uts}} (in package \code{uts}) for converting just univariate time series.
+#' @seealso \code{\link[uts:as.uts]{as.uts}} for converting just univariate time series.
 as.uts_vector <- function(x, ...) UseMethod("as.uts_vector")
 
 
@@ -56,6 +56,37 @@ as.uts_vector.zoo <- function(x, ...)
   
   uts_vector_wide(x, times)
 }
+
+
+
+##############################
+# Coercion from "uts_vector" #
+##############################
+
+#' Coercion to zoo
+#' 
+#' @return A \code{\link[zoo:zoo]{zoo}} object.
+#' @param x a \code{"uts_vector"} object.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @examples
+#' if (requireNamespace("zoo", quietly = TRUE)) {
+#'   # Bivariate uts_vector with synchronized observation times
+#'   utsv <- c(a=ex_uts(), b=ex_uts() + 3)
+#'   zoo::as.zoo(utsv)
+#'   
+#'   # # Bivariate uts_vector with non-synchronized observation times
+#'   zoo::as.zoo(ex_uts_vector())
+#' }
+as.zoo.uts_vector <- function(x, ...)
+{
+  if (!requireNamespace("zoo", quietly=TRUE))
+    stop("Package 'zoo' needed for this function to work")
+  
+  data <- as.data.frame(x)
+  zoo::zoo(data[, -1], data$time)
+}
+
 
 
 

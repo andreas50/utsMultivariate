@@ -1,11 +1,11 @@
 context("coercions")
 
-test_that("coercions work",{
+test_that("coercions to uts_vector works",{
   # ts
   ts1 <- ts(matrix(1:20, 10, 2), start=c(2016, 1), frequency=12, names=c("apples", "oranges"))
-  expect_equal_to_reference(as.uts_vector(ts1), file="test-coercions_ts.rds")
+  expect_equal_to_reference(as.uts_vector(ts1), file="test-coercions_from_ts.rds")
   
-# fts
+  # fts
   if (requireNamespace("fts", quietly = TRUE)) {
   
   }
@@ -30,11 +30,24 @@ test_that("coercions work",{
     # without names
     values <- matrix(1:12, 4, 3)
     zoo1 <- zoo::zoo(values, as.Date("2003-01-01") + 0:3)
-    expect_equal_to_reference(as.uts_vector(zoo1), file="test-coercions_zoo_1.rds")
+    expect_equal_to_reference(as.uts_vector(zoo1), file="test-coercions_from_zoo_1.rds")
     
     # with names
     colnames(values) <- c("a", "b", "c")
     zoo2 <- zoo::zoo(values, as.Date("2003-01-01") + 0:3)
-    expect_equal_to_reference(as.uts_vector(zoo2), file="test-coercions_zoo_2.rds")
+    expect_equal_to_reference(as.uts_vector(zoo2), file="test-coercions_from_zoo_2.rds")
+  }
+})
+
+
+test_that("coercions to uts_vector works",{
+  # zoo
+  if (requireNamespace("zoo", quietly = TRUE)) {
+    # synchronized observation times
+    utsv <- c(a=ex_uts(), b=ex_uts() + 3)
+    expect_equal_to_reference(zoo::as.zoo(utsv), file="test-coercions_to_zoo_1.rds")
+    
+    # non-synchronized observation times
+    expect_equal_to_reference(zoo::as.zoo(ex_uts_vector()), file="test-coercions_to_zoo_2.rds")
   }
 })
