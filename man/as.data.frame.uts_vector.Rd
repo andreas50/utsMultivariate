@@ -4,7 +4,7 @@
 \alias{as.data.frame.uts_vector}
 \title{Coerce to a Data Frame}
 \usage{
-\method{as.data.frame}{uts_vector}(x, method = "wide", ...)
+\method{as.data.frame}{uts_vector}(x, ..., method = "wide")
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object.}

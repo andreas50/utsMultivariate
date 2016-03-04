@@ -178,7 +178,7 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 #' @examples
 #' as.data.frame(ex_uts_vector())
 #' as.data.frame(ex_uts_vector(), method="long", format="%Y-%m-%d")
-as.data.frame.uts_vector <- function(x, method="wide", ...)
+as.data.frame.uts_vector <- function(x, ..., method="wide")
 {
   # Argument checking
   if (!all(sapply(ex_uts_vector(), function(x) is.atomic(x$values))))
@@ -194,7 +194,6 @@ as.data.frame.uts_vector <- function(x, method="wide", ...)
   if (method == "wide") {
     # Extract observation values
     times <- time(x)
-    stop("Not working yet. Need sample_values.uts_vector()")
     out <- as.data.frame(sample_values(x, times, drop=FALSE, max_dt=ddays(0)))
     colnames(out) <- ts_names
     

@@ -58,6 +58,20 @@ test_that("time point extraction works",{
     time(ex_uts_vector2()),
     file="test-time_2.rds"
   )
-  
 })
 
+
+test_that("as.data.frame.uts_vector works",{
+  # Argument checking
+  expect_error(as.data.frame(ex_uts_vector2()))
+  
+  # Regression testing
+  expect_equal_to_reference(
+    as.data.frame(ex_uts_vector()),
+    file="test-as.data.frame_1.rds"
+  )
+  expect_equal_to_reference(
+    as.data.frame(ex_uts_vector(), method="long", format="%Y-%m-%d"),
+    file="test-as.data.frame_2.rds"
+  )
+})
