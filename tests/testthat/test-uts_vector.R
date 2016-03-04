@@ -71,7 +71,7 @@ test_that("as.data.frame.uts_vector works",{
     file="test-as.data.frame_1.rds"
   )
   expect_equal_to_reference(
-    as.data.frame(ex_uts_vector(), method="long", format="%Y-%m-%d"),
+    as.data.frame(ex_uts_vector(), method="long"),
     file="test-as.data.frame_2.rds"
   )
 })

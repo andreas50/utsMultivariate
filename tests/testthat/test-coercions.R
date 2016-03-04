@@ -1,6 +1,6 @@
 context("coercions")
 
-test_that("coercions to uts_vector works",{
+test_that("coercions to 'uts_vector' work",{
   # ts
   ts1 <- ts(matrix(1:20, 10, 2), start=c(2016, 1), frequency=12, names=c("apples", "oranges"))
   expect_equal_to_reference(as.uts_vector(ts1), file="test-coercions_from_ts.rds")
@@ -22,7 +22,7 @@ test_that("coercions to uts_vector works",{
   
   # xts
   if (requireNamespace("xts", quietly = TRUE)) {
-
+    
   }
   
   # zoo
@@ -40,7 +40,30 @@ test_that("coercions to uts_vector works",{
 })
 
 
-test_that("coercions to uts_vector works",{
+test_that("coercions from 'uts_vector' work",{
+  # ts
+  expect_error(as.ts(ex_uts_vector()))
+  
+    # fts
+  if (requireNamespace("fts", quietly = TRUE)) {
+  
+  }
+  
+  # irts
+  if (requireNamespace("tseries", quietly = TRUE)) {
+
+  }
+
+  # its
+  if (requireNamespace("its", quietly = TRUE)) {
+
+  }
+  
+  # xts
+  if (requireNamespace("xts", quietly = TRUE)) {
+    expect_equal_to_reference(xts::as.xts(ex_uts_vector()), file="test-coercions_to_xts.rds")
+  }
+  
   # zoo
   if (requireNamespace("zoo", quietly = TRUE)) {
     # synchronized observation times

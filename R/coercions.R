@@ -88,5 +88,24 @@ as.zoo.uts_vector <- function(x, ...)
 }
 
 
+#' Coercion to xts
+#' 
+#' @return A \code{\link[xts:xts]{xts}} object.
+#' @param x a \code{"uts_vector"} object.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @examples
+#' if (requireNamespace("xts", quietly = TRUE)) {
+#'   xts::as.xts(ex_uts_vector())
+#' }
+as.xts.uts_vector <- function(x, ...)
+{
+  if (!requireNamespace("xts", quietly=TRUE))
+    stop("Package 'xts' needed for this function to work")
+  
+  data <- as.data.frame(x)
+  xts::xts(data[, -1], data$time)
+}
+
 
 

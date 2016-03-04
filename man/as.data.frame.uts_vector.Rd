@@ -27,6 +27,7 @@ This method is helpful for saving a multivariate time series to a human-readable
 }
 \examples{
 as.data.frame(ex_uts_vector())
+as.data.frame(ex_uts_vector(), method="long")
 }
 \seealso{
 The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in "long" and "wide" format, respectively, to a \code{uts_vector}.
