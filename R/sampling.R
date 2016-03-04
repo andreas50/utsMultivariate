@@ -47,12 +47,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
     out <- do.call(cbind, out)
   else
     out <- do.call(data.frame, out)
-  
-  # Pick sensible column names
-  cnames <- names(x)
-  if (is.null(cnames))
-    cnames <- paste0("uts", seq_along(x))
-  colnames(out) <- cnames
+  colnames(out) <- names(x)
   
   # Drop length-one dimensions
   if (drop)

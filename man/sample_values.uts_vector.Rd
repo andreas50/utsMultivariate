@@ -34,7 +34,7 @@ sample_values(ex_uts_vector(), times[1], drop=FALSE)
 
 # Store sampled values in data.frame if of different type
 x <- ex_uts()
-y <- uts(letters[1:6], uts1$times)
+y <- uts(letters[1:6], x$times)
 utsv <- c(x, y)
 sample_values(utsv, times)
 
