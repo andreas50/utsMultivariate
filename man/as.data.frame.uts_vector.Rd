@@ -15,17 +15,18 @@
   \item code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
 }}
 
-\item{\dots}{arguments passed to \code{\link{format.POSIXct}}.}
+\item{\dots}{further arguments passed to or from methods.}
 }
 \description{
 Flatten a \code{"uts_vector"} to a \code{data.frame}.
 }
 \note{
 Only time series with atomic observation values can be coerced to a \code{data.frame}.
+
+This method is helpful for saving a multivariate time series to a human-readable text file.
 }
 \examples{
 as.data.frame(ex_uts_vector())
-as.data.frame(ex_uts_vector(), method="long", format="\%Y-\%m-\%d")
 }
 \seealso{
 The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in "long" and "wide" format, respectively, to a \code{uts_vector}.

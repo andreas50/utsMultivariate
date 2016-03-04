@@ -165,6 +165,7 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 #' Flatten a \code{"uts_vector"} to a \code{data.frame}.
 #' 
 #' @note Only time series with atomic observation values can be coerced to a \code{data.frame}.
+#' @note This method is helpful for saving a multivariate time series to a human-readable text file.
 #' 
 #' @param x a \code{"uts_vector"} object.
 #' @param method either \code{"long"} or \code{"wide"}, determining the shape of the output:
@@ -172,12 +173,12 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 #'   \item \code{"long"}: a \code{data.frame} with one row for each observation from one of the time series in \code{x}. The \code{data.frame} has three columns denoting the source of each observation (i.e. from which time series of \code{x} is the observation from)?, the observation time, and the observation value.
 #'   \item code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
 #' }
-#' @param \dots arguments passed to \code{\link{format.POSIXct}}.
+#' @param \dots further arguments passed to or from methods.
 #' 
 #' @seealso The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in "long" and "wide" format, respectively, to a \code{uts_vector}.
 #' @examples
 #' as.data.frame(ex_uts_vector())
-#' as.data.frame(ex_uts_vector(), method="long", format="%Y-%m-%d")
+#' as.data.frame(ex_uts_vector(), method="long")
 as.data.frame.uts_vector <- function(x, ..., method="wide")
 {
   # Argument checking
@@ -198,7 +199,7 @@ as.data.frame.uts_vector <- function(x, ..., method="wide")
     colnames(out) <- ts_names
     
     # Combine with observation times
-    out <- cbind(time=format(times, ...), out, stringsAsFactors=FALSE)
+    out <- cbind(time=times, out, stringsAsFactors=FALSE)
   } else if (method == "long") {
     out <- lapply(x, as.data.frame, ...)
     for (j in 1:num_ts)
