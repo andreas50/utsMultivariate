@@ -194,11 +194,11 @@ as.data.frame.uts_vector <- function(x, ..., method="wide")
   if (method == "wide") {
     # Extract observation values
     times <- time(x)
-    out <- as.data.frame(sample_values(x, times, drop=FALSE, max_dt=ddays(0)))
+    out <- as.data.frame(sample_values(x, times, drop=FALSE, max_dt=ddays(0)), stringsAsFactors=FALSE)
     colnames(out) <- ts_names
     
     # Combine with observation times
-    out <- cbind(time=format(times, ...), out)
+    out <- cbind(time=format(times, ...), out, stringsAsFactors=FALSE)
   } else if (method == "long") {
     out <- lapply(x, as.data.frame, ...)
     for (j in 1:num_ts)
