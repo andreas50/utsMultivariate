@@ -15,6 +15,16 @@ NULL
 
 
 #' @rdname compatability
+#'
+#' @examples
+#' \dontrun{as.ts(ex_uts_vector())}
+as.ts.uts_vector <- function(x, ...)
+{
+  stop("Unevenly spaced time series vectors cannot be coerced to 'ts' objects")
+}
+
+
+#' @rdname compatability
 #' 
 #' @return \code{cycle()} and \code{frequency()} give an error message, because  \code{"uts_vector"} and \code{"uts_matrix"} objects objects, by definition, do not have a fixed number of observations in a given time interval.
 #' 

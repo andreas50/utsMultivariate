@@ -19,8 +19,12 @@ Coercion to zoo
 }
 \examples{
 if (requireNamespace("zoo", quietly = TRUE)) {
+  # Bivariate uts_vector with synchronized observation times
   utsv <- c(a=ex_uts(), b=ex_uts() + 3)
   zoo::as.zoo(utsv)
+  
+  # # Bivariate uts_vector with non-synchronized observation times
+  zoo::as.zoo(ex_uts_vector())
 }
 }
 

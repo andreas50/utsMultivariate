@@ -1,7 +1,7 @@
 ## Import packages
 import(uts)
 import(lubridate)
-importFrom(stats, end, na.omit, start, time)
+importFrom(stats, as.ts, end, na.omit, start, time)
 
 
 # Export class constructors
@@ -20,6 +20,7 @@ export(sapply)
 
 # Register S3 methods (needed if a package is imported but not attached to the search path)
 S3method(as.data.frame, uts_vector)
+S3method(as.ts, uts_vector)
 S3method(as.uts_vector, ts)
 S3method(as.uts_vector, zoo)
 S3method(c, uts)

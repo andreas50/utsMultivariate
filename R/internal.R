@@ -18,8 +18,9 @@
 #' 
 #' Methods that exists solely ensure that methods intended for \code{\link{ts}} objects in base \R are not accidentally applied to \code{"uts_vector"} and \code{"uts_matrix"} objects:
 #' \itemize{
-#'   \item \code{\link[=cycle.uts_vector]{cycle}}
-#'   \item \code{\link[=frequency.uts_vector]{frequency}}
+#'   \item \code{\link{as.ts.uts_vector}}
+#'   \item \code{\link{cycle.uts_vector}}
+#'   \item \code{\link{frequency.uts_vector}}
 #' }
 #' 
 #' @name utsMultivariate-internal
