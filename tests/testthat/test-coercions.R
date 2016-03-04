@@ -22,7 +22,15 @@ test_that("coercions to 'uts_vector' work",{
   
   # xts
   if (requireNamespace("xts", quietly = TRUE)) {
+    # without names
+    values <- matrix(1:12, 4, 3)
+    xts1 <- xts::xts(values, as.Date("2003-01-01") + 0:3)
+    expect_equal_to_reference(as.uts_vector(xts1), file="test-coercions_from_xts_1.rds")
     
+    # with names
+    colnames(values) <- c("a", "b", "c")
+    xts1 <- xts::xts(values, as.Date("2003-01-01") + 0:3)
+    expect_equal_to_reference(as.uts_vector(xts1), file="test-coercions_from_xts_2.rds")
   }
   
   # zoo

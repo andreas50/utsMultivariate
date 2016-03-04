@@ -3,12 +3,15 @@
 \name{as.uts_vector}
 \alias{as.uts_vector}
 \alias{as.uts_vector.ts}
+\alias{as.uts_vector.xts}
 \alias{as.uts_vector.zoo}
 \title{Coercion to uts_vector}
 \usage{
 as.uts_vector(x, ...)
 
 \method{as.uts_vector}{ts}(x, ...)
+
+\method{as.uts_vector}{xts}(x, ...)
 
 \method{as.uts_vector}{zoo}(x, ...)
 }
@@ -27,6 +30,8 @@ Convert univariate and multivariate time series objects from other R package to 
 \itemize{
 \item \code{ts}: convert a \code{\link[stats:ts]{ts}} object
 
+\item \code{xts}: convert a \code{\link[xts:xts]{xtss}} object
+
 \item \code{zoo}: convert a \code{\link[zoo:zoo]{zoo}} object
 }}
 \examples{
@@ -35,6 +40,12 @@ ts1 <- ts(matrix(1:20, 10, 2), start=c(2016, 1), frequency=12, names=c("apples",
 utsv <- as.uts_vector(ts1)
 utsv[[1]]
 utsv$oranges
+
+# Convert a 3-dimensional "xts"
+if (requireNamespace("zoo", quietly = TRUE)) {
+  xts1 <- xts::xts(matrix(1:12, 4, 3), as.Date("2003-01-01") + 0:3)
+  as.uts_vector(xts1)
+}
 
 # Convert a 3-dimensional "zoo"
 if (requireNamespace("zoo", quietly = TRUE)) {

@@ -21,6 +21,12 @@
 #' utsv[[1]]
 #' utsv$oranges
 #' 
+#' # Convert a 3-dimensional "xts"
+#' if (requireNamespace("zoo", quietly = TRUE)) {
+#'   xts1 <- xts::xts(matrix(1:12, 4, 3), as.Date("2003-01-01") + 0:3)
+#'   as.uts_vector(xts1)
+#' }
+#' 
 #' # Convert a 3-dimensional "zoo"
 #' if (requireNamespace("zoo", quietly = TRUE)) {
 #'   zoo1 <- zoo::zoo(matrix(1:12, 4, 3), as.Date("2003-01-01") + 0:3)
@@ -44,6 +50,17 @@ as.uts_vector.ts <- function(x, ...)
   if (freq %in% c(4, 12))
     times <- floor_date(times + days(5), unit="month")
   uts_vector_wide(values, times)
+}
+
+
+#' @describeIn as.uts_vector convert a \code{\link[xts:xts]{xtss}} object
+as.uts_vector.xts <- function(x, ...)
+{
+  times <- as.POSIXct(time(x))
+  values <- as.matrix(x)
+  colnames(values) <- colnames(x)
+  
+  uts_vector_wide(x, times)
 }
 
 
