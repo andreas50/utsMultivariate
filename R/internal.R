@@ -2,7 +2,7 @@
 #'
 #' The internal functions listed below might be of interest to developers seeking to extend the package functionality.
 #' 
-#' \code{uts_vector} methods:
+#' \code{uts_vector} and \code{uts_matrix} methods that exist primarily because they also work for \R's other time series classes:
 #' \itemize{
 #'   \item \code{\link{is.uts_matrix}}
 #'   \item \code{\link{is.uts_vector}}
@@ -16,7 +16,7 @@
 #' }
 #' 
 #' 
-#' Methods that exists solely ensure that methods intended for \code{\link{ts}} objects in base \R are not accidentally applied to \code{"uts_vector"} and \code{"uts_matrix"} objects:
+#' Methods that are not applicable to unevenly spaced time series. These are provided so that methods intended for \code{\link{ts}} objects in base \R are not accidentally applied to \code{"uts_vector"} and \code{"uts_matrix"} objects:
 #' \itemize{
 #'   \item \code{\link{as.ts.uts_vector}}
 #'   \item \code{\link{cycle.uts_vector}}
