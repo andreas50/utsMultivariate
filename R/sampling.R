@@ -10,7 +10,7 @@
 #' @param x a \code{"uts_vector"} object where each individual \code{"uts"} as atomic observation values.
 #' @param time_points a strictly increasing sequence of \code{\link{POSIXct}} date-times.
 #' @param drop logical. If \code{TRUE} the result is coerced to the lowest possible dimension. See the examples and \code{\link{drop}}.
-#' @param \dots arguments passed to \code{\link[uts:sample_values]{sample_values.uts}} for sampling from the individual time series.
+#' @param \dots arguments passed to \code{\link[uts]{sample_values.uts}} for sampling from the individual time series.
 #' 
 #' @examples
 #' times <- as.POSIXct(c("2007-11-09", "2007-11-10"))

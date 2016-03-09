@@ -34,11 +34,11 @@
 #'   utsv[[1]]
 #' }
 #' 
-#' @seealso \code{\link[uts:as.uts]{as.uts}} for converting just univariate time series.
+#' @seealso \code{\link[uts]{as.uts}} for converting just univariate time series.
 as.uts_vector <- function(x, ...) UseMethod("as.uts_vector")
 
 
-#' @describeIn as.uts_vector convert a \code{\link[stats:ts]{ts}} object
+#' @describeIn as.uts_vector convert a \code{\link{ts}} object
 as.uts_vector.ts <- function(x, ...)
 {
   # Extract values and times
@@ -53,7 +53,7 @@ as.uts_vector.ts <- function(x, ...)
 }
 
 
-#' @describeIn as.uts_vector convert a \code{\link[xts:xts]{xtss}} object
+#' @describeIn as.uts_vector convert a \code{\link[xts]{xts}} object
 as.uts_vector.xts <- function(x, ...)
 {
   times <- as.POSIXct(time(x))
@@ -64,7 +64,7 @@ as.uts_vector.xts <- function(x, ...)
 }
 
 
-#' @describeIn as.uts_vector convert a \code{\link[zoo:zoo]{zoo}} object
+#' @describeIn as.uts_vector convert a \code{\link[zoo]{zoo}} object
 as.uts_vector.zoo <- function(x, ...)
 {
   times <- as.POSIXct(as.character(attr(x, "index")))
@@ -82,7 +82,7 @@ as.uts_vector.zoo <- function(x, ...)
 
 #' Coercion to zoo
 #' 
-#' @return A \code{\link[zoo:zoo]{zoo}} object.
+#' @return A \code{\link[zoo]{zoo}} object.
 #' @param x a \code{"uts_vector"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
@@ -107,7 +107,7 @@ as.zoo.uts_vector <- function(x, ...)
 
 #' Coercion to xts
 #' 
-#' @return A \code{\link[xts:xts]{xts}} object.
+#' @return A \code{\link[xts]{xts}} object.
 #' @param x a \code{"uts_vector"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 

@@ -11,7 +11,7 @@
 #' @param \dots further arguments passed to or from methods.
 #' 
 #' @keywords internal
-#' @seealso \code{\link[base:print]{print}} in base \R.
+#' @seealso \code{\link{print}} in base \R.
 #' @examples
 #' # Print "uts_vector"
 #' uts_vector()

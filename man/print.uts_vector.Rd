@@ -29,7 +29,7 @@ ex_uts_matrix()
 print(ex_uts_matrix(), print_times=TRUE)
 }
 \seealso{
-\code{\link[base:print]{print}} in base \R.
+\code{\link{print}} in base \R.
 }
 \keyword{internal}
 

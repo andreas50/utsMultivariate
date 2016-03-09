@@ -9,10 +9,10 @@ The internal functions listed below might be of interest to developers seeking t
 \details{
 \code{uts_vector} and \code{uts_matrix} methods that exist primarily because they also work for \R's other time series classes:
 \itemize{
-  \item \code{\link{is.uts_matrix}}
   \item \code{\link{is.uts_vector}}
-  \item \code{\link{print.uts_matrix}}
+  \item \code{\link{is.uts_matrix}}
   \item \code{\link{print.uts_vector}}
+  \item \code{\link{print.uts_matrix}}
 }
 
 Helper functions:

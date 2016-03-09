@@ -142,7 +142,7 @@ rep.uts_vector <- function(x, ...)
 #' @param tolerance a non-negative number, indicating the tolerance for numerical noise in the observation times. Observation times less than this threshold apart are treated as identical.
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso \code{\link[uts:time.uts]{time.uts}}, \code{\link[uts:sorted_union]{sorted_union}}
+#' @seealso \code{\link[uts]{time.uts}}, \code{\link[uts]{sorted_union}}
 #' @examples
 #' time(ex_uts_vector())
 #' time(ex_uts_vector2())

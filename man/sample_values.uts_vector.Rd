@@ -13,7 +13,7 @@
 
 \item{drop}{logical. If \code{TRUE} the result is coerced to the lowest possible dimension. See the examples and \code{\link{drop}}.}
 
-\item{\dots}{arguments passed to \code{\link[uts:sample_values]{sample_values.uts}} for sampling from the individual time series.}
+\item{\dots}{arguments passed to \code{\link[uts]{sample_values.uts}} for sampling from the individual time series.}
 }
 \value{
 A \code{matrix} if all sampled observation values are of the same \code{\link{type}}, and a \code{data.frame} otherwise. However, when using argument \code{drop=TRUE} the result may be simplified further.

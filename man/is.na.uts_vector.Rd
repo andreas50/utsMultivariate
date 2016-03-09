@@ -25,10 +25,8 @@ is.na(test)
 is.na(test)$oranges
 }
 \seealso{
-\code{\link{na.omit}}
+\code{\link[uts]{is.na.uts}}, \code{\link[uts]{na.omit.uts}} for \code{"uts"} objects.
 
-\code{\link[uts:is.na.uts]{is.na}}, \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.
-
-\code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+\code{\link{is.na}}, \code{\link{na.omit}} in base \R.
 }
 

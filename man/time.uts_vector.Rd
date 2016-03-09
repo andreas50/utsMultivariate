@@ -21,6 +21,6 @@ time(ex_uts_vector())
 time(ex_uts_vector2())
 }
 \seealso{
-\code{\link[uts:time.uts]{time.uts}}, \code{\link[uts:sorted_union]{sorted_union}}
+\code{\link[uts]{time.uts}}, \code{\link[uts]{sorted_union}}
 }
 

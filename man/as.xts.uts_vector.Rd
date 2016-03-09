@@ -12,7 +12,7 @@ as.xts.uts_vector(x, ...)
 \item{\dots}{further arguments passed to or from methods.}
 }
 \value{
-A \code{\link[xts:xts]{xts}} object.
+A \code{\link[xts]{xts}} object.
 }
 \description{
 Coercion to xts

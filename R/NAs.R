@@ -9,9 +9,8 @@
 #' @param object a \code{"uts_vector"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso \code{\link{is.na}}
-#' @seealso \code{\link[uts:is.na.uts]{is.na}} \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.
-#' @seealso \code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+#' @seealso \code{\link[uts]{is.na.uts}}, \code{\link[uts]{na.omit.uts}} for \code{"uts"} objects.
+#' @seealso \code{\link{is.na}}, \code{\link{na.omit}} in base \R.
 #' 
 #' @examples
 #' # Remove NAs from a "uts_vector"
@@ -31,9 +30,8 @@ na.omit.uts_vector <- function(object, ...)
 #' @return An object of the same class as \code{x}, but with observation values replaced with \code{TRUE} or \code{FALSE}, indicating which observation values of \code{x} are \code{NA}.
 #' @param x a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' 
-#' @seealso \code{\link{na.omit}}
-#' @seealso \code{\link[uts:is.na.uts]{is.na}}, \code{\link[uts:na.omit.uts]{na.omit}} for \code{"uts"} objects.
-#' @seealso \code{\link[base:is.na]{is.na}}, \code{\link[stats:na.fail]{na.omit}} in base \R.
+#' @seealso \code{\link[uts]{is.na.uts}}, \code{\link[uts]{na.omit.uts}} for \code{"uts"} objects.
+#' @seealso \code{\link{is.na}}, \code{\link{na.omit}} in base \R.
 #' 
 #' @examples
 #' # Set observation to NA

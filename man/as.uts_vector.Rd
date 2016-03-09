@@ -28,11 +28,11 @@ Convert univariate and multivariate time series objects from other R package to 
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ts}: convert a \code{\link[stats:ts]{ts}} object
+\item \code{ts}: convert a \code{\link{ts}} object
 
-\item \code{xts}: convert a \code{\link[xts:xts]{xtss}} object
+\item \code{xts}: convert a \code{\link[xts]{xts}} object
 
-\item \code{zoo}: convert a \code{\link[zoo:zoo]{zoo}} object
+\item \code{zoo}: convert a \code{\link[zoo]{zoo}} object
 }}
 \examples{
 # Convert a bivariate "ts"
@@ -56,6 +56,6 @@ if (requireNamespace("zoo", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link[uts:as.uts]{as.uts}} for converting just univariate time series.
+\code{\link[uts]{as.uts}} for converting just univariate time series.
 }
 
