@@ -21,6 +21,14 @@
 #' utsv[[1]]
 #' utsv$oranges
 #' 
+#' # Convert a 2-dimensional "fts" and remove NA observations
+#' if (requireNamespace("fts", quietly = TRUE)) {
+#'   x <- fts::fts(index=seq(from=Sys.Date(), by="months", length.out=24),data=1:24)
+#'   y <- fts::fts(index=seq(from=Sys.Date(), by="months", length.out=12),data=13:24)
+#'   fts1 <- cbind(x, y)
+#'   na.omit(as.uts_vector(fts1))
+#' }
+#' 
 #' # Convert a 3-dimensional "xts"
 #' if (requireNamespace("zoo", quietly = TRUE)) {
 #'   xts1 <- xts::xts(matrix(1:12, 4, 3), as.Date("2003-01-01") + 0:3)
@@ -50,6 +58,13 @@ as.uts_vector.ts <- function(x, ...)
   if (freq %in% c(4, 12))
     times <- floor_date(times + days(5), unit="month")
   uts_vector_wide(values, times)
+}
+
+
+#' @describeIn as.uts_vector convert an \code{\link[fts]{fts}} object
+as.uts_vector.fts <- function(x, ...)
+{
+  as.uts_vector.zoo(x, ...)
 }
 
 

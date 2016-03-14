@@ -2,6 +2,7 @@
 % Please edit documentation in R/coercions.R
 \name{as.uts_vector}
 \alias{as.uts_vector}
+\alias{as.uts_vector.fts}
 \alias{as.uts_vector.ts}
 \alias{as.uts_vector.xts}
 \alias{as.uts_vector.zoo}
@@ -10,6 +11,8 @@
 as.uts_vector(x, ...)
 
 \method{as.uts_vector}{ts}(x, ...)
+
+\method{as.uts_vector}{fts}(x, ...)
 
 \method{as.uts_vector}{xts}(x, ...)
 
@@ -30,6 +33,8 @@ Convert univariate and multivariate time series objects from other R package to 
 \itemize{
 \item \code{ts}: convert a \code{\link{ts}} object
 
+\item \code{fts}: convert an \code{\link[fts]{fts}} object
+
 \item \code{xts}: convert a \code{\link[xts]{xts}} object
 
 \item \code{zoo}: convert a \code{\link[zoo]{zoo}} object
@@ -40,6 +45,14 @@ ts1 <- ts(matrix(1:20, 10, 2), start=c(2016, 1), frequency=12, names=c("apples",
 utsv <- as.uts_vector(ts1)
 utsv[[1]]
 utsv$oranges
+
+# Convert a 2-dimensional "fts" and remove NA observations
+if (requireNamespace("fts", quietly = TRUE)) {
+  x <- fts::fts(index=seq(from=Sys.Date(), by="months", length.out=24),data=1:24)
+  y <- fts::fts(index=seq(from=Sys.Date(), by="months", length.out=12),data=13:24)
+  fts1 <- cbind(x, y)
+  na.omit(as.uts_vector(fts1))
+}
 
 # Convert a 3-dimensional "xts"
 if (requireNamespace("zoo", quietly = TRUE)) {

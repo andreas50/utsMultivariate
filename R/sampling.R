@@ -17,7 +17,7 @@
 #' 
 #' # Sample with last-point and linear interpolation
 #' sample_values(ex_uts_vector(), times)
-#' sample_values(ex_uts_vector(), times, method="linear")
+#' sample_values(ex_uts_vector(), times, interpolation="linear")
 #' 
 #' # Sample with and without dropping of length-one dimensions
 #' sample_values(ex_uts_vector(), times[1])

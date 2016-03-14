@@ -19,7 +19,7 @@ test_that("sample_values works",{
     file="test-sampling_1.rds"
   )
   expect_equal_to_reference(
-    sample_values(x, times, method="linear"),
+    sample_values(x, times, interpolation="linear"),
     file="test-sampling_2.rds"
   )
   

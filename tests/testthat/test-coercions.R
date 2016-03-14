@@ -7,7 +7,10 @@ test_that("coercions to 'uts_vector' work",{
   
   # fts
   if (requireNamespace("fts", quietly = TRUE)) {
-  
+    x <- fts::fts(index=seq(from=Sys.Date(), by="months", length.out=24),data=1:24)
+    y <- fts::fts(index=seq(from=Sys.Date(), by="months", length.out=12),data=13:24)
+    fts1 <- cbind(x, y)
+    expect_equal_to_reference(na.omit(as.uts_vector(fts1)), file="test-coercions_from_fts.rds")
   }
   
   # irts
