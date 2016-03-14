@@ -9,7 +9,7 @@ Depends:
     uts
 Suggests:
     testthat
-Enhances: fts, xts, zoo
+Enhances: fts, tseries, xts, zoo
 Description: S3 classes ("uts_vector" and "uts_matrix") for multivariate
     unevenly spaced time series. R users familiar with vectors and matrices
     should find it straightforward to work with the corresponding time series

@@ -15,7 +15,16 @@ test_that("coercions to 'uts_vector' work",{
   
   # irts
   if (requireNamespace("tseries", quietly = TRUE)) {
-
+    # without names
+    values <- matrix(1:12, 4)
+    times <- as.POSIXct("2015-01-01") + days(c(1, 3, 7, 9))
+    irts1 <- tseries::irts(times, values)
+    expect_equal_to_reference(as.uts_vector(irts1), file="test-coercions_from_irts_1.rds")
+    
+    # with names
+    colnames(values) <- c("a", "b", "c")
+    irts1 <- tseries::irts(times, values)
+    expect_equal_to_reference(as.uts_vector(irts1), file="test-coercions_from_irts_2.rds")
   }
 
   # its

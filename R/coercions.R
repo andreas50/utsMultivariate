@@ -29,6 +29,12 @@
 #'   na.omit(as.uts_vector(fts1))
 #' }
 #' 
+#' # Convert a 3-dimensional "irts"
+#' if (requireNamespace("tseries", quietly = TRUE)) {
+#'   irts1 <- tseries::irts(as.POSIXct("2015-01-01") + days(c(1, 3, 7, 9)), matrix(1:12, 4))
+#'   as.uts_vector(irts1)
+#' }
+#' 
 #' # Convert a 3-dimensional "xts"
 #' if (requireNamespace("zoo", quietly = TRUE)) {
 #'   xts1 <- xts::xts(matrix(1:12, 4, 3), as.Date("2003-01-01") + 0:3)
@@ -65,6 +71,17 @@ as.uts_vector.ts <- function(x, ...)
 as.uts_vector.fts <- function(x, ...)
 {
   as.uts_vector.zoo(x, ...)
+}
+
+
+#' @describeIn as.uts_vector convert an \code{\link[tseries]{irts}} object
+as.uts_vector.irts <- function(x, ...)
+{
+  # Clean messed up class attributed of observations times
+  times <- x$time
+  class(times) <- class(as.POSIXct(character()))
+  
+  uts_vector_wide(x$value, times)
 }
 
 
