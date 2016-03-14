@@ -175,3 +175,22 @@ as.fts.uts_vector <- function(x)
   fts::fts(data$time, data[, -1])
 }
 
+
+#' Coercion to irts
+#' 
+#' @return An \code{\link[tseries]{irts}} object.
+#' @param x a \code{"uts_vector"} object.
+#' 
+#' @examples
+#' if (requireNamespace("tseries", quietly = TRUE)) {
+#'   tseries::as.irts(ex_uts_vector())
+#' }
+as.irts.uts_vector <- function(x)
+{
+  if (!requireNamespace("tseries", quietly=TRUE))
+    stop("Package 'tseries' needed for this function to work")
+  
+  data <- as.data.frame(x)
+  tseries::irts(data$time, as.matrix(data[, -1]))
+}
+

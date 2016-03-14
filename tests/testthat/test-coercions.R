@@ -71,7 +71,7 @@ test_that("coercions from 'uts_vector' work",{
   
   # irts
   if (requireNamespace("tseries", quietly = TRUE)) {
-
+    expect_equal_to_reference(tseries::as.irts(ex_uts_vector()), file="test-coercions_to_irts.rds")
   }
 
   # its
