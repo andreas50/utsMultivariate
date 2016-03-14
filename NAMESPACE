@@ -47,6 +47,7 @@ S3method(time, uts_vector)
 # S3 methods that cause problems when registered with S3method() instead of export():
 # 1.) A method for a generic in an enhanced/suggested package cannot be registered.
 #     See chapter 8 of "R packages" by Hadley Wickham.
+export(as.fts.uts_vector)     # would need to create "fts" package dependency
 export(as.xts.uts_vector)     # would need to create "xts" package dependency
 export(as.zoo.uts_vector)     # would need to create "zoo" package dependency
 

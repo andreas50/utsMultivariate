@@ -140,4 +140,21 @@ as.xts.uts_vector <- function(x, ...)
 }
 
 
+#' Coercion to fts
+#' 
+#' @return An \code{\link[fts]{fts}} object.
+#' @param x a \code{"uts_vector"} object.
+#' 
+#' @examples
+#' if (requireNamespace("fts", quietly = TRUE)) {
+#'   fts::as.fts(ex_uts_vector())
+#' }
+as.fts.uts_vector <- function(x)
+{
+  if (!requireNamespace("fts", quietly=TRUE))
+    stop("Package 'fts' needed for this function to work")
+  
+  data <- as.data.frame(x)
+  fts::fts(data$time, data[, -1])
+}
 

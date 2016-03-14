@@ -57,7 +57,7 @@ test_that("coercions from 'uts_vector' work",{
   
     # fts
   if (requireNamespace("fts", quietly = TRUE)) {
-  
+    expect_equal_to_reference(fts::as.fts(ex_uts_vector()), file="test-coercions_to_fts.rds")
   }
   
   # irts
