@@ -33,7 +33,7 @@ as.uts_vector(x, ...)
 An object of class \code{"uts_vector"}.
 }
 \description{
-Convert univariate and multivariate time series objects from other R package to \code{"uts_vector"} objects.
+Convert univariate and multivariate time series objects from other R packages to \code{"uts_vector"} objects.
 }
 \section{Methods (by class)}{
 \itemize{

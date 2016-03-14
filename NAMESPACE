@@ -51,6 +51,7 @@ S3method(time, uts_vector)
 #     See chapter 8 of "R packages" by Hadley Wickham.
 export(as.fts.uts_vector)     # would need to create "fts" package dependency
 export(as.irts.uts_vector)    # would need to create "tseries" package dependency
+export(as.its.uts_vector)     # would need to create "its" package dependency
 export(as.xts.uts_vector)     # would need to create "xts" package dependency
 export(as.zoo.uts_vector)     # would need to create "zoo" package dependency
 

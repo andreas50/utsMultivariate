@@ -8,7 +8,7 @@
 
 #' Coercion to uts_vector
 #' 
-#' Convert univariate and multivariate time series objects from other R package to \code{"uts_vector"} objects.
+#' Convert univariate and multivariate time series objects from other R packages to \code{"uts_vector"} objects.
 #'
 #' @return An object of class \code{"uts_vector"}.
 #' @param x a time series object of appropriate type.
@@ -79,6 +79,7 @@ as.uts_vector.ts <- function(x, ...)
 #' @describeIn as.uts_vector convert an \code{\link[fts]{fts}} object
 as.uts_vector.fts <- function(x, ...)
 {
+  # The "fts" class inherits from "zoo"
   as.uts_vector.zoo(x, ...)
 }
 
@@ -210,3 +211,22 @@ as.irts.uts_vector <- function(x)
   tseries::irts(data$time, as.matrix(data[, -1]))
 }
 
+
+#' Coercion to its
+#' 
+#' @return An \code{\link[its]{its}} object.
+#' @param x a \code{"uts_vector"} object.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @examples
+#' if (requireNamespace("its", quietly = TRUE)) {
+#'   its::as.its(ex_uts_vector())
+#' }
+as.its.uts_vector <- function(x, ...)
+{
+  if (!requireNamespace("its", quietly=TRUE))
+    stop("Package 'its' needed for this function to work")
+  
+  data <- as.data.frame(x)
+  its::its(as.matrix(data[, -1]), data$time)
+}

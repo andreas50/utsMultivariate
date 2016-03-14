@@ -80,7 +80,7 @@ test_that("coercions from 'uts_vector' work",{
 
   # its
   if (requireNamespace("its", quietly = TRUE)) {
-
+    expect_equal_to_reference(its::as.its(ex_uts_vector()), file="test-coercions_to_its.rds")
   }
   
   # xts
