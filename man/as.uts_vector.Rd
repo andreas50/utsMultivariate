@@ -4,6 +4,7 @@
 \alias{as.uts_vector}
 \alias{as.uts_vector.fts}
 \alias{as.uts_vector.irts}
+\alias{as.uts_vector.its}
 \alias{as.uts_vector.ts}
 \alias{as.uts_vector.xts}
 \alias{as.uts_vector.zoo}
@@ -16,6 +17,8 @@ as.uts_vector(x, ...)
 \method{as.uts_vector}{fts}(x, ...)
 
 \method{as.uts_vector}{irts}(x, ...)
+
+\method{as.uts_vector}{its}(x, ...)
 
 \method{as.uts_vector}{xts}(x, ...)
 
@@ -40,6 +43,8 @@ Convert univariate and multivariate time series objects from other R package to 
 
 \item \code{irts}: convert an \code{\link[tseries]{irts}} object
 
+\item \code{its}: convert an \code{\link[its]{its}} object
+
 \item \code{xts}: convert a \code{\link[xts]{xts}} object
 
 \item \code{zoo}: convert a \code{\link[zoo]{zoo}} object
@@ -63,6 +68,15 @@ if (requireNamespace("fts", quietly = TRUE)) {
 if (requireNamespace("tseries", quietly = TRUE)) {
   irts1 <- tseries::irts(as.POSIXct("2015-01-01") + days(c(1, 3, 7, 9)), matrix(1:12, 4))
   as.uts_vector(irts1)
+}
+
+# Convert a 3-dimensional "its"
+if (requireNamespace("its", quietly = TRUE)) {
+  mat <- matrix(1:6, nrow=2)
+  colnames(mat) <- c("a", "b", "c")
+  rownames(mat) <- c("2003-01-01","2003-01-04")
+  its1 <- its::its(mat)
+  as.uts_vector(its1)
 }
 
 # Convert a 3-dimensional "xts"

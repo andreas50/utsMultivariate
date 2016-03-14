@@ -29,7 +29,11 @@ test_that("coercions to 'uts_vector' work",{
 
   # its
   if (requireNamespace("its", quietly = TRUE)) {
-
+    mat <- matrix(1:6, nrow=2)
+    colnames(mat) <- c("a", "b", "c")
+    rownames(mat) <- c("2003-01-01","2003-01-04")
+    its1 <- its::its(mat)
+    expect_equal_to_reference(as.uts_vector(its1), file="test-coercions_from_its.rds")
   }
   
   # xts
