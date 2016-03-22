@@ -162,7 +162,7 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 
 #' Coerce to a Data Frame
 #'
-#' Flatten a \code{"uts_vector"} to a \code{data.frame}.
+#' Flatten a \code{\link{uts_vector}} to a \code{\link{data.frame}}.
 #' 
 #' @note Only time series with atomic observation values can be coerced to a \code{data.frame}.
 #' @note This method is helpful for saving a multivariate time series to a human-readable text file.
@@ -170,12 +170,12 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 #' @param x a \code{"uts_vector"} object.
 #' @param method either \code{"long"} or \code{"wide"}, determining the shape of the output:
 #' \itemize{
-#'   \item \code{"long"}: a \code{data.frame} with one row for each observation from one of the time series in \code{x}. The \code{data.frame} has three columns denoting the source of each observation (i.e. from which time series of \code{x} is the observation from)?, the observation time, and the observation value.
-#'   \item code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
+#'   \item \code{"long"}: a \code{data.frame} with one row for each observation for each time series in \code{x}. The \code{data.frame} has three columns denoting the source of each observation (i.e. from which time series of \code{x} is the observation from?), the observation time, and the observation value.
+#'   \item \code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
 #' }
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in "long" and "wide" format, respectively, to a \code{uts_vector}.
+#' @seealso The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_vector}.
 #' @examples
 #' as.data.frame(ex_uts_vector())
 #' as.data.frame(ex_uts_vector(), method="long")
@@ -189,7 +189,7 @@ as.data.frame.uts_vector <- function(x, ..., method="wide")
   num_ts <- length(x)
   ts_names <- names(x)
   if (is.null(ts_names))
-    ts_names <- as.character(seq_len(num_ts))
+    ts_names <- seq_len(num_ts)
   
   # Flatten the data
   if (method == "wide") {

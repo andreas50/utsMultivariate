@@ -68,10 +68,10 @@ test_that("as.data.frame.uts_vector works",{
   # Regression testing
   expect_equal_to_reference(
     as.data.frame(ex_uts_vector()),
-    file="test-as.data.frame_1.rds"
+    file="test-as.data.frame.uts_vector_1.rds"
   )
   expect_equal_to_reference(
     as.data.frame(ex_uts_vector(), method="long"),
-    file="test-as.data.frame_2.rds"
+    file="test-as.data.frame.uts_vector_2.rds"
   )
 })

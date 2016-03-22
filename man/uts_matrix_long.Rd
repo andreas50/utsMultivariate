@@ -33,7 +33,7 @@ uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
   names=c("A", "A", "B", "B", "A"), fields=c("c", "d", "d", "d", "d"))
 }
 \seealso{
-\code{\link{uts_matrix_wide}}
+\code{\link{uts_matrix_wide}}, \code{\link{uts_vector_long}}, \code{\link{uts_vector_wide}}
 }
 \keyword{classes}
 \keyword{ts}

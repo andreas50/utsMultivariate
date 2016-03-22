@@ -25,7 +25,7 @@ values <- data.frame(apples=1:10, oranges=letters[1:10],
 uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10))
 }
 \seealso{
-\code{\link{uts_vector_long}}
+\code{\link{uts_vector_long}}, \code{\link{uts_matrix_long}}, \code{\link{uts_matrix_wide}}
 }
 \keyword{classes}
 \keyword{ts}

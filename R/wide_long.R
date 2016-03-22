@@ -16,7 +16,7 @@
 #' @param names a character vector. The entity/attribute names of the columns of \code{values}. By default, the column names of \code{values} are used.
 #' 
 #' @keywords ts classes
-#' @seealso \code{\link{uts_vector_long}}
+#' @seealso \code{\link{uts_vector_long}}, \code{\link{uts_matrix_long}}, \code{\link{uts_matrix_wide}}
 #' @examples 
 #' values <- data.frame(apples=1:10, oranges=letters[1:10],
 #'   bananas=month.name[1:10], stringsAsFactors=FALSE)
@@ -57,7 +57,7 @@ uts_vector_wide <- function(values, times, names=colnames(values))
 #' @param names a character vector. The matching entity/attribute names of the observations. By default, the names of \code{values} are used.
 #' 
 #' @keywords ts classes
-#' @seealso \code{\link{uts_vector_wide}}
+#' @seealso \code{\link{uts_vector_wide}}, \code{\link{uts_matrix_long}}, \code{\link{uts_matrix_wide}}
 #' @examples 
 #' values <- c(a=5, b=6, a=6, a=7)
 #' times <- as.POSIXct("2016-01-01") + dhours(1:4)
@@ -113,7 +113,7 @@ uts_vector_long <- function(values, times, names=base::names(values))
 #' @param names a character vector. The the matching entity names for the observations. By default, the names of \code{values} are used.
 #' @param fields a character vector. The the matching attribute/field names for the observations.
 #' 
-#' @seealso \code{\link{uts_matrix_wide}}
+#' @seealso \code{\link{uts_matrix_wide}}, \code{\link{uts_vector_long}}, \code{\link{uts_vector_wide}}
 #' @keywords ts classes
 #' @examples
 #' values <- c(A=1, A=2, B=3, B=4, A=5)
@@ -179,7 +179,7 @@ uts_matrix_long <- function(values, times, names=base::names(values), fields)
 #' @param names a character vector. The the matching entity names for the records. By default, the row names of \code{values} are used.
 #' @param fields a character vector. The the attribute/field names of the records. By default, the column names of \code{values} are used.
 #' 
-#' @seealso \code{\link{uts_matrix_long}}
+#' @seealso \code{\link{uts_matrix_long}}, \code{\link{uts_vector_long}}, \code{\link{uts_vector_wide}}
 #' @keywords ts classes
 #' @examples 
 #' values <- matrix(1:8, 4, 2)

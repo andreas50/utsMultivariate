@@ -28,7 +28,7 @@ uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
   names=c("a", "a", "a", "a", "a", "c", "c", "b", "b", "b"))
 }
 \seealso{
-\code{\link{uts_vector_wide}}
+\code{\link{uts_vector_wide}}, \code{\link{uts_matrix_long}}, \code{\link{uts_matrix_wide}}
 }
 \keyword{classes}
 \keyword{ts}

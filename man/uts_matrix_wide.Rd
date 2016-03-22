@@ -35,7 +35,7 @@ uts_matrix_wide(values, times)
 uts_matrix_wide(values, times, names=c("China", "China", "France", "USA"))
 }
 \seealso{
-\code{\link{uts_matrix_long}}
+\code{\link{uts_matrix_long}}, \code{\link{uts_vector_long}}, \code{\link{uts_vector_wide}}
 }
 \keyword{classes}
 \keyword{ts}
