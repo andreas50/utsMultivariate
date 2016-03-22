@@ -60,3 +60,14 @@ test_that("uts_matrix works",{
 })
 
 
+test_that("as.data.frame.uts_matrix works",{
+  # Regression testing
+  expect_equal_to_reference(
+    as.data.frame(ex_uts_matrix()),
+    file="test-as.data.frame.uts_matrix_1.rds"
+  )
+  expect_equal_to_reference(
+    as.data.frame(ex_uts_matrix(), method="long"),
+    file="test-as.data.frame.uts_matrix_2.rds"
+  )
+})

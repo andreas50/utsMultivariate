@@ -113,3 +113,48 @@ is.uts_matrix <- function(x)
   inherits(x, "uts_matrix")
 }
 
+
+#' Coerce to a Data Frame
+#'
+#' Flatten a \code{\link{uts_matrix}} to a \code{\link{data.frame}}.
+#' 
+#' @note Only time series with atomic observation values can be coerced to a \code{data.frame}.
+#' @note This method is helpful for saving a multivariate time series to a human-readable text file.
+#' 
+#' @param x a \code{"uts_matrix"} object.
+#' @param method either \code{"long"} or \code{"wide"}, determining the shape of the output:
+#' \itemize{
+#'   \item \code{"long"}: a \code{data.frame} with one row for each observation for each time series in \code{x}. The \code{data.frame} has four columns denoting the source of each observation (i.e. from which row and column of \code{x} is the observation from?), the observation time, and the observation value.
+#'   \item \code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
+#' }
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @seealso The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
+#' @examples
+#' as.data.frame(ex_uts_matrix())
+#' as.data.frame(ex_uts_matrix(), method="long")
+as.data.frame.uts_matrix <- function(x, ..., method="wide")
+{
+  # Call method for uts_vector
+  out <- as.data.frame.uts_vector(x, ..., method=method)
+  
+  # Extract row and columns names
+  rnames <- rownames(x)
+  if (is.null(rnames))
+    rnames <- seq_len(nrow(x))
+  cnames <- colnames(x)
+  if (is.null(cnames))
+    cnames <- seq_len(ncol(x))
+  
+  # Insert names to indentify rows and columns of observations
+  if (method == "wide") {
+    colnames(out)[-1] <- paste0("[", rep(rnames, length(cnames)), ", ", rep(cnames, each=length(rnames)), "]")
+  } else if (method == "long") {
+    row_pos <- ((out$name - 1) %% nrow(x)) + 1
+    col_pos <- (out$name - row_pos) / ncol(x) + 1
+    out <- data.frame(row=rnames[row_pos], column=cnames[col_pos], out[,-1])
+  }
+  out
+}
+
+
