@@ -25,16 +25,16 @@
 Plot the individual time series of a \code{"uts_vector"} using \code{\link[uts]{plot.uts}}.
 }
 \examples{
-# plot all time series at once
+# Plot all time series at once
 old <- par(mfrow=c(1, 2))
 plot(ex_uts_vector())
 plot(ex_uts_vector(), max_dt=dhours(12), type="b")   # don't connect points more than 12 hours apart
 par(old)
 
-# plot one time series at a time
+# Plot one time series at a time
 plot(ex_uts_vector(), ask=TRUE)
 
-# plot multiple time series in a single plot by superimposing the plots
+# Plot multiple time series in a single plot by superimposing the plots
 plot(ex_uts_vector(), plot.type="single")
 }
 \seealso{
