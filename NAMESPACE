@@ -68,4 +68,5 @@ export(ex_uts_vector2)
 export(is.uts_matrix)
 export(is.uts_vector)
 export(Ops_uts_vector)
+export(plot_single_uts_vector)
 

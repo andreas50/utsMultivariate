@@ -4,12 +4,20 @@
 \alias{plot.uts_vector}
 \title{Plot a uts_vector}
 \usage{
-\method{plot}{uts_vector}(x, ..., ask = getOption("device.ask.default"))
+\method{plot}{uts_vector}(x, ..., plot.type = "multiple",
+  ask = getOption("device.ask.default"), legend = TRUE,
+  legend.x = "topright", legend.y = NULL)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
 
+\item{plot.type}{\code{"multiple"} plots the time eries on multiple plots, while \code{"single"} superimposes them on a single plot}
+
 \item{ask}{logical. If \code{TRUE} (and the \R session is interactive) the user is asked for input, before a new figure is drawn.}
+
+\item{legend}{boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.}
+
+\item{legend.x, legend.y}{the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.}
 
 \item{\dots}{arguments passed to \code{\link[uts]{plot.uts}}.}
 }
@@ -25,5 +33,8 @@ par(old)
 
 # plot one time series at a time
 plot(ex_uts_vector(), ask=TRUE)
+
+# plot multiple time series in a single plot by superimposing the plots
+plot(ex_uts_vector(), plot.type="single")
 }
 
