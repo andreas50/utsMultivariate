@@ -4,11 +4,15 @@
 \alias{plot_single_uts_vector}
 \title{Plot a uts_vector in a single plot}
 \usage{
-plot_single_uts_vector(x, ..., legend = TRUE, legend.x = "topright",
-  legend.y = NULL)
+plot_single_uts_vector(x, ..., xlab = "", ylab = "", legend = TRUE,
+  legend.x = "topright", legend.y = NULL)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
+
+\item{xlab}{a label for the x axis.}
+
+\item{ylab}{a label for the y axis}
 
 \item{legend}{boolean. Whether to add a legend to the plot.}
 
@@ -25,4 +29,5 @@ plot_single_uts_vector(ex_uts_vector())
 \seealso{
 \code{\link{matplot}}
 }
+\keyword{internal}
 

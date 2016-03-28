@@ -13,7 +13,7 @@
 #' @param legend.x,legend.y the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.
 #' @param \dots arguments passed to \code{\link[uts]{plot.uts}}.
 #' 
-#' @seealso
+#' @seealso \code{\link{plot.uts}}
 #' @examples
 #' # plot all time series at once
 #' old <- par(mfrow=c(1, 2))
@@ -62,15 +62,21 @@ plot.uts_vector <- function(x, ..., plot.type="multiple", ask=getOption("device.
 #' A helper function that implements \code{plot.uts_vector} for argument \code{plot.type="single"}.
 #' 
 #' @param x a \code{"uts_vector"} object with numeric or logical observation values.
-#' @param \dots arguments passed to \code{\link[uts]{plot.uts}}.
+#' @param xlab a label for the x axis.
+#' @param ylab a label for the y axis
 #' @param legend boolean. Whether to add a legend to the plot.
 #' @param legend.x,legend.y the x and y co-ordinates to be used to position the legend.
+#' @param \dots arguments passed to \code{\link[uts]{plot.uts}}.
 #' 
 #' @seealso \code{\link{matplot}}
+#' @keywords internal
 #' @examples
 #' plot_single_uts_vector(ex_uts_vector())
-plot_single_uts_vector <- function(x, ..., legend=TRUE, legend.x="topright", legend.y=NULL)
+plot_single_uts_vector <- function(x, ..., xlab="", ylab="", legend=TRUE, legend.x="topright", legend.y=NULL)
 {
-  
+  # Set up empty plotting canvas
+  tmp_x <- c(min(start(x)), max(end(x)))
+  tmp_y <- range(range(x))
+  plot(tmp_x, tmp_y, type="n", xlab=xlab, ylab=ylab, ...)
 }
 

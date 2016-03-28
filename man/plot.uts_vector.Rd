@@ -37,4 +37,7 @@ plot(ex_uts_vector(), ask=TRUE)
 # plot multiple time series in a single plot by superimposing the plots
 plot(ex_uts_vector(), plot.type="single")
 }
+\seealso{
+\code{\link{plot.uts}}
+}
 
