@@ -4,30 +4,29 @@
 
 #' Plot a uts_vector
 #' 
-#' Plot the individual time series of a \code{"uts_vector"} using \code{\link[uts]{plot.uts}}.
+#' Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted on at a time.
 #' 
 #' @param x a \code{"uts_vector"} object with numeric or logical observation values.
-#' @param plot.type \code{"multiple"} plots the time eries on multiple plots, while \code{"single"} superimposes them on a single plot
-#' @param ask logical. If \code{TRUE} (and the \R session is interactive) the user is asked for input, before a new figure is drawn.
+#' @param plot.type \code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot
 #' @param legend boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.
 #' @param legend.x,legend.y the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.
-#' @param \dots arguments passed to \code{\link[uts]{plot.uts}}.
+#' @param ask logical. For \code{plot.type="multiple"}, if \code{TRUE} (and the \R session is interactive) the user is asked for input before a new figure is drawn.
+#' @param \dots graphical parameters passed to passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}.
 #' 
 #' @seealso \code{\link{plot.uts}}
 #' @examples
-#' # Plot all time series at once
-#' old <- par(mfrow=c(1, 2))
+#' #' # Plot multiple time series in a single canvas by superimposing the plots
 #' plot(ex_uts_vector())
-#' plot(ex_uts_vector(), max_dt=dhours(12), type="b")   # don't connect points more than 12 hours apart
+#' 
+#' # Plot each time series separately
+#' old <- par(mfrow=c(1, 2))
+#' plot(ex_uts_vector(), plot.type="multiple")
 #' par(old)
 #' 
-#' # Plot one time series at a time
-#' plot(ex_uts_vector(), ask=TRUE)
-#' 
-#' # Plot multiple time series in a single plot by superimposing the plots
-#' plot(ex_uts_vector(), plot.type="single")
-plot.uts_vector <- function(x, plot.type="single", ..., ask=getOption("device.ask.default"),
-  legend=TRUE, legend.x="topright", legend.y=NULL)
+#' # Plot one time series at a time, waiting for user input
+#' plot(ex_uts_vector(), plot.type="multiple", ask=TRUE)
+plot.uts_vector <- function(x, plot.type="single", ...,
+  legend=TRUE, legend.x="topright", legend.y=NULL, ask=getOption("device.ask.default"))
 {
   # Argument checking
   if (!(plot.type %in% c("multiple", "single")))
@@ -35,7 +34,12 @@ plot.uts_vector <- function(x, plot.type="single", ..., ask=getOption("device.as
   
   # Remove time series with zero observations
   len <- sapply(x, length)
-  x <- x[len > 0]
+  if (0) {
+    #x <- x[len > 0]    # not implemented yet
+  } else {
+    for (l in rev(len))
+      x[[l]] <- NULL
+  }
   if (length(x) == 0)
     stop("Nothing to plot")
   
@@ -72,8 +76,9 @@ plot.uts_vector <- function(x, plot.type="single", ..., ask=getOption("device.as
 #' @seealso \code{\link{matplot}}
 #' @keywords internal
 #' @examples
-#' plot_single_uts_vector(ex_uts_vector())
-#' plot_single_uts_vector(ex_uts_vector(), type="o")
+#' plot_single_uts_vector(ex_uts_vector(), xlab="time")
+#' plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit")
+#' plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60))
 plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
   col=seq_along(x), lty=1, lwd=1, pch=1, type="l",
   legend=TRUE, legend.x="topright", legend.y=NULL)
@@ -113,19 +118,18 @@ plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
   
   # Add legend
   if (legend) {
-    # extract names
+    # Pick sensible names
     names <- names(x)
     if (is.null(names))
       names <- as.character(1:length(uts_vector))
     
-    # need to clean 'pch' and 'lty' paramters, because effect different for legend() than plot()
+    # Clean 'pch' and 'lty' parameters, because effect different than for plot()
     legend.pch <- pch
     legend.pch[!(type %in% c("b", "o", "p"))] <- -1
     #
     legend.lty <- lty
     legend.lty[type %in% "p"] <- NA
-    
-    #browser()
+
     legend(legend.x, legend.y, legend=names, xjust=1, yjust=1, inset=c(0.01),
       col=col, lty=legend.lty, lwd=lwd, pch=legend.pch)
   }

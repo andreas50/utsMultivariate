@@ -4,38 +4,37 @@
 \alias{plot.uts_vector}
 \title{Plot a uts_vector}
 \usage{
-\method{plot}{uts_vector}(x, plot.type = "single", ...,
-  ask = getOption("device.ask.default"), legend = TRUE,
-  legend.x = "topright", legend.y = NULL)
+\method{plot}{uts_vector}(x, plot.type = "single", ..., legend = TRUE,
+  legend.x = "topright", legend.y = NULL,
+  ask = getOption("device.ask.default"))
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
 
-\item{plot.type}{\code{"multiple"} plots the time eries on multiple plots, while \code{"single"} superimposes them on a single plot}
-
-\item{ask}{logical. If \code{TRUE} (and the \R session is interactive) the user is asked for input, before a new figure is drawn.}
+\item{plot.type}{\code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot}
 
 \item{legend}{boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.}
 
 \item{legend.x, legend.y}{the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.}
 
-\item{\dots}{arguments passed to \code{\link[uts]{plot.uts}}.}
+\item{ask}{logical. For \code{plot.type="multiple"}, if \code{TRUE} (and the \R session is interactive) the user is asked for input before a new figure is drawn.}
+
+\item{\dots}{graphical parameters passed to passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}.}
 }
 \description{
-Plot the individual time series of a \code{"uts_vector"} using \code{\link[uts]{plot.uts}}.
+Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted on at a time.
 }
 \examples{
-# Plot all time series at once
-old <- par(mfrow=c(1, 2))
+#' # Plot multiple time series in a single canvas by superimposing the plots
 plot(ex_uts_vector())
-plot(ex_uts_vector(), max_dt=dhours(12), type="b")   # don't connect points more than 12 hours apart
+
+# Plot each time series separately
+old <- par(mfrow=c(1, 2))
+plot(ex_uts_vector(), plot.type="multiple")
 par(old)
 
-# Plot one time series at a time
-plot(ex_uts_vector(), ask=TRUE)
-
-# Plot multiple time series in a single plot by superimposing the plots
-plot(ex_uts_vector(), plot.type="single")
+# Plot one time series at a time, waiting for user input
+plot(ex_uts_vector(), plot.type="multiple", ask=TRUE)
 }
 \seealso{
 \code{\link{plot.uts}}
