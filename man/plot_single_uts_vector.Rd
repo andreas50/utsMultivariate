@@ -4,7 +4,8 @@
 \alias{plot_single_uts_vector}
 \title{Plot a uts_vector in a single plot}
 \usage{
-plot_single_uts_vector(x, ..., xlab = "", ylab = "", legend = TRUE,
+plot_single_uts_vector(x, ..., xlab = "", ylab = "", col = seq_along(x),
+  lty = 1, lwd = 1, pch = 1, type = "l", legend = TRUE,
   legend.x = "topright", legend.y = NULL)
 }
 \arguments{
@@ -13,6 +14,8 @@ plot_single_uts_vector(x, ..., xlab = "", ylab = "", legend = TRUE,
 \item{xlab}{a label for the x axis.}
 
 \item{ylab}{a label for the y axis}
+
+\item{col, lty, lwd, pch, type}{graphical parameters. See \code{\link{plot.default}}.}
 
 \item{legend}{boolean. Whether to add a legend to the plot.}
 
@@ -25,6 +28,7 @@ A helper function that implements \code{plot.uts_vector} for argument \code{plot
 }
 \examples{
 plot_single_uts_vector(ex_uts_vector())
+plot_single_uts_vector(ex_uts_vector(), type="o")
 }
 \seealso{
 \code{\link{matplot}}

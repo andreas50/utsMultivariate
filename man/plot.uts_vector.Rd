@@ -4,7 +4,7 @@
 \alias{plot.uts_vector}
 \title{Plot a uts_vector}
 \usage{
-\method{plot}{uts_vector}(x, ..., plot.type = "multiple",
+\method{plot}{uts_vector}(x, plot.type = "single", ...,
   ask = getOption("device.ask.default"), legend = TRUE,
   legend.x = "topright", legend.y = NULL)
 }
