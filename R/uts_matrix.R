@@ -70,9 +70,9 @@ uts_matrix <- function(data=uts(), nrow=1, ncol=1, byrow=FALSE, dimnames=NULL)
     stop("The 'data' for a 'uts_matrix' needs to be a 'uts' or 'uts_vector'")
   
   # Check that nrow/ncol value compatible with the number of time series
-  if (!missing(nrow) && (nrow > 1) && ((nrow * ncol) %% num_ts > 0))
+  if (!missing(nrow) && (nrow > 1) && ((nrow * ncol) %% num_ts > 0) && (num_ts %% (nrow * ncol) > 0))
     stop("'data' length not a multiple or sub-multiple of the number of rows")
-  if (!missing(ncol) && (ncol > 1) && ((nrow * ncol) %% num_ts > 0))
+  if (!missing(ncol) && (ncol > 1) && ((nrow * ncol) %% num_ts > 0) && (num_ts %% (nrow * ncol) > 0))
     stop("'data' length not a multiple or sub-multiple of the number of columns")
   
   # In case not provided, guess nrows and ncols

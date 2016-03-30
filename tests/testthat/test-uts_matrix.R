@@ -57,6 +57,10 @@ test_that("uts_matrix works",{
     uts_matrix(nrow=2, ncol=3, dimnames=list(c("a", "b"), c("X", "Y", "Z"))),
     file="test-uts_matrix_5.rds"
   )
+  expect_equal_to_reference(
+    uts_matrix(rep(ex_uts_vector(), 6), ncol=2),
+    file="test-uts_matrix_6.rds"
+  )
 })
 
 
