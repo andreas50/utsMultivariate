@@ -4,18 +4,18 @@
 
 #' Plot a uts_vector
 #' 
-#' Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted on at a time.
+#' Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted one at a time.
 #' 
 #' @param x a \code{"uts_vector"} object with numeric or logical observation values.
-#' @param plot.type \code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot
+#' @param plot.type \code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot.
 #' @param legend boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.
 #' @param legend.x,legend.y the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.
-#' @param ask logical. For \code{plot.type="multiple"}, if \code{TRUE} (and the \R session is interactive) the user is asked for input before a new figure is drawn.
-#' @param \dots graphical parameters passed to passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}.
+#' @param ask logical. If \code{TRUE} (and \code{plot.type="multiple"} and the \R session is interactive) the user is asked for input before a new figure is drawn.
+#' @param \dots graphical parameters passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}. If not provided, several sensible default values are used. 
 #' 
-#' @seealso \code{\link{plot.uts}}
+#' @seealso \code{\link{plot.uts}}, \code{\link{plot.default}}, \code{\link{par}}
 #' @examples
-#' #' # Plot multiple time series in a single canvas by superimposing the plots
+#' # Plot multiple time series in a single canvas by superimposing the plots
 #' plot(ex_uts_vector())
 #' 
 #' # Plot each time series separately
@@ -78,7 +78,7 @@ plot.uts_vector <- function(x, plot.type="single", ...,
 #' @examples
 #' plot_single_uts_vector(ex_uts_vector(), xlab="time")
 #' plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit")
-#' plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60))
+#' plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60), cex=2)
 plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
   col=seq_along(x), lty=1, lwd=1, pch=1, type="l",
   legend=TRUE, legend.x="topright", legend.y=NULL)
@@ -97,7 +97,7 @@ plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
   
   # Set up empty plotting canvas
   tmp_x <- c(min(start(x)), max(end(x)))
-  tmp_y <- range(range(x))
+  tmp_y <- range(range(x, na.rm=TRUE), na.rm=TRUE)
   plot(tmp_x, tmp_y, type="n", xlab=xlab, ylab=ylab, ...)
   
   # Recycle arguments

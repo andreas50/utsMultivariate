@@ -29,7 +29,7 @@ A helper function that implements \code{plot.uts_vector} for argument \code{plot
 \examples{
 plot_single_uts_vector(ex_uts_vector(), xlab="time")
 plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit")
-plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60))
+plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60), cex=2)
 }
 \seealso{
 \code{\link{matplot}}

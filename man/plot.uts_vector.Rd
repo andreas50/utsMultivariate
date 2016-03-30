@@ -11,21 +11,21 @@
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
 
-\item{plot.type}{\code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot}
+\item{plot.type}{\code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot.}
 
 \item{legend}{boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.}
 
 \item{legend.x, legend.y}{the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.}
 
-\item{ask}{logical. For \code{plot.type="multiple"}, if \code{TRUE} (and the \R session is interactive) the user is asked for input before a new figure is drawn.}
+\item{ask}{logical. If \code{TRUE} (and \code{plot.type="multiple"} and the \R session is interactive) the user is asked for input before a new figure is drawn.}
 
-\item{\dots}{graphical parameters passed to passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}.}
+\item{\dots}{graphical parameters passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}. If not provided, several sensible default values are used.}
 }
 \description{
-Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted on at a time.
+Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted one at a time.
 }
 \examples{
-#' # Plot multiple time series in a single canvas by superimposing the plots
+# Plot multiple time series in a single canvas by superimposing the plots
 plot(ex_uts_vector())
 
 # Plot each time series separately
@@ -37,6 +37,6 @@ par(old)
 plot(ex_uts_vector(), plot.type="multiple", ask=TRUE)
 }
 \seealso{
-\code{\link{plot.uts}}
+\code{\link{plot.uts}}, \code{\link{plot.default}}, \code{\link{par}}
 }
 

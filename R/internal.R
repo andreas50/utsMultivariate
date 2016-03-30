@@ -13,6 +13,7 @@
 #' Helper functions:
 #' \itemize{
 #'   \item \code{\link{Ops_uts_vector}}
+#'   \item \code{\link{plot_single_uts_vector}}
 #' }
 #' 
 #' 
