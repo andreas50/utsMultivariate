@@ -56,23 +56,17 @@ plot.uts_vector <- function(x, plot.type="single", ask=getOption("device.ask.def
   if (ask && interactive()) {
     oask <- devAskNewPage(TRUE)
     on.exit(devAskNewPage(oask))
-    
-    # If not provided, pick sensible titles
-    have_title <- ("main" %in% names(list(...)))
-    
-    # Plot all time series
-    for (j in seq_along(x)) {
-      if (have_title)
-        plot(x[[j]], ...)
-      else
-        plot(x[[j]], main=names(x)[j], ...)
-    }
-    return(invisible())
-  }
+  }  
   
-  # Plot all time series in a row
-  for (x_j in x)
-    plot(x_j, ...)
+  # Plot all time series
+  # -) if not provided, pick sensible titles
+  have_title <- ("main" %in% names(list(...)))
+  for (j in seq_along(x)) {
+    if (have_title)
+      plot(x[[j]], ...)
+    else
+      plot(x[[j]], main=names(x)[j], ...)
+  }
 }
 
 
