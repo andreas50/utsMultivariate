@@ -121,7 +121,7 @@ plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
     # Pick sensible names
     names <- names(x)
     if (is.null(names))
-      names <- as.character(1:length(uts_vector))
+      names <- as.character(1:length(x))
     
     # Clean 'pch' and 'lty' parameters, because effect different than for plot()
     legend.pch <- pch
