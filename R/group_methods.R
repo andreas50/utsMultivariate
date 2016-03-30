@@ -16,3 +16,29 @@ Summary.uts_vector <- function(x, ...)
 {
   sapply(x, .Generic, ...)
 }
+
+
+#' Math Group Methods for uts_vector
+#' 
+#' Apply the \code{\link{Math}} methods in base \R{} to the observation values of \code{"uts_vector"} objects.
+#' 
+#' @param x a \code{"uts_vector"} object.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @seealso \code{\link{groupGeneric}}
+#' 
+#' @examples
+#' # Take the base-2 logarithm of the observation values and return the corresponding "uts_vector"
+#' log(ex_uts_vector(), base=2)
+#' 
+#' # Calculate the cumulative sum of the observation values and return the corresponding "uts_vector"
+#' cumsum(ex_uts_vector())
+Math.uts_vector <- function(x, ...)
+{
+  sapply(x, .Generic, ...)
+}
+if (0) {
+  methods("Math")
+}
+
+
