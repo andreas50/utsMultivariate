@@ -8,9 +8,9 @@
 #' 
 #' @param x a \code{"uts_vector"} object with numeric or logical observation values.
 #' @param plot.type \code{"multiple"} plots the time series on multiple plots, while \code{"single"} (the default) superimposes them on a single plot.
+#' @param ask logical. If \code{TRUE} (and the \R session is interactive), then the \code{plot_type} is set to \code{"multiple"} and the user is asked for input before a each time series is plotted.
 #' @param legend boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.
 #' @param legend.x,legend.y the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.
-#' @param ask logical. If \code{TRUE} (and \code{plot.type="multiple"} and the \R session is interactive) the user is asked for input before a new figure is drawn.
 #' @param \dots graphical parameters passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}. If not provided, several sensible default values are used. 
 #' 
 #' @seealso \code{\link{plot.uts}}, \code{\link{plot.default}}, \code{\link{par}}
@@ -23,12 +23,15 @@
 #' plot(ex_uts_vector(), plot.type="multiple")
 #' par(old)
 #' 
-#' # Plot one time series at a time, waiting for user input
+#' # Plot one time series at a time, waiting for user input before drawing the next plot.
+#' # The names of time series are used as the main titles for the plots.
 #' plot(ex_uts_vector(), plot.type="multiple", ask=TRUE)
-plot.uts_vector <- function(x, plot.type="single", ...,
-  legend=TRUE, legend.x="topright", legend.y=NULL, ask=getOption("device.ask.default"))
+plot.uts_vector <- function(x, plot.type="single", ask=getOption("device.ask.default"), ...,
+  legend=TRUE, legend.x="topright", legend.y=NULL)
 {
   # Argument checking
+  if (ask && interactive())
+    plot.type <- "multiple"
   if (!(plot.type %in% c("multiple", "single")))
     stop("Unknown 'plot.type'")
   
@@ -53,9 +56,21 @@ plot.uts_vector <- function(x, plot.type="single", ...,
   if (ask && interactive()) {
     oask <- devAskNewPage(TRUE)
     on.exit(devAskNewPage(oask))
+    
+    # If not provided, pick sensible titles
+    have_title <- ("main" %in% names(list(...)))
+    
+    # Plot all time series
+    for (j in seq_along(x)) {
+      if (have_title)
+        plot(x[[j]], ...)
+      else
+        plot(x[[j]], main=names(x)[j], ...)
+    }
+    return(invisible())
   }
   
-  # Plot all time series
+  # Plot all time series in a row
   for (x_j in x)
     plot(x_j, ...)
 }
