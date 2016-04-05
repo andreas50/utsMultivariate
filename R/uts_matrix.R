@@ -129,32 +129,30 @@ is.uts_matrix <- function(x)
 #' }
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
+#' @seealso The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide exactly the opposite functionality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
 #' @examples
 #' as.data.frame(ex_uts_matrix())
 #' as.data.frame(ex_uts_matrix(), method="long")
 as.data.frame.uts_matrix <- function(x, ..., method="wide")
 {
-  # Call method for uts_vector
-  out <- as.data.frame.uts_vector(x, ..., method=method)
-  
-  # Extract row and columns names
-  rnames <- rownames(x)
-  if (is.null(rnames))
-    rnames <- seq_len(nrow(x))
-  cnames <- colnames(x)
-  if (is.null(cnames))
-    cnames <- seq_len(ncol(x))
-  
-  # Insert names to indentify rows and columns of observations
   if (method == "wide") {
-    colnames(out)[-1] <- paste0("[", rep(rnames, length(cnames)), ", ", rep(cnames, each=length(rnames)), "]")
+    as.data.frame(as.uts_vector(x), method="wide")
   } else if (method == "long") {
+    # Call uts_vector method
+    out <- NextMethod()
+    
+    # Extract row and columns names
+    rnames <- rownames(x)
+    if (is.null(rnames))
+      rnames <- seq_len(nrow(x))
+    cnames <- colnames(x)
+    if (is.null(cnames))
+      cnames <- seq_len(ncol(x))
+    
+    # Insert names to indentify rows and columns of observations
     row_pos <- ((out$name - 1) %% nrow(x)) + 1
     col_pos <- (out$name - row_pos) / ncol(x) + 1
-    out <- data.frame(row=rnames[row_pos], column=cnames[col_pos], out[,-1])
-  }
-  out
+    data.frame(row=rnames[row_pos], column=cnames[col_pos], out[,-1])
+  } else
+    stop("Unknown 'method'")
 }
-
-
