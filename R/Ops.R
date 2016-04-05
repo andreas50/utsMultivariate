@@ -1,6 +1,5 @@
 #' Ops Group Methods for uts_vector
 #' 
-#' 
 #' @keywords internal
 #' @examples
 #' # Unary operators

@@ -1,8 +1,8 @@
 #' Summary Group Methods for uts_vector
 #' 
-#' Apply the \code{\link{Summary}} methods in base \R{} to the time series of \code{"uts_vector"} objects.
+#' Apply the \code{\link{Summary}} methods in base \R to the individual time series of a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' 
-#' @param x a \code{"uts_vector"} object.
+#' @param x a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
 #' @seealso \code{\link{groupGeneric}}, \code{\link[uts]{Summary.uts}}
@@ -12,6 +12,7 @@
 #' 
 #' # Check which time series have any observation value larger than 49
 #' any(ex_uts_vector() > 49)
+#' #which(ex_uts_matrix() > 49)
 Summary.uts_vector <- function(x, ...)
 {
   sapply(x, .Generic, ...)
