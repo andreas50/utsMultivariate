@@ -211,3 +211,38 @@ as.data.frame.uts_vector <- function(x, ..., method="wide")
   out
 }
 
+
+#' Convert uts_matrix to uts_vector
+#' 
+#' Convert a \code{\link{uts_matrix}} to a \code{\link{uts_vector}} by dropping all \code{uts_matrix}-specific attributes.
+#' 
+#' @param x a \code{"uts_matrix"} object.
+#' @param USE.NAMES logical. Whether to assign sensible names to the output based on the row and column names of \code{x}.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @seealso \code{\link{uts_matrix}} for the exactly the opposite functionality, i.e. for converting a \code{"uts_vector"} to a \code{"uts_matrix"}.
+#' @examples
+#' as.uts_vector(ex_uts_matrix())
+#' as.uts_vector(ex_uts_matrix(), USE.NAMES=FALSE)
+as.uts_vector.uts_matrix <- function(x, USE.NAMES=TRUE, ...)
+{
+  # Remove uts_matrix attributes
+  out <- x
+  attr(out, "dim") <- NULL
+  attr(out, "dimnames") <- NULL
+  class(out) <- class(uts_vector())
+  
+  # Use row- and column names to get names for output
+  if (USE.NAMES) {
+    rnames <- rownames(x)
+    if (is.null(rnames))
+      rnames <- seq_len(nrow(x))
+    cnames <- colnames(x)
+    if (is.null(cnames))
+      cnames <- seq_len(ncol(x))
+    
+    names(out) <- paste0("[", rep(rnames, length(cnames)), ", ", rep(cnames, each=length(rnames)), "]")
+  }
+  out
+}
+

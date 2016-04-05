@@ -75,3 +75,17 @@ test_that("as.data.frame.uts_vector works",{
     file="test-as.data.frame.uts_vector_2.rds"
   )
 })
+
+
+test_that("as.data.frame.uts_matrix",{
+  # Regression testing
+  expect_equal_to_reference(
+    as.uts_vector(ex_uts_matrix()),
+    file="test-as.uts_vector.uts_matrix_1.rds"
+  )
+  expect_equal_to_reference(
+    as.uts_vector(ex_uts_matrix(), USE.NAMES=FALSE),
+    file="test-as.uts_vector.uts_matrix_2.rds"
+  )
+})
+
