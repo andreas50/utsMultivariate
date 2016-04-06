@@ -4,12 +4,14 @@
 \alias{plot_single_uts_vector}
 \title{Plot a uts_vector in a single plot}
 \usage{
-plot_single_uts_vector(x, ..., xlab = "", ylab = "", col = seq_along(x),
-  lty = 1, lwd = 1, pch = 1, type = "l", legend = TRUE,
-  legend.x = "topright", legend.y = NULL)
+plot_single_uts_vector(x, ..., max_dt = ddays(Inf), xlab = "", ylab = "",
+  col = seq_along(x), lty = 1, lwd = 1, pch = 1, type = "l",
+  legend = TRUE, legend.x = "topright", legend.y = NULL)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
+
+\item{max_dt}{a non-negative \code{\link[lubridate]{duration}} object. Consecutive observations that are more than this amount apart in time, are not connected by a line in the graph.}
 
 \item{xlab}{a label for the x axis.}
 
@@ -28,7 +30,7 @@ A helper function that implements \code{plot.uts_vector} for argument \code{plot
 }
 \examples{
 plot_single_uts_vector(ex_uts_vector(), xlab="time")
-plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit")
+plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit", max_dt=dhours(12))
 plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60), cex=2)
 }
 \seealso{

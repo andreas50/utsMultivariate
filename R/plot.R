@@ -75,6 +75,7 @@ plot.uts_vector <- function(x, plot.type="single", ask=getOption("device.ask.def
 #' A helper function that implements \code{plot.uts_vector} for argument \code{plot.type="single"}.
 #' 
 #' @param x a \code{"uts_vector"} object with numeric or logical observation values.
+#' @param max_dt a non-negative \code{\link[lubridate]{duration}} object. Consecutive observations that are more than this amount apart in time, are not connected by a line in the graph.
 #' @param xlab a label for the x axis.
 #' @param ylab a label for the y axis
 #' @param col,lty,lwd,pch,type graphical parameters. See \code{\link{plot.default}}.
@@ -86,9 +87,9 @@ plot.uts_vector <- function(x, plot.type="single", ask=getOption("device.ask.def
 #' @keywords internal
 #' @examples
 #' plot_single_uts_vector(ex_uts_vector(), xlab="time")
-#' plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit")
+#' plot_single_uts_vector(ex_uts_vector(), type="o", main="Fruit", max_dt=dhours(12))
 #' plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60), cex=2)
-plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
+plot_single_uts_vector <- function(x, ..., max_dt=ddays(Inf), xlab="", ylab="",
   col=seq_along(x), lty=1, lwd=1, pch=1, type="l",
   legend=TRUE, legend.x="topright", legend.y=NULL)
 {
@@ -120,10 +121,12 @@ plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
     pch <- rep_len(pch, num_ts)
   if (length(type) < num_ts) 
     type <- rep_len(type, num_ts)
+  if (length(max_dt) < num_ts) 
+    max_dt <- rep_len(max_dt, num_ts)
   
   # Plot the individual time series
   for (j in seq_along(x))
-    plot(x[[j]], plot.new=FALSE, col=col[j], lty=lty[j], lwd=lwd[j], pch=pch[j], type=type[j], ...)
+    plot(x[[j]], plot.new=FALSE, col=col[j], lty=lty[j], lwd=lwd[j], pch=pch[j], type=type[j], max_dt=max_dt[j], ...)
   
   # Add legend
   if (legend) {
