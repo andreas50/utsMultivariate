@@ -9,6 +9,7 @@
 #' @param object a \code{"uts_vector"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
+#' @aliases na.omit.uts_matrix
 #' @seealso \code{\link[uts]{is.na.uts}}, \code{\link[uts]{na.omit.uts}} for \code{"uts"} objects.
 #' @seealso \code{\link{is.na}}, \code{\link{na.omit}} in base \R.
 #' 
@@ -30,6 +31,7 @@ na.omit.uts_vector <- function(object, ...)
 #' @return An object of the same class as \code{x}, but with observation values replaced with \code{TRUE} or \code{FALSE}, indicating which observation values of \code{x} are \code{NA}.
 #' @param x a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' 
+#' @aliases is.na.uts_matrix
 #' @seealso \code{\link[uts]{is.na.uts}}, \code{\link[uts]{na.omit.uts}} for \code{"uts"} objects.
 #' @seealso \code{\link{is.na}}, \code{\link{na.omit}} in base \R.
 #' 
