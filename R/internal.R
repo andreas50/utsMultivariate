@@ -6,6 +6,7 @@
 #' \itemize{
 #'   \item \code{\link{is.uts_vector}}
 #'   \item \code{\link{is.uts_matrix}}
+#'   \item \code{\link{mean.uts_vector}}
 #'   \item \code{\link{print.uts_vector}}
 #'   \item \code{\link{print.uts_matrix}}
 #'   \item \code{\link{summary.uts_vector}}

@@ -49,7 +49,7 @@ end.uts_vector <- function(x, ...)
     as.POSIXct(character())
 }
 
-#' @rdname end.uts_vector
+#' @rdname start.uts_vector
 end.uts_matrix <- function(x, ...)
 {
   end(as.uts_vector(x), ...)

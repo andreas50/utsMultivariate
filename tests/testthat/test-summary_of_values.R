@@ -18,3 +18,15 @@ test_that("summary works",{
   )
 })
 
+
+test_that("mean works",{
+  expect_equal_to_reference(
+    mean(ex_uts_vector()),
+    file="test-mean_1.rds"
+  )
+  expect_equal_to_reference(
+    mean(ex_uts_matrix()),
+    file="test-mean_2.rds"
+  )
+})
+
