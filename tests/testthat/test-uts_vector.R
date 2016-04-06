@@ -78,6 +78,11 @@ test_that("as.data.frame.uts_vector works",{
 
 
 test_that("as.data.frame.uts_matrix",{
+  expect_identical(
+    as.uts_vector(uts_matrix(nrow=4, ncol=0)),
+    uts_vector()
+  )
+  
   # Regression testing
   expect_equal_to_reference(
     as.uts_vector(ex_uts_matrix()),

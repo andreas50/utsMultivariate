@@ -233,7 +233,7 @@ as.uts_vector.uts_matrix <- function(x, USE.NAMES=TRUE, ...)
   class(out) <- class(uts_vector())
   
   # Use row- and column names to get names for output
-  if (USE.NAMES) {
+  if (USE.NAMES && (length(x) > 0)) {
     rnames <- rownames(x)
     if (is.null(rnames))
       rnames <- seq_len(nrow(x))
