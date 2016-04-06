@@ -107,7 +107,7 @@ plot_single_uts_vector <- function(x, ..., xlab="", ylab="",
   # Set up empty plotting canvas
   tmp_x <- c(min(start(x)), max(end(x)))
   tmp_y <- range(range(x, na.rm=TRUE), na.rm=TRUE)
-  plot(tmp_x, tmp_y, type="n", xlab=xlab, ylab=ylab, ...)
+  plot(uts(times=tmp_x, values=tmp_y), type="n", xlab=xlab, ylab=ylab, ...)
   
   # Recycle arguments
   if (length(col) < num_ts) 
