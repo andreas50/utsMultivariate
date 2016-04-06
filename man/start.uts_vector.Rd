@@ -2,10 +2,13 @@
 % Please edit documentation in R/start_end.R
 \name{start.uts_vector}
 \alias{end.uts_vector}
+\alias{start.uts_matrix}
 \alias{start.uts_vector}
 \title{First and Last Observation Times}
 \usage{
 \method{start}{uts_vector}(x, ...)
+
+\method{start}{uts_matrix}(x, ...)
 
 \method{end}{uts_vector}(x, ...)
 }

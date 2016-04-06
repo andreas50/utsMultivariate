@@ -27,6 +27,13 @@ start.uts_vector <- function(x, ...)
     as.POSIXct(character())
 }
 
+#' @rdname start.uts_vector
+start.uts_matrix <- function(x, ...)
+{
+  start(as.uts_vector(x), ...)
+}
+
+
 
 #' @rdname start.uts_vector
 #' 
@@ -40,4 +47,10 @@ end.uts_vector <- function(x, ...)
     with_tz(out, tz(tmp[[1]]))
   } else
     as.POSIXct(character())
+}
+
+#' @rdname end.uts_vector
+end.uts_matrix <- function(x, ...)
+{
+  end(as.uts_vector(x), ...)
 }
