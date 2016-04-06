@@ -30,3 +30,26 @@ test_that("mean works",{
   )
 })
 
+
+test_that("median works",{
+  expect_equal_to_reference(
+    median(ex_uts_vector()),
+    file="test-median_1.rds"
+  )
+  expect_equal_to_reference(
+    median(ex_uts_matrix()),
+    file="test-median_2.rds"
+  )
+})
+
+
+test_that("sd works",{
+  expect_equal_to_reference(
+    sd(ex_uts_vector()),
+    file="test-sd_1.rds"
+  )
+  expect_equal_to_reference(
+    sd(ex_uts_matrix()),
+    file="test-sd_2.rds"
+  )
+})

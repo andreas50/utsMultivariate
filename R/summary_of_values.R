@@ -38,17 +38,33 @@ summary.uts_matrix <- function(object, ...)
 #' @param x a \code{"uts_vector"} object.
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @aliases mean.uts_matrix
+#' @aliases mean.uts_matrix, median.uts_matrix, sd.uts_matrix
 #' @seealso \code{\link[uts]{mean.uts}}, \code{\link[uts]{median.uts}}, \code{\link[uts]{sd.uts}}
 #' @seealso \code{\link{mean}}, \code{\link{median}}, \code{\link{sd}} in base \R.
 
 #' @keywords internal
 #' @examples
 #' mean(ex_uts_vector())
+#' median(ex_uts_vector())
+#' sd(ex_uts_vector())
+#' 
 #' mean(ex_uts_matrix())
+#' median(ex_uts_matrix())
+#' sd(ex_uts_matrix())
 mean.uts_vector <- function(x, ...)
 {
   sapply(x, mean, ...)
 }
 
+#' @rdname mean.uts_vector
+median.uts_vector <- function(x, ...)
+{
+  sapply(x, median, ...)
+}
+
+#' @rdname mean.uts_vector
+sd.uts_vector <- function(x, ...)
+{
+  sapply(x, sd, ...)
+}
 

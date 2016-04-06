@@ -1,7 +1,7 @@
 ## Import packages
 import(uts)
 import(lubridate)
-importFrom(stats, as.ts, end, na.omit, start, time)
+importFrom(stats, as.ts, end, median, na.omit, start, time)
 
 
 # Export class constructors
@@ -38,6 +38,7 @@ S3method(is.na, uts_vector)
 S3method(last, uts_vector)
 S3method(Math, uts_vector)
 S3method(mean, uts_vector)
+S3method(median, uts_vector)
 S3method(na.omit, uts_vector)
 S3method(plot, uts_vector)
 S3method(print, uts_matrix)
@@ -48,6 +49,7 @@ S3method(sample_values, uts_vector)
 S3method(sapply, default)
 S3method(sapply, uts_matrix)
 S3method(sapply, uts_vector)
+S3method(sd, uts_vector)
 S3method(start, uts_matrix)
 S3method(start, uts_vector)
 S3method(summary, uts_matrix)
