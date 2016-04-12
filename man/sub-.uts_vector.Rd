@@ -27,15 +27,21 @@ x[, 1]
 x[, "oranges", drop=FALSE]
 x[, 2:1]
 
-# Sample at multiple time points, optionally restricting the maximum time difference
-# between sampling and observation times
+# Subsampling using a POSIXct vector
 x <- ex_uts_vector()
 times <- as.POSIXct(c("2007-11-08 11:01:00", "2007-11-09 15:16:00"))
 x[times]
 x[times, interpolation="linear"]
 
-# Both at the same time, i.e. subsampling and subsetting
+# Subsampling using a "uts" with logical observation values
+x <- ex_uts_vector()
+x[ex_uts() > 48]
+
+# Subsampling and subsetting at the same time
+# 1.) using separate subsampling and subsetting indicies
 x[times, "oranges"]
 x[times, c(1, 2, 1)]
+# 2.) using "uts_vector" with logical observation values
+x[x > 48]
 }
 

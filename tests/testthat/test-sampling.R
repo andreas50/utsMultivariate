@@ -113,6 +113,10 @@ test_that("uts_vector subsampling and subsetting work at the same time",{
     x[times, c(1, 2, 1)],
     file="test-subsampling_subsetting_2.rds"
   )
+  expect_equal_to_reference(
+    x[x > 48],
+    file="test-subsampling_subsetting_3.rds"
+  )
 })
 
 

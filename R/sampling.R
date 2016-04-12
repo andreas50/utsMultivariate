@@ -84,8 +84,11 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x[ex_uts() > 48]
 #' 
 #' # Subsampling and subsetting at the same time
+#' # 1.) using separate subsampling and subsetting indicies
 #' x[times, "oranges"]
 #' x[times, c(1, 2, 1)]
+#' # 2.) using "uts_vector" with logical observation values
+#' x[x > 48]
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -123,3 +126,4 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
     x
   }
 }
+
