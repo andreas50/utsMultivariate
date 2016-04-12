@@ -72,6 +72,17 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x[, 1]
 #' x[, "oranges", drop=FALSE]
 #' x[, 2:1]
+#' 
+#' # Sample at multiple time points, optionally restricting the maximum time difference
+#' # between sampling and observation times
+#' x <- ex_uts_vector()
+#' times <- as.POSIXct(c("2007-11-08 11:01:00", "2007-11-09 15:16:00"))
+#' x[times]
+#' x[times, interpolation="linear"]
+#' 
+#' # Both at the same time, i.e. subsampling and subsetting
+#' x[times, "oranges"]
+#' x[times, c(1, 2, 1)]
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -92,21 +103,20 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
   
   # Check argument consistency
   num_ts <- ifelse(is.uts_vector(x), length(x), 1)
-  num_selector_t <- ifelse(is.POSIXct(selector_t) | is.uts(selector_t), 1, length(selector_t))
-  if (min(num_ts, num_selector_t) > 1 && (num_ts != num_selector_t))
-    stop(cat("Dimension of", class(x)[1], "and sampling points differs.")) 
+  num_selector_i <- ifelse(is.POSIXct(i) | is.uts(i), 1, length(i))
+  if ((num_ts > 1) && (num_selector_i > 1) && (num_ts != num_selector_i))
+    stop("The dimension of the 'uts_vector' the and sampling points `i` do not match")
   
-  # Special case if dimension of 'x' dropped
+  # Special case if dimension of 'x' was dropped
   if (is.uts(x))
-    return(x[selector_t[[1]], ...])
+    return(x[i, ...])
   
   # Sample each element of 'x'
-  num_args <- length(list(...))
-  if (is.POSIXct(selector_t) || is.uts(selector_t))
-    sapply(x, "[", selector_t, ...)
+  if (is.POSIXct(i) || is.uts(i))
+    sapply(x, "[", i, ...)
   else {
-    for (j in 1:num_ts)
-      x[[j]] <- x[[j]][selector_t[[j]], ...]
+    for (k in seq_len(num_ts))
+      x[[k]] <- x[[k]][i[[k]], ...]
     x
   }
 }

@@ -50,7 +50,7 @@ test_that("sample_values works",{
 })
 
 
-test_that("subsetting works",{
+test_that("uts_vector subsetting works",{
   x <- ex_uts_vector()
   
   expect_identical(
@@ -78,3 +78,12 @@ test_that("subsetting works",{
     file="test-subsetting.rds"
   )
 })
+
+
+test_that("uts_vector subsampling works",{
+  x <- ex_uts_vector()
+  
+  # Argument checking
+  
+})
+
