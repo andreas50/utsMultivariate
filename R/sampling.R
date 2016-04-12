@@ -135,11 +135,26 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' @examples
 #' # Replace subset of time series vector with a new time series
 #' x <- ex_uts_vector()
-#' x$oranges <- ex_uts() + 10
-#' x$nuts <- uts(values=50, times=Sys.time())
+#' x[, "oranges"] <- uts(values=50, times=Sys.time())
+#' x[, "nuts"] <- head(ex_uts(), 2)
+#' x$apples <- NULL
+#' 
+#' # Same, but use "uts_vector" for replacing
+#' x <- c(ex_uts_vector(), nuts=ex_uts())
+#' x[, 1:2] <- c(uts(), ex_uts())
+#' x[, "nuts"] <- uts(values=50, times=Sys.time())
+#' x[, c("apples", "oranges")] <- NULL
 `[<-.uts_vector` <- function(x, i, j, ..., value)
 {
-
+  # Replace subset time series vector
+  if (missing(i)) {
+    x <- unclass(x)
+    if (is.uts(value))
+      value <- uts_vector(value)
+    x[j] <- value
+    class(x) <- class(uts_vector())
+    return(x)
+  }
 }
 
 

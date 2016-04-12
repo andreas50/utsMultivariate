@@ -50,7 +50,14 @@ x[times, c(1, 2, 1)]
 x[x > 48]
 # Replace subset of time series vector with a new time series
 x <- ex_uts_vector()
-x$oranges <- ex_uts() + 10
-x$nuts <- uts(values=50, times=Sys.time())
+x[, "oranges"] <- uts(values=50, times=Sys.time())
+x[, "nuts"] <- head(ex_uts(), 2)
+x$apples <- NULL
+
+# Same, but use "uts_vector" for replacing
+x <- c(ex_uts_vector(), nuts=ex_uts())
+x[, 1:2] <- c(uts(), ex_uts())
+x[, "nuts"] <- uts(values=50, times=Sys.time())
+x[, c("apples", "oranges")] <- NULL
 }
 
