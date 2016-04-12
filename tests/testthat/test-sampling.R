@@ -82,8 +82,37 @@ test_that("uts_vector subsetting works",{
 
 test_that("uts_vector subsampling works",{
   x <- ex_uts_vector()
+  times <- as.POSIXct(c("2007-11-08 11:01:00", "2007-11-09 15:16:00"))
   
-  # Argument checking
-  
+  # Regression tests
+  expect_equal_to_reference(
+    x[times],
+    file="test-subsampling_1.rds"
+  )
+  expect_equal_to_reference(
+    x[times, interpolation="linear"],
+    file="test-subsampling_2.rds"
+  )
+  expect_equal_to_reference(
+    x[ex_uts() > 48],
+    file="test-subsampling_3.rds"
+  )
 })
+
+
+test_that("uts_vector subsampling and subsetting work at the same time",{
+  x <- ex_uts_vector()
+  times <- as.POSIXct(c("2007-11-08 11:01:00", "2007-11-09 15:16:00"))
+  
+  # Regression tests
+  expect_equal_to_reference(
+    x[times, "oranges"],
+    file="test-subsampling_subsetting_1.rds"
+  )
+  expect_equal_to_reference(
+    x[times, c(1, 2, 1)],
+    file="test-subsampling_subsetting_2.rds"
+  )
+})
+
 

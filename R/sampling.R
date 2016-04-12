@@ -63,7 +63,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' @param x a \code{"uts)vector"} object.
 #' @param i either a strictly increasing sequence of \code{\link{POSIXct}} date-times, or a \code{"uts"} or \code{"uts_vector"} with \code{\link{logical}} observation values.
 #' @param j index specifying the time series to extract or replace. The index can be a \code{numeric} or \code{character} vector or empty (missing) or \code{NULL}. Numeric values are coerced to integer as by \code{\link{as.integer}} (and hence truncated towards zero). Character vectors will be matched to the \code{\link{names}} of the object.
-#' @param logical. If \code{TRUE} the result is coerced to the lowest possible dimension.
+#' @param drop logical. If \code{TRUE} the result is coerced to the lowest possible dimension.
 #' @param \dots further arguments passed to \code{\link[uts]{sample_values.uts}}.
 #' 
 #' @examples
@@ -73,14 +73,17 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x[, "oranges", drop=FALSE]
 #' x[, 2:1]
 #' 
-#' # Sample at multiple time points, optionally restricting the maximum time difference
-#' # between sampling and observation times
+#' # Subsampling using a POSIXct vector
 #' x <- ex_uts_vector()
 #' times <- as.POSIXct(c("2007-11-08 11:01:00", "2007-11-09 15:16:00"))
 #' x[times]
 #' x[times, interpolation="linear"]
 #' 
-#' # Both at the same time, i.e. subsampling and subsetting
+#' # Subsampling using a "uts" with logical observation values
+#' x <- ex_uts_vector()
+#' x[ex_uts() > 48]
+#' 
+#' # Subsampling and subsetting at the same time
 #' x[times, "oranges"]
 #' x[times, c(1, 2, 1)]
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)

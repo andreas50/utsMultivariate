@@ -13,7 +13,7 @@
 
 \item{j}{index specifying the time series to extract or replace. The index can be a \code{numeric} or \code{character} vector or empty (missing) or \code{NULL}. Numeric values are coerced to integer as by \code{\link{as.integer}} (and hence truncated towards zero). Character vectors will be matched to the \code{\link{names}} of the object.}
 
-\item{logical.}{If \code{TRUE} the result is coerced to the lowest possible dimension.}
+\item{drop}{logical. If \code{TRUE} the result is coerced to the lowest possible dimension.}
 
 \item{\dots}{further arguments passed to \code{\link[uts]{sample_values.uts}}.}
 }
@@ -26,5 +26,16 @@ x <- ex_uts_vector()
 x[, 1]
 x[, "oranges", drop=FALSE]
 x[, 2:1]
+
+# Sample at multiple time points, optionally restricting the maximum time difference
+# between sampling and observation times
+x <- ex_uts_vector()
+times <- as.POSIXct(c("2007-11-08 11:01:00", "2007-11-09 15:16:00"))
+x[times]
+x[times, interpolation="linear"]
+
+# Both at the same time, i.e. subsampling and subsetting
+x[times, "oranges"]
+x[times, c(1, 2, 1)]
 }
 
