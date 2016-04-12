@@ -2,9 +2,12 @@
 % Please edit documentation in R/sampling.R
 \name{[.uts_vector}
 \alias{[.uts_vector}
+\alias{[<-.uts_vector}
 \title{Extract or Replace Parts of a uts_vector}
 \usage{
 \method{[}{uts_vector}(x, i, j, drop = TRUE, ...)
+
+\method{[}{uts_vector}(x, i, j, ...) <- value
 }
 \arguments{
 \item{x}{a \code{"uts)vector"} object.}
@@ -14,6 +17,8 @@
 \item{j}{index specifying the time series to extract or replace. The index can be a \code{numeric} or \code{character} vector or empty (missing) or \code{NULL}. Numeric values are coerced to integer as by \code{\link{as.integer}} (and hence truncated towards zero). Character vectors will be matched to the \code{\link{names}} of the object.}
 
 \item{drop}{logical. If \code{TRUE} the result is coerced to the lowest possible dimension.}
+
+\item{value}{either (i) a vector of observation values, or a \code{"uts"} or \code{"uts_vector"}}
 
 \item{\dots}{further arguments passed to \code{\link[uts]{sample_values.uts}}.}
 }
@@ -43,5 +48,9 @@ x[times, "oranges"]
 x[times, c(1, 2, 1)]
 # 2.) using "uts_vector" with logical observation values
 x[x > 48]
+# Replace subset of time series vector with a new time series
+x <- ex_uts_vector()
+x$oranges <- ex_uts() + 10
+x$nuts <- uts(values=50, times=Sys.time())
 }
 

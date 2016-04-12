@@ -127,3 +127,19 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
   }
 }
 
+
+#' @rdname sub-.uts_vector
+#' 
+#' @param value either (i) a vector of observation values, or a \code{"uts"} or \code{"uts_vector"}
+#' 
+#' @examples
+#' # Replace subset of time series vector with a new time series
+#' x <- ex_uts_vector()
+#' x$oranges <- ex_uts() + 10
+#' x$nuts <- uts(values=50, times=Sys.time())
+`[<-.uts_vector` <- function(x, i, j, ..., value)
+{
+
+}
+
+
