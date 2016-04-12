@@ -120,3 +120,32 @@ test_that("uts_vector subsampling and subsetting work at the same time",{
 })
 
 
+test_that("uts_vector subset replacement works",{
+  # Replacement with single time series
+  x <- ex_uts_vector()
+  x[, "oranges"] <- uts(values=50, times=as.POSIXct("2016-01-01"))
+  expect_equal_to_reference(x, file="test-subset_replacement_1.rds")
+  #
+  x <- ex_uts_vector()
+  x[, "nuts"] <- head(ex_uts(), 2)
+  expect_equal_to_reference(x, file="test-subset_replacement_2.rds")
+  #
+  x <- ex_uts_vector()
+  x$apples <- NULL
+  expect_equal_to_reference(x, file="test-subset_replacement_3.rds")
+  
+  # Replacement with time series vector
+  x <- c(ex_uts_vector(), nuts=ex_uts())
+  x[, 1:2] <- c(uts(), ex_uts())
+  expect_equal_to_reference(x, file="test-subset_replacement_4.rds")
+  #
+  x <- c(ex_uts_vector(), nuts=ex_uts())
+  x[, "nuts"] <- uts_vector(uts(values=50, times=as.POSIXct("2016-01-01")))
+  expect_equal_to_reference(x, file="test-subset_replacement_5.rds")
+  #
+  x <- c(ex_uts_vector(), nuts=ex_uts())
+  x[, c("apples", "oranges")] <- NULL
+  expect_equal_to_reference(x, file="test-subset_replacement_6.rds")
+})
+
+

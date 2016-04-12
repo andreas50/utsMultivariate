@@ -142,7 +142,6 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' # Same, but use "uts_vector" for replacing
 #' x <- c(ex_uts_vector(), nuts=ex_uts())
 #' x[, 1:2] <- c(uts(), ex_uts())
-#' x[, "nuts"] <- uts(values=50, times=Sys.time())
 #' x[, c("apples", "oranges")] <- NULL
 `[<-.uts_vector` <- function(x, i, j, ..., value)
 {

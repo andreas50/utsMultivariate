@@ -57,7 +57,6 @@ x$apples <- NULL
 # Same, but use "uts_vector" for replacing
 x <- c(ex_uts_vector(), nuts=ex_uts())
 x[, 1:2] <- c(uts(), ex_uts())
-x[, "nuts"] <- uts(values=50, times=Sys.time())
 x[, c("apples", "oranges")] <- NULL
 }
 
