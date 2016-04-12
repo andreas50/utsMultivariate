@@ -48,3 +48,33 @@ test_that("sample_values works",{
     file="test-sampling_6.rds"
   )
 })
+
+
+test_that("subsetting works",{
+  x <- ex_uts_vector()
+  
+  expect_identical(
+    x[, 1],
+    x[[1]]
+  )
+  expect_identical(
+    x[, "oranges", drop=FALSE],
+    c(oranges=x[["oranges"]])
+  )
+  
+  # output of length zero
+  expect_identical(
+    x[, c()],
+    uts_vector()
+  )
+  expect_identical(
+    x[, "abc"],
+    uts_vector()
+  )
+  
+  # Regression tests
+  expect_equal_to_reference(
+    x[, 2:1],
+    file="test-subsetting.rds"
+  )
+})

@@ -55,3 +55,58 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
   out
 }
 
+
+#' Extract or Replace Parts of a uts_vector
+#'
+#' The accessor method (\code{"["}) extracts either (i) a sub-sampled time series vector, (ii) a subset of the time series vector, or (iii) both. The replacement method (\code{"[<-"}) inserts observation values at the provided observation times, replacing observations values for already existing observation times (if any).
+#' 
+#' @param x a \code{"uts)vector"} object.
+#' @param i either a strictly increasing sequence of \code{\link{POSIXct}} date-times, or a \code{"uts"} or \code{"uts_vector"} with \code{\link{logical}} observation values.
+#' @param j index specifying the time series to extract or replace. The index can be a \code{numeric} or \code{character} vector or empty (missing) or \code{NULL}. Numeric values are coerced to integer as by \code{\link{as.integer}} (and hence truncated towards zero). Character vectors will be matched to the \code{\link{names}} of the object.
+#' @param logical. If \code{TRUE} the result is coerced to the lowest possible dimension.
+#' @param \dots further arguments passed to \code{\link[uts]{sample_values.uts}}.
+#' 
+#' @examples
+#' # Extract subset of time series vector
+#' x <- ex_uts_vector()
+#' x[, 1]
+#' x[, "oranges", drop=FALSE]
+#' x[, 2:1]
+`[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
+{
+  # Extract subset time series vector
+  if (!missing(j)) {
+    x <- unclass(x)
+    x <- x[j]
+    x[!sapply(x, is.uts)] <- NULL
+    
+    if (length(x) == 0)
+      return(uts_vector())
+    else if ((length(x) == 1) && drop)
+      x <- x[[1]]
+    else
+      class(x) <- class(uts_vector())
+  }
+  if (missing(i))
+    return(x)
+  
+  # Check argument consistency
+  num_ts <- ifelse(is.uts_vector(x), length(x), 1)
+  num_selector_t <- ifelse(is.POSIXct(selector_t) | is.uts(selector_t), 1, length(selector_t))
+  if (min(num_ts, num_selector_t) > 1 && (num_ts != num_selector_t))
+    stop(cat("Dimension of", class(x)[1], "and sampling points differs.")) 
+  
+  # Special case if dimension of 'x' dropped
+  if (is.uts(x))
+    return(x[selector_t[[1]], ...])
+  
+  # Sample each element of 'x'
+  num_args <- length(list(...))
+  if (is.POSIXct(selector_t) || is.uts(selector_t))
+    sapply(x, "[", selector_t, ...)
+  else {
+    for (j in 1:num_ts)
+      x[[j]] <- x[[j]][selector_t[[j]], ...]
+    x
+  }
+}
