@@ -67,6 +67,10 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' @param \dots further arguments passed to \code{\link[uts]{sample_values.uts}}.
 #' 
 #' @examples
+#' ##############################
+#' # Subsampling and Subsetting #
+#' ##############################
+#' 
 #' # Extract subset of time series vector
 #' x <- ex_uts_vector()
 #' x[, 1]
@@ -89,6 +93,22 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x[times, c(1, 2, 1)]
 #' # 2.) using "uts_vector" with logical observation values
 #' x[x > 48]
+#' 
+#'
+#' ###############################
+#' # Replacements and Insertions #
+#' ###############################
+#' 
+#' # Replace subset of time series vector with a new time series
+#' x <- ex_uts_vector()
+#' x[, "oranges"] <- uts(values=50, times=Sys.time())
+#' x[, "nuts"] <- head(ex_uts(), 2)
+#' x$apples <- NULL
+#' 
+#' # Same, but use "uts_vector" for replacing
+#' x <- c(ex_uts_vector(), nuts=ex_uts())
+#' x[, 1:2] <- c(uts(), ex_uts())
+#' x[, c("apples", "oranges")] <- NULL
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -130,19 +150,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 
 #' @rdname sub-.uts_vector
 #' 
-#' @param value either (i) a vector of observation values, or a \code{"uts"} or \code{"uts_vector"}
-#' 
-#' @examples
-#' # Replace subset of time series vector with a new time series
-#' x <- ex_uts_vector()
-#' x[, "oranges"] <- uts(values=50, times=Sys.time())
-#' x[, "nuts"] <- head(ex_uts(), 2)
-#' x$apples <- NULL
-#' 
-#' # Same, but use "uts_vector" for replacing
-#' x <- c(ex_uts_vector(), nuts=ex_uts())
-#' x[, 1:2] <- c(uts(), ex_uts())
-#' x[, c("apples", "oranges")] <- NULL
+#' @param value a vector of observation values, a \code{"uts"}, a or \code{"uts_vector"}.
 `[<-.uts_vector` <- function(x, i, j, ..., value)
 {
   # Replace subset time series vector

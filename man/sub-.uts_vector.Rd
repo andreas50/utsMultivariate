@@ -18,7 +18,7 @@
 
 \item{drop}{logical. If \code{TRUE} the result is coerced to the lowest possible dimension.}
 
-\item{value}{either (i) a vector of observation values, or a \code{"uts"} or \code{"uts_vector"}}
+\item{value}{a vector of observation values, a \code{"uts"}, a or \code{"uts_vector"}.}
 
 \item{\dots}{further arguments passed to \code{\link[uts]{sample_values.uts}}.}
 }
@@ -26,6 +26,10 @@
 The accessor method (\code{"["}) extracts either (i) a sub-sampled time series vector, (ii) a subset of the time series vector, or (iii) both. The replacement method (\code{"[<-"}) inserts observation values at the provided observation times, replacing observations values for already existing observation times (if any).
 }
 \examples{
+##############################
+# Subsampling and Subsetting #
+##############################
+
 # Extract subset of time series vector
 x <- ex_uts_vector()
 x[, 1]
@@ -48,6 +52,12 @@ x[times, "oranges"]
 x[times, c(1, 2, 1)]
 # 2.) using "uts_vector" with logical observation values
 x[x > 48]
+
+
+###############################
+# Replacements and Insertions #
+###############################
+
 # Replace subset of time series vector with a new time series
 x <- ex_uts_vector()
 x[, "oranges"] <- uts(values=50, times=Sys.time())
