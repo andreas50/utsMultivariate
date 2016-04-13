@@ -111,13 +111,18 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x[, c("apples", "oranges")] <- NULL
 #' 
 #' # Replace/insert observations of single time series
+#' # 1.) Insert single value into the first time series 
+#' # 2.) Insert multiple values into the time series named "oranges"
 #' x <- ex_uts_vector()
 #' x[Sys.time(), 1] <- 50
 #' x[Sys.time() + ddays(1:2), "oranges"] <- c(52, 53)
 #' 
 #' # Replace/insert observations of multiple time series
+#' # 1.) Insert single value into every time series
+#' # 2.) Insert the same multiple values into every time series
 #' x <- ex_uts_vector()
 #' x[Sys.time(), ] <- 51
+#' x[Sys.time() + ddays(1:2), ] <- c(52, 53)
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -182,9 +187,11 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
     return(x)
   }
   
-  # Case 2: insert indentical values into multiple time series
+  # Case 2: insert the same values into multiple time series
   if (is.vector(value)) {
-      
+    for (pos in j)
+      x[[pos]][i] <- value
+    return(x)
   }
   
   # Check argument consistency

@@ -158,17 +158,29 @@ test_that("uts_vector subset replacement works",{
   expect_equal_to_reference(x, file="test-subset_replacement_6.rds")
 })
 
-test_that("uts_vector insertion works for single 'uts'",{
+test_that("uts_vector insertion of numeric values works for single uts",{
   # insert single value
   x <- ex_uts_vector()
   x[as.POSIXct("2016-01-01"), 1] <- 50
-  expect_equal_to_reference(x, file="test-subset_insertion_single_1.rds")
+  expect_equal_to_reference(x, file="test-insertion_single_uts_1.rds")
   
   # insert multiple values
   x <- ex_uts_vector()
   x[as.POSIXct(c("2016-01-01", "2016-01-02")), "oranges"] <- c(52, 53)
-  expect_equal_to_reference(x, file="test-subset_insertion_single_2.rds")
+  expect_equal_to_reference(x, file="test-insertion_single_uts_2.rds")
 })
 
+test_that("uts_vector insertion of numeric values works for subset uts_vector",{
+  # insert single value
+  x <- ex_uts_vector()
+  x[as.POSIXct("2016-01-01"), ] <- 50
+  expect_equal_to_reference(x, file="test-insertion_multiple_uts_1.rds")
+  
+  # insert multiple values
+  x <- ex_uts_vector()
+  x[as.POSIXct(c("2016-01-01", "2016-01-02")), ] <- c(52, 53)
+  expect_equal_to_reference(x, file="test-insertion_multiple_uts_2.rds")
+})
+t
 
 

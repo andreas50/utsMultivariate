@@ -70,12 +70,17 @@ x[, 1:2] <- c(uts(), ex_uts())
 x[, c("apples", "oranges")] <- NULL
 
 # Replace/insert observations of single time series
+# 1.) Insert single value into the first time series 
+# 2.) Insert multiple values into the time series named "oranges"
 x <- ex_uts_vector()
 x[Sys.time(), 1] <- 50
 x[Sys.time() + ddays(1:2), "oranges"] <- c(52, 53)
 
 # Replace/insert observations of multiple time series
+# 1.) Insert single value into every time series
+# 2.) Insert the same multiple values into every time series
 x <- ex_uts_vector()
 x[Sys.time(), ] <- 51
+x[Sys.time() + ddays(1:2), ] <- c(52, 53)
 }
 
