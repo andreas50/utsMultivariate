@@ -60,7 +60,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #'
 #' The accessor method (\code{"["}) extracts either (i) a sub-sampled time series vector, (ii) a subset of the time series vector, or (iii) both. The replacement method (\code{"[<-"}) inserts observation values at the provided observation times, replacing observations values for already existing observation times (if any).
 #' 
-#' @param x a \code{"uts)vector"} object.
+#' @param x a \code{"uts_vector"} object.
 #' @param i either a strictly increasing sequence of \code{\link{POSIXct}} date-times, or a \code{"uts"} or \code{"uts_vector"} with \code{\link{logical}} observation values.
 #' @param j index specifying the time series to extract or replace. The index can be a \code{numeric} or \code{character} vector or empty (missing) or \code{NULL}. Numeric values are coerced to integer as by \code{\link{as.integer}} (and hence truncated towards zero). Character vectors will be matched to the \code{\link{names}} of the object.
 #' @param drop logical. If \code{TRUE} the result is coerced to the lowest possible dimension.
@@ -99,16 +99,25 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' # Replacements and Insertions #
 #' ###############################
 #' 
-#' # Replace subset of time series vector with a new time series
+#' # Replace subset of time series vector with a single time series
 #' x <- ex_uts_vector()
 #' x[, "oranges"] <- uts(values=50, times=Sys.time())
 #' x[, "nuts"] <- head(ex_uts(), 2)
-#' x$apples <- NULL
+#' x[, "apples"] <- NULL
 #' 
 #' # Same, but use "uts_vector" for replacing
 #' x <- c(ex_uts_vector(), nuts=ex_uts())
 #' x[, 1:2] <- c(uts(), ex_uts())
 #' x[, c("apples", "oranges")] <- NULL
+#' 
+#' # Replace/insert observations of single time series
+#' x <- ex_uts_vector()
+#' x[Sys.time(), 1] <- 50
+#' x[Sys.time() + ddays(1:2), "oranges"] <- c(52, 53)
+#' 
+#' # Replace/insert observations of multiple time series
+#' x <- ex_uts_vector()
+#' x[Sys.time(), ] <- 51
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -131,7 +140,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
   num_ts <- ifelse(is.uts_vector(x), length(x), 1)
   num_selector_i <- ifelse(is.POSIXct(i) | is.uts(i), 1, length(i))
   if ((num_ts > 1) && (num_selector_i > 1) && (num_ts != num_selector_i))
-    stop("The dimension of the 'uts_vector' the and sampling points `i` do not match")
+    stop("The dimension of the 'uts_vector' the and sampling points `i` does not match")
   
   # Special case if dimension of 'x' was dropped
   if (is.uts(x))
@@ -162,6 +171,26 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
     class(x) <- class(uts_vector())
     return(x)
   }
+  
+  # Argument checking
+  if (missing(j))
+    j <- seq_along(x)
+  
+  # Case 1: insert values into single time series
+  if ((length(j) == 1) && is.vector(value)) {
+    x[[j]][i] <- value
+    return(x)
+  }
+  
+  # Case 2: insert indentical values into multiple time series
+  if (is.vector(value)) {
+      
+  }
+  
+  # Check argument consistency
+  #num_selector_i <- ifelse(is.POSIXct(i) | is.uts(i), 1, length(i))
+  #if ((num_ts > 1) && (num_selector_i > 1) && (num_ts != num_selector_i))
+  #  stop("The dimension of the 'uts_vector' the and sampling points `i` do not match")
 }
 
 

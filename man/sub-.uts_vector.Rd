@@ -10,7 +10,7 @@
 \method{[}{uts_vector}(x, i, j, ...) <- value
 }
 \arguments{
-\item{x}{a \code{"uts)vector"} object.}
+\item{x}{a \code{"uts_vector"} object.}
 
 \item{i}{either a strictly increasing sequence of \code{\link{POSIXct}} date-times, or a \code{"uts"} or \code{"uts_vector"} with \code{\link{logical}} observation values.}
 
@@ -58,15 +58,24 @@ x[x > 48]
 # Replacements and Insertions #
 ###############################
 
-# Replace subset of time series vector with a new time series
+# Replace subset of time series vector with a single time series
 x <- ex_uts_vector()
 x[, "oranges"] <- uts(values=50, times=Sys.time())
 x[, "nuts"] <- head(ex_uts(), 2)
-x$apples <- NULL
+x[, "apples"] <- NULL
 
 # Same, but use "uts_vector" for replacing
 x <- c(ex_uts_vector(), nuts=ex_uts())
 x[, 1:2] <- c(uts(), ex_uts())
 x[, c("apples", "oranges")] <- NULL
+
+# Replace/insert observations of single time series
+x <- ex_uts_vector()
+x[Sys.time(), 1] <- 50
+x[Sys.time() + ddays(1:2), "oranges"] <- c(52, 53)
+
+# Replace/insert observations of multiple time series
+x <- ex_uts_vector()
+x[Sys.time(), ] <- 51
 }
 
