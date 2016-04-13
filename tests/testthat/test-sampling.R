@@ -168,6 +168,10 @@ test_that("uts_vector insertion of numeric values works for single uts",{
   x <- ex_uts_vector()
   x[as.POSIXct(c("2016-01-01", "2016-01-02")), "oranges"] <- c(52, 53)
   expect_equal_to_reference(x, file="test-insertion_single_uts_2.rds")
+  #
+  x <- ex_uts_vector()
+  x[x$apples > 48, "apples"] <- 5
+  expect_equal_to_reference(x, file="test-insertion_single_uts_3.rds")
 })
 
 test_that("uts_vector insertion of numeric values works for subset uts_vector",{
@@ -180,6 +184,10 @@ test_that("uts_vector insertion of numeric values works for subset uts_vector",{
   x <- ex_uts_vector()
   x[as.POSIXct(c("2016-01-01", "2016-01-02")), ] <- c(52, 53)
   expect_equal_to_reference(x, file="test-insertion_multiple_uts_2.rds")
+  #
+  x <- ex_uts_vector()
+  x[ex_uts() > 48] <- 5
+  expect_equal_to_reference(x, file="test-insertion_multiple_uts_3.rds")
 })
 t
 

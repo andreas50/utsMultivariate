@@ -123,6 +123,11 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x <- ex_uts_vector()
 #' x[Sys.time(), ] <- 51
 #' x[Sys.time() + ddays(1:2), ] <- c(52, 53)
+#' 
+#' # Replacement time from "uts" or "uts_vector" with logical observation values
+#' x <- ex_uts_vector()
+#' x[ex_uts() > 48] <- 5
+#' x[x > 48] <- 6
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -193,6 +198,8 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
       x[[pos]][i] <- value
     return(x)
   }
+  
+  # Case 3: 
   
   # Check argument consistency
   #num_selector_i <- ifelse(is.POSIXct(i) | is.uts(i), 1, length(i))
