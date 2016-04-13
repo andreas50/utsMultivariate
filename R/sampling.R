@@ -99,7 +99,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' # Replacements and Insertions #
 #' ###############################
 #' 
-#' # Replace subset of time series vector with a single time series
+#' # Replace subset of time series vector with a single new "uts" time series
 #' x <- ex_uts_vector()
 #' x[, "oranges"] <- uts(values=50, times=Sys.time())
 #' x[, "nuts"] <- head(ex_uts(), 2)
@@ -124,10 +124,10 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' x[Sys.time(), ] <- 51
 #' x[Sys.time() + ddays(1:2), ] <- c(52, 53)
 #' 
-#' # Replacement time from "uts" or "uts_vector" with logical observation values
+#' # Take replacement times from "uts" or "uts_vector" with logical observation values
 #' x <- ex_uts_vector()
 #' x[ex_uts() > 48] <- 5
-#' x[x > 48] <- 6
+#' x[x == 5] <- 6
 `[.uts_vector` <- function(x, i, j, drop=TRUE, ...)
 {
   # Extract subset time series vector
@@ -172,7 +172,11 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
 #' @param value a vector of observation values, a \code{"uts"}, a or \code{"uts_vector"}.
 `[<-.uts_vector` <- function(x, i, j, ..., value)
 {
-  # Replace subset time series vector
+  # Argument checking
+  if (missing(j))
+    j <- seq_along(x)
+  
+  # Case 1: replace subset time series vector with new time series
   if (missing(i)) {
     x <- unclass(x)
     if (is.uts(value))
@@ -182,29 +186,31 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
     return(x)
   }
   
-  # Argument checking
-  if (missing(j))
-    j <- seq_along(x)
+  # Case 2: uts_vector with logical observation values determines the insertion times
+  if (is.uts_vector(i)) {
+    if (length(i) != length(j))
+      stop("The lengths of the uts_vectors 'x' and 'i' do not match")
+    
+    for (k in seq_along(x))
+      x[[k]][i[[k]]] <- value
+    return(x)
+  }
   
-  # Case 1: insert values into single time series
+  # Case 3: insert values into single time series
   if ((length(j) == 1) && is.vector(value)) {
     x[[j]][i] <- value
     return(x)
   }
   
-  # Case 2: insert the same values into multiple time series
+  # Case 4: insert the same values into multiple time series
   if (is.vector(value)) {
     for (pos in j)
       x[[pos]][i] <- value
     return(x)
   }
   
-  # Case 3: 
-  
-  # Check argument consistency
-  #num_selector_i <- ifelse(is.POSIXct(i) | is.uts(i), 1, length(i))
-  #if ((num_ts > 1) && (num_selector_i > 1) && (num_ts != num_selector_i))
-  #  stop("The dimension of the 'uts_vector' the and sampling points `i` do not match")
+  # If none of the cases applies
+  stop("This combination of arguments is not supported")
 }
 
 

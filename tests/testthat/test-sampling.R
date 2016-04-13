@@ -130,6 +130,7 @@ test_that("uts_vector subsampling and subsetting work at the same time",{
 # [<-.uts_vector #
 ##################
 
+# case 1
 test_that("uts_vector subset replacement works",{
   # Replacement with single time series
   x <- ex_uts_vector()
@@ -158,6 +159,21 @@ test_that("uts_vector subset replacement works",{
   expect_equal_to_reference(x, file="test-subset_replacement_6.rds")
 })
 
+
+# case 2
+test_that("uts_vector insertion with logical uts_vector works",{
+  # argument checking
+  x <- ex_uts_vector()
+  y <- c(x, x)
+  expect_error(y[x > 48] <- 5)
+  
+  x <- ex_uts_vector()
+  x[x > 48] <- 5
+  expect_equal_to_reference(x, file="test-insertion_logical_uts_vector.rds")
+})
+
+
+# case 3
 test_that("uts_vector insertion of numeric values works for single uts",{
   # insert single value
   x <- ex_uts_vector()
@@ -174,6 +190,8 @@ test_that("uts_vector insertion of numeric values works for single uts",{
   expect_equal_to_reference(x, file="test-insertion_single_uts_3.rds")
 })
 
+
+# case 4
 test_that("uts_vector insertion of numeric values works for subset uts_vector",{
   # insert single value
   x <- ex_uts_vector()
@@ -189,6 +207,7 @@ test_that("uts_vector insertion of numeric values works for subset uts_vector",{
   x[ex_uts() > 48] <- 5
   expect_equal_to_reference(x, file="test-insertion_multiple_uts_3.rds")
 })
-t
+
+
 
 

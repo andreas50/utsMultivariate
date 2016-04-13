@@ -58,7 +58,7 @@ x[x > 48]
 # Replacements and Insertions #
 ###############################
 
-# Replace subset of time series vector with a single time series
+# Replace subset of time series vector with a single new "uts" time series
 x <- ex_uts_vector()
 x[, "oranges"] <- uts(values=50, times=Sys.time())
 x[, "nuts"] <- head(ex_uts(), 2)
@@ -82,5 +82,10 @@ x[Sys.time() + ddays(1:2), "oranges"] <- c(52, 53)
 x <- ex_uts_vector()
 x[Sys.time(), ] <- 51
 x[Sys.time() + ddays(1:2), ] <- c(52, 53)
+
+# Take replacement times from "uts" or "uts_vector" with logical observation values
+x <- ex_uts_vector()
+x[ex_uts() > 48] <- 5
+x[x == 5] <- 6
 }
 
