@@ -178,6 +178,7 @@ sample_values.uts_vector <- function(x, time_points, ..., drop=TRUE)
   
   # Case 1: replace subset time series vector with new time series
   if (missing(i)) {
+    # need to remove class, because could not determine how to call [.default (if even possible)
     x <- unclass(x)
     if (is.uts(value))
       value <- uts_vector(value)

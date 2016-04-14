@@ -40,14 +40,14 @@ plot.uts_vector <- function(x, plot.type="single", ask=getOption("device.ask.def
   if (0) {
     #x <- x[len > 0]    # not implemented yet
   } else {
-    for (l in rev(len))
+    for (l in rev(len[len == 0]))
       x[[l]] <- NULL
   }
   if (length(x) == 0)
     stop("Nothing to plot")
   
   # Call helper function for super-imposed plots
-  if ( plot.type == "single") {
+  if (plot.type == "single") {
     plot_single_uts_vector(x, ..., legend=legend, legend.x=legend.x, legend.y=legend.y)
     return(invisible())
   }
@@ -98,7 +98,7 @@ plot_single_uts_vector <- function(x, ..., max_dt=ddays(Inf), xlab="", ylab="",
   if (0) {
     #x <- x[len > 0]    # not implemented yet
   } else {
-    for (l in rev(len))
+    for (l in rev(len[len == 0]))
       x[[l]] <- NULL
   }
   num_ts <- length(x)
