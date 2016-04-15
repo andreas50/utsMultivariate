@@ -18,8 +18,11 @@
 Extract a subperiod time series between times \code{start} and \code{end}.
 }
 \examples{
-window(ex_uts_vector(), start=as.POSIXct("2007-11-09"))
-window(ex_uts_vector(), end=as.POSIXct(c("2007-11-09 12:00:00", "2007-11-09")))
+# For each time series, drop observations before 2007-11-09 Eastern Standard Time
+window(ex_uts_vector(), start="2007-11-09 EST")
+
+# Use a different end time for each subperiod time series
+window(ex_uts_vector(), end=c("2007-11-09 12:00:00 EST", "2007-11-09 EST"))
 }
 \seealso{
 \code{\link{head}}, \code{\link{head_t}}, \code{\link{tail}}, \code{\link{tail_t}} for other methods that extract a subperiod time series.

@@ -1,7 +1,7 @@
 ## Import packages
 import(uts)
 import(lubridate)
-importFrom(stats, as.ts, end, median, na.omit, start, time)
+importFrom(stats, as.ts, end, median, na.omit, start, time, window)
 
 
 # Export class constructors

@@ -173,10 +173,10 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 #' 
 #' @examples
 #' # For each time series, drop observations before 2007-11-09 Eastern Standard Time
-#' window(ex_uts_vector(), start=as.POSIXct("2007-11-09 EST"))
+#' window(ex_uts_vector(), start="2007-11-09 EST")
 #' 
 #' # Use a different end time for each subperiod time series
-#' window(ex_uts_vector(), end=as.POSIXct(c("2007-11-09 12:00:00 EST", "2007-11-09 EST")))
+#' window(ex_uts_vector(), end=c("2007-11-09 12:00:00 EST", "2007-11-09 EST"))
 window.uts_vector <- function(x, start=NULL, end=NULL, ...)
 {
   if (is.null(start))

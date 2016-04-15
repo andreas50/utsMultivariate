@@ -61,6 +61,19 @@ test_that("time point extraction works",{
 })
 
 
+test_that("window works",{
+  # Regression testing
+  expect_equal_to_reference(
+    window(ex_uts_vector(), start="2007-11-09 EST"),
+    file="test-window_1.rds"
+  )
+  expect_equal_to_reference(
+    window(ex_uts_vector(), end=c("2007-11-09 12:00:00 EST", "2007-11-09 EST")),
+    file="test-window_2.rds"
+  )
+})
+
+
 test_that("as.data.frame.uts_vector works",{
   # Argument checking
   expect_error(as.data.frame(ex_uts_vector2()))
