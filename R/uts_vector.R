@@ -160,6 +160,44 @@ time.uts_vector <- function(x, tolerance=.Machine$double.eps ^ 0.5, ...)
 }
 
 
+#' Time Window
+#' 
+#' Extract a subperiod time series between times \code{start} and \code{end}.
+#' 
+#' @param x a \code{"uts_vector"} object.
+#' @param start,end \code{\link{POSIXct}} object or coercible using \code{\link{as.POSIXct}}. The start and end times, respectively, for the individual subperiod time series. If there are fewer times than time series, then they are recycled in the standard fashion.
+#' @param \dots further arguments passed to or from methods.
+#' 
+#' @aliases time.uts_matrix
+#' @seealso \code{\link{head}}, \code{\link{head_t}}, \code{\link{tail}}, \code{\link{tail_t}} for other methods that extract a subperiod time series.
+#' 
+#' @examples
+#' # For each time series, drop observations before 2007-11-09 Eastern Standard Time
+#' window(ex_uts_vector(), start=as.POSIXct("2007-11-09 EST"))
+#' 
+#' # Use a different end time for each subperiod time series
+#' window(ex_uts_vector(), end=as.POSIXct(c("2007-11-09 12:00:00 EST", "2007-11-09 EST")))
+window.uts_vector <- function(x, start=NULL, end=NULL, ...)
+{
+  if (is.null(start))
+    start <- start(x)
+  if (is.null(end))
+    end <- end(x)
+  
+  # Recycle start and end times
+  num_ts <- length(x)
+  if (length(start) < num_ts) 
+    start <- rep(start, num_ts)
+  if (length(end) < num_ts) 
+    end <- rep(end, num_ts)
+  
+  # Cut each time series down to subperiod
+  for (j in seq_along(x))
+     x[[j]] <- window(x[[j]], start[j], end[j], ...)
+  x
+}
+
+
 #' Coerce to a Data Frame
 #'
 #' Flatten a \code{\link{uts_vector}} to a \code{\link{data.frame}}.

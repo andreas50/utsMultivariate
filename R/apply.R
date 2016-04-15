@@ -2,9 +2,13 @@
 # apply() and related functions #
 #################################
 
+##########
+# sapply #
+##########
+
 #' Generic sapply function
 #'
-#' The function is needed, because \code{\link[base:sapply]{sapply}} of base \R is not generic.
+#' The function is needed, because \code{\link[base]{sapply}} of base \R is not generic.
 #' 
 #' @note
 #' As recommended in Section 7.1 ("Adding new generics") of "Writing R Extensions", the implementation of \code{\link{sapply.default}} has been made a wrapper around \code{\link[base:sapply]{base::sapply}}.
@@ -23,7 +27,7 @@ sapply.default <- function(X, ...) base::sapply(X, ...)
 
 #' Apply a Function over a Multivariate Time Series
 #' 
-#' Same as \code{\link[base:sapply]{sapply}} in base \R, but further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
+#' Same as \code{\link[base]{sapply}} in base \R, but further simplify the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
 #' 
 #' @param X a \code{"uts_vector"} or \code{"uts_matrix"} object.
 #' @param \ldots arguments passed to \code{sapply} in base \R.
@@ -79,4 +83,10 @@ sapply.uts_matrix <- function(X, ...)
     class(out) <- "matrix"
   out
 }
+
+
+
+
+
+
 

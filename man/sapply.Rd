@@ -15,7 +15,7 @@ sapply(X, ...)
 \item{further}{arguments passed to or from methods.}
 }
 \description{
-The function is needed, because \code{\link[base:sapply]{sapply}} of base \R is not generic.
+The function is needed, because \code{\link[base]{sapply}} of base \R is not generic.
 }
 \section{Methods (by class)}{
 \itemize{

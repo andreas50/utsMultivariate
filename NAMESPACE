@@ -58,6 +58,7 @@ S3method(summary, uts_matrix)
 S3method(summary, uts_vector)
 S3method(Summary, uts_vector)
 S3method(time, uts_vector)
+S3method(window, uts_vector)
 
 
 # S3 methods that cause problems when registered with S3method() instead of export():

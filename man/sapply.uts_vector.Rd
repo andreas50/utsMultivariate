@@ -15,7 +15,7 @@
 \item{\ldots}{arguments passed to \code{sapply} in base \R.}
 }
 \description{
-Same as \code{\link[base:sapply]{sapply}} in base \R, but further simplifies the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
+Same as \code{\link[base]{sapply}} in base \R, but further simplify the output to a \code{"uts_vector"} or \code{"uts_matrix"} if possible.
 }
 \examples{
 # Same results as sapply() in base R
