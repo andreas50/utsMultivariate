@@ -23,4 +23,3 @@ time(ex_uts_vector2())
 \seealso{
 \code{\link[uts]{time.uts}}, \code{\link[uts]{sorted_union}}
 }
-

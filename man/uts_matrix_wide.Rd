@@ -39,4 +39,3 @@ uts_matrix_wide(values, times, names=c("China", "China", "France", "USA"))
 }
 \keyword{classes}
 \keyword{ts}
-

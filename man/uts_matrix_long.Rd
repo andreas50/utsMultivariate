@@ -37,4 +37,3 @@ uts_matrix_long(values=1:5, times=as.POSIXct("2015-01-01") + days(1:5),
 }
 \keyword{classes}
 \keyword{ts}
-

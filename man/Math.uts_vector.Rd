@@ -24,4 +24,3 @@ cumsum(ex_uts_vector())
 \seealso{
 \code{\link{groupGeneric}}
 }
-

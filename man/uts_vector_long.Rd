@@ -32,4 +32,3 @@ uts_vector_long(values=1:10, times=as.POSIXct("2016-01-01") + days(1:10),
 }
 \keyword{classes}
 \keyword{ts}
-

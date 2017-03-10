@@ -213,7 +213,7 @@ window.uts_vector <- function(x, start=NULL, end=NULL, ...)
 #' }
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide exactly the opposite funcitonality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_vector}.
+#' @seealso The \code{\link{uts_vector_long}} and \code{\link{uts_vector_wide}} constructors provide the opposite funcitonality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_vector}.
 #' @examples
 #' as.data.frame(ex_uts_vector())
 #' as.data.frame(ex_uts_vector(), method="long")
@@ -258,7 +258,7 @@ as.data.frame.uts_vector <- function(x, ..., method="wide")
 #' @param USE.NAMES logical. Whether to assign sensible names to the output based on the row and column names of \code{x}.
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso \code{\link{uts_matrix}} for the exactly the opposite functionality, i.e. for converting a \code{"uts_vector"} to a \code{"uts_matrix"}.
+#' @seealso \code{\link{uts_matrix}} for the opposite functionality, i.e. for converting a \code{"uts_vector"} to a \code{"uts_matrix"}.
 #' @examples
 #' as.uts_vector(ex_uts_matrix())
 #' as.uts_vector(ex_uts_matrix(), USE.NAMES=FALSE)

@@ -21,8 +21,8 @@ The function is needed, because \code{\link[base]{sapply}} of base \R is not gen
 \itemize{
 \item \code{default}: simply calls the default implementation of base \R
 }}
+
 \note{
 As recommended in Section 7.1 ("Adding new generics") of "Writing R Extensions", the implementation of \code{\link{sapply.default}} has been made a wrapper around \code{\link[base:sapply]{base::sapply}}.
 }
 \keyword{internal}
-

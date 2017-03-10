@@ -1,7 +1,10 @@
 ## Import packages
 import(uts)
 import(lubridate)
-importFrom(stats, as.ts, end, median, na.omit, start, time, window)
+importFrom(graphics, plot)
+importFrom(grDevices, devAskNewPage)
+importFrom(stats, as.ts, end, median, na.omit, start, time, tsp, window)
+importFrom(utils, head, tail)
 
 
 # Export class constructors

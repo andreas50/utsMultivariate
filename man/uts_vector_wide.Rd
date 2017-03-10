@@ -29,4 +29,3 @@ uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10))
 }
 \keyword{classes}
 \keyword{ts}
-

@@ -11,6 +11,8 @@ plot_single_uts_vector(x, ..., max_dt = ddays(Inf), xlab = "", ylab = "",
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
 
+\item{\dots}{arguments passed to \code{\link[uts]{plot.uts}}.}
+
 \item{max_dt}{a non-negative \code{\link[lubridate]{duration}} object. Consecutive observations that are more than this amount apart in time, are not connected by a line in the graph.}
 
 \item{xlab}{a label for the x axis.}
@@ -22,8 +24,6 @@ plot_single_uts_vector(x, ..., max_dt = ddays(Inf), xlab = "", ylab = "",
 \item{legend}{boolean. Whether to add a legend to the plot.}
 
 \item{legend.x, legend.y}{the x and y co-ordinates to be used to position the legend.}
-
-\item{\dots}{arguments passed to \code{\link[uts]{plot.uts}}.}
 }
 \description{
 A helper function that implements \code{plot.uts_vector} for argument \code{plot.type="single"}.
@@ -37,4 +37,3 @@ plot_single_uts_vector(ex_uts_vector(), type="p", pch=2, ylim=c(40, 60), cex=2)
 \code{\link{matplot}}
 }
 \keyword{internal}
-

@@ -21,6 +21,5 @@ as.uts_vector(ex_uts_matrix())
 as.uts_vector(ex_uts_matrix(), USE.NAMES=FALSE)
 }
 \seealso{
-\code{\link{uts_matrix}} for the exactly the opposite functionality, i.e. for converting a \code{"uts_vector"} to a \code{"uts_matrix"}.
+\code{\link{uts_matrix}} for the opposite functionality, i.e. for converting a \code{"uts_vector"} to a \code{"uts_matrix"}.
 }
-

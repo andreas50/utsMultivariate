@@ -15,11 +15,11 @@
 
 \item{ask}{logical. If \code{TRUE} (and the \R session is interactive), then the \code{plot_type} is set to \code{"multiple"} and the user is asked for input before a each time series is plotted.}
 
+\item{\dots}{graphical parameters passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}. If not provided, several sensible default values are used.}
+
 \item{legend}{boolean. For \code{plot.type="single"}, whether to add a \code{\link{legend}} to the plot.}
 
 \item{legend.x, legend.y}{the x and y co-ordinates to be used to position the legend. See \code{\link{legend}}.}
-
-\item{\dots}{graphical parameters passed to \code{\link{plot.default}}, such as \code{col}, \code{lty}, \code{lwd}, \code{main}, \code{pch}, \code{type}. If not provided, several sensible default values are used.}
 }
 \description{
 Plot the time series of a \code{"uts_vector"}. By default, the individual plots are superimposed, but they can also be plotted one at a time.
@@ -40,4 +40,3 @@ plot(ex_uts_vector(), plot.type="multiple", ask=TRUE)
 \seealso{
 \code{\link{plot.uts}}, \code{\link{plot.default}}, \code{\link{par}}
 }
-

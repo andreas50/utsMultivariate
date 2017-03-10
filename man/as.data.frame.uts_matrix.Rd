@@ -9,13 +9,13 @@
 \arguments{
 \item{x}{a \code{"uts_matrix"} object.}
 
+\item{\dots}{further arguments passed to or from methods.}
+
 \item{method}{either \code{"long"} or \code{"wide"}, determining the shape of the output:
 \itemize{
   \item \code{"long"}: a \code{data.frame} with one row for each observation for each time series in \code{x}. The \code{data.frame} has four columns denoting the source of each observation (i.e. from which row and column of \code{x} is the observation from?), the observation time, and the observation value.
   \item \code{"wide"}: a \code{data.frame} with one column for each time series in \code{x}. 
 }}
-
-\item{\dots}{further arguments passed to or from methods.}
 }
 \description{
 Flatten a \code{\link{uts_matrix}} to a \code{\link{data.frame}}.
@@ -30,6 +30,5 @@ as.data.frame(ex_uts_matrix())
 as.data.frame(ex_uts_matrix(), method="long")
 }
 \seealso{
-The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide exactly the opposite functionality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
+The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide the opposite functionality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
 }
-

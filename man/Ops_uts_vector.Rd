@@ -20,4 +20,3 @@ ex_uts_vector() + ex_uts()
 ex_uts_vector() + ex_uts_vector()
 }
 \keyword{internal}
-

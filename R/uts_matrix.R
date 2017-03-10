@@ -129,7 +129,7 @@ is.uts_matrix <- function(x)
 #' }
 #' @param \dots further arguments passed to or from methods.
 #' 
-#' @seealso The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide exactly the opposite functionality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
+#' @seealso The \code{\link{uts_matrix_long}} and \code{\link{uts_matrix_wide}} constructors provide the opposite functionality, i.e. they convert data in \emph{long} and \emph{wide} format, respectively, to a \code{uts_matrix}.
 #' @examples
 #' as.data.frame(ex_uts_matrix())
 #' as.data.frame(ex_uts_matrix(), method="long")
