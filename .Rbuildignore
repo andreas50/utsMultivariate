@@ -3,4 +3,5 @@ Rprof.out
 .*\.o$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
 to_do_list.md

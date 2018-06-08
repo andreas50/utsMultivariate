@@ -66,15 +66,6 @@ if (requireNamespace("tseries", quietly = TRUE)) {
   as.uts_vector(irts1)
 }
 
-# Convert a 3-dimensional "its"
-if (requireNamespace("its", quietly = TRUE)) {
-  mat <- matrix(1:6, nrow=2)
-  colnames(mat) <- c("a", "b", "c")
-  rownames(mat) <- c("2003-01-01","2003-01-04")
-  its1 <- its::its(mat)
-  as.uts_vector(its1)
-}
-
 # Convert a 3-dimensional "xts"
 if (requireNamespace("zoo", quietly = TRUE)) {
   xts1 <- xts::xts(matrix(1:12, 4, 3), as.Date("2003-01-01") + 0:3)
