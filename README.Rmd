@@ -16,7 +16,7 @@ library(utsMultivariate)
 
 ### Introduction
 
-This package provides S3 classes ("uts_vector" and "uts_matrix") for multivariate unevenly spaced time series.
+This package provides S3 classes ("uts_vector" and "uts_matrix") for multivariate unevenly spaced time series. The individual time series are [uts](https://github.com/andreas50/uts) objects.
 
 R users familiar with vectors and matrices should find it straightforward to work with the corresponding time series objects, because the usage of many functions (such as [, [[, length, etc.) is completely analogous.
 
@@ -39,8 +39,74 @@ remotes::install_github("andreas50/utsMultivariate")
 
 ### Sample Code
 
+First, a few examples how to use a time series vector.
+
 ```{r}
 # Get sample unevenly-spaced time series vector
 x <- ex_uts_vector()
 x
 ```
+
+
+```{r uts_plot, fig.width=8, fig.height=4, echo=c(1, 3), dev="svg"}
+# Plot the time series vector
+par(mai=c(0.5, 0.5, 0.2, 0.2))
+plot(x, type="o", cex.axis=0.8)
+```
+
+```{r}
+# Get first and last observation value(!) of each time series
+first(x)
+last(x)
+
+# Get first and last observation time(!) of each time series
+start(x)
+end(x)
+
+# Insert new observation
+x[as.POSIXct("2007-11-10 10:00:00"), "apples"] <- 45
+
+# Sample the time series at a specific time point, using one of several supported interpolation methods
+sample_values(x, as.POSIXct("2007-11-10"), interpolation="linear")
+
+# Get maximum observation value of each time series
+max(x)
+
+# Time series arithmetic
+(x*2 + 5)$apples$values
+
+# Apply a function to the individual time series of a time series vector
+sapply(x, length)
+sapply(x, range)
+
+# Convert the time series vector to data.frame, i.e. flatten the data
+as.data.frame(x)
+
+# Conversely, convert data in flat (long) format to a time series vector
+values <- data.frame(apples=1:10, oranges=letters[1:10], stringsAsFactors=FALSE)
+uts_vector_wide(values, times=as.POSIXct("2015-01-01") + ddays(1:10))
+
+# Convert data in wide format to a time series vector
+values <- c(5, 6, 6, 7)
+times <- as.POSIXct("2016-01-01") + dhours(1:4)
+names <- c("a", "b", "a", "a")
+uts_vector_long(values, times, names)
+```
+
+Most operatios for time series vectors also apply to a time series matrix, so only a few examples are given here.
+
+```{r}
+# Create a time series matrix by recycling the elements of a time series vector
+y <- uts_matrix(x, nrow=2, ncol=3)
+rownames(y) <- c("foo", "bar")
+colnames(y) <- c("red", "green", "blue")
+y
+
+# Extract first two rows, and second column (coming soon)
+#y[, 1:2, "green"]
+
+# Transpose
+t(y)
+```
+
+
