@@ -29,7 +29,6 @@ S3method(as.data.frame, uts_vector)
 S3method(as.ts, uts_vector)
 S3method(as.uts_vector, fts)
 S3method(as.uts_vector, irts)
-S3method(as.uts_vector, its)
 S3method(as.uts_vector, ts)
 S3method(as.uts_vector, uts_matrix)
 S3method(as.uts_vector, xts)
@@ -69,7 +68,6 @@ S3method(window, uts_vector)
 #     See chapter 8 of "R packages" by Hadley Wickham.
 export(as.fts.uts_vector)     # would need to create "fts" package dependency
 export(as.irts.uts_vector)    # would need to create "tseries" package dependency
-export(as.its.uts_vector)     # would need to create "its" package dependency
 export(as.xts.uts_vector)     # would need to create "xts" package dependency
 export(as.zoo.uts_vector)     # would need to create "zoo" package dependency
 

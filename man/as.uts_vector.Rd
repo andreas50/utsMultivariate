@@ -5,7 +5,6 @@
 \alias{as.uts_vector.ts}
 \alias{as.uts_vector.fts}
 \alias{as.uts_vector.irts}
-\alias{as.uts_vector.its}
 \alias{as.uts_vector.xts}
 \alias{as.uts_vector.zoo}
 \title{Coercion to uts_vector}
@@ -17,8 +16,6 @@ as.uts_vector(x, ...)
 \method{as.uts_vector}{fts}(x, ...)
 
 \method{as.uts_vector}{irts}(x, ...)
-
-\method{as.uts_vector}{its}(x, ...)
 
 \method{as.uts_vector}{xts}(x, ...)
 
@@ -42,8 +39,6 @@ Convert univariate and multivariate time series objects from other R packages to
 \item \code{fts}: convert an \code{\link[fts]{fts}} object
 
 \item \code{irts}: convert an \code{\link[tseries]{irts}} object
-
-\item \code{its}: convert an \code{\link[its]{its}} object
 
 \item \code{xts}: convert a \code{\link[xts]{xts}} object
 

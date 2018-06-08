@@ -26,15 +26,6 @@ test_that("coercions to 'uts_vector' work",{
     irts1 <- tseries::irts(times, values)
     expect_equal_to_reference(as.uts_vector(irts1), file="test-coercions_from_irts_2.rds")
   }
-
-  # its
-  if (requireNamespace("its", quietly = TRUE)) {
-    mat <- matrix(1:6, nrow=2)
-    colnames(mat) <- c("a", "b", "c")
-    rownames(mat) <- c("2003-01-01","2003-01-04")
-    its1 <- its::its(mat)
-    expect_equal_to_reference(as.uts_vector(its1), file="test-coercions_from_its.rds")
-  }
   
   # xts
   if (requireNamespace("xts", quietly = TRUE)) {
@@ -76,11 +67,6 @@ test_that("coercions from 'uts_vector' work",{
   # irts
   if (requireNamespace("tseries", quietly = TRUE)) {
     expect_equal_to_reference(tseries::as.irts(ex_uts_vector()), file="test-coercions_to_irts.rds")
-  }
-
-  # its
-  if (requireNamespace("its", quietly = TRUE)) {
-    expect_equal_to_reference(its::as.its(ex_uts_vector()), file="test-coercions_to_its.rds")
   }
   
   # xts
