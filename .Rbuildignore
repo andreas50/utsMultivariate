@@ -1,6 +1,4 @@
 Rprof.out
-.*\.so$
-.*\.o$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
