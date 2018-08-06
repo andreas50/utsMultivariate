@@ -37,12 +37,7 @@ plot.uts_vector <- function(x, plot.type="single", ask=getOption("device.ask.def
   
   # Remove time series with zero observations
   len <- sapply(x, length)
-  if (0) {
-    #x <- x[len > 0]    # not implemented yet
-  } else {
-    for (l in rev(len[len == 0]))
-      x[[l]] <- NULL
-  }
+  x <- x[, len > 0]
   if (length(x) == 0)
     stop("Nothing to plot")
   

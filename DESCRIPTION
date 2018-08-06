@@ -5,6 +5,7 @@ Title: Multivariate Unevenly Spaced Time Series
 Author: Andreas Eckner <andreas@eckner.com>
 Maintainer: Andreas Eckner <andreas@eckner.com>
 Depends:
+    R (>= 3.1),
     lubridate,
     uts
 Suggests:
