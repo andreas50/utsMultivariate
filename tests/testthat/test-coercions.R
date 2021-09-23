@@ -78,9 +78,9 @@ test_that("coercions from 'uts_vector' work",{
   if (requireNamespace("zoo", quietly = TRUE)) {
     # synchronized observation times
     utsv <- c(a=ex_uts(), b=ex_uts() + 3)
-    expect_equal_to_reference(zoo::as.zoo(utsv), file="test-coercions_to_zoo_1.rds")
+    expect_equal_to_reference(as.zoo.uts_vector(utsv), file="test-coercions_to_zoo_1.rds")
     
     # non-synchronized observation times
-    expect_equal_to_reference(zoo::as.zoo(ex_uts_vector()), file="test-coercions_to_zoo_2.rds")
+    expect_equal_to_reference(as.zoo.uts_vector(ex_uts_vector()), file="test-coercions_to_zoo_2.rds")
   }
 })
