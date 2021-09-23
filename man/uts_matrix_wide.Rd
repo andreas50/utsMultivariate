@@ -4,8 +4,12 @@
 \alias{uts_matrix_wide}
 \title{Create uts_matrix from wide tabular data}
 \usage{
-uts_matrix_wide(values, times, names = base::rownames(values),
-  fields = base::colnames(values))
+uts_matrix_wide(
+  values,
+  times,
+  names = base::rownames(values),
+  fields = base::colnames(values)
+)
 }
 \arguments{
 \item{values}{a matrix or data.frame of observation values.}

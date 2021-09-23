@@ -5,8 +5,7 @@
 \alias{is.uts_matrix}
 \title{Unevenly-spaced Time Series Matrix}
 \usage{
-uts_matrix(data = uts(), nrow = 1, ncol = 1, byrow = FALSE,
-  dimnames = NULL)
+uts_matrix(data = uts(), nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL)
 
 is.uts_matrix(x)
 }

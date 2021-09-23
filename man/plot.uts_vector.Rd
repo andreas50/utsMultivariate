@@ -4,9 +4,15 @@
 \alias{plot.uts_vector}
 \title{Plot a uts_vector}
 \usage{
-\method{plot}{uts_vector}(x, plot.type = "single",
-  ask = getOption("device.ask.default"), ..., legend = TRUE,
-  legend.x = "topright", legend.y = NULL)
+\method{plot}{uts_vector}(
+  x,
+  plot.type = "single",
+  ask = getOption("device.ask.default"),
+  ...,
+  legend = TRUE,
+  legend.x = "topright",
+  legend.y = NULL
+)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
