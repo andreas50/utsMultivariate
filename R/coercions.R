@@ -104,7 +104,7 @@ as.uts_vector.zoo <- function(x, ...)
   values <- as.matrix(x)
   colnames(values) <- colnames(x)
   
-  uts_vector_wide(x, times)
+  uts_vector_wide(values, times)
 }
 
 
