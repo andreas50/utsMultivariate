@@ -4,9 +4,21 @@
 \alias{plot_single_uts_vector}
 \title{Plot a uts_vector in a single plot}
 \usage{
-plot_single_uts_vector(x, ..., max_dt = ddays(Inf), xlab = "", ylab = "",
-  col = seq_along(x), lty = 1, lwd = 1, pch = 1, type = "l",
-  legend = TRUE, legend.x = "topright", legend.y = NULL)
+plot_single_uts_vector(
+  x,
+  ...,
+  max_dt = ddays(Inf),
+  xlab = "",
+  ylab = "",
+  col = seq_along(x),
+  lty = 1,
+  lwd = 1,
+  pch = 1,
+  type = "l",
+  legend = TRUE,
+  legend.x = "topright",
+  legend.y = NULL
+)
 }
 \arguments{
 \item{x}{a \code{"uts_vector"} object with numeric or logical observation values.}
