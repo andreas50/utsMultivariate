@@ -209,13 +209,21 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
   ncols <- length(fields)
   out <- uts_matrix(uts(), ncol=ncols, nrow=nrows)
 
+  # Degenerate cases
+  if ((nrows == 0) || (ncols == 0)) {
+    rownames(out) <- sort(unique(names))
+    colnames(out) <- sort(unique(fields))
+    return(out) 
+  }
+  
   # Insert data one column at a time
   for (col in seq_len(ncols)) {
     out_col <- uts_vector_long(values[, col], times, names=names)
-    print(last(out_col))
     for (row in seq_len(nrows))
       out[[row + (col-1)*nrows]] <- out_col[[row]]
   }
+  
+  # Assign column and row names
   rownames(out) <- names(out_col)
   colnames(out) <- fields
   out
