@@ -26,6 +26,7 @@ Helper functions:
   \item \code{\link{plot_single_uts_vector}}
 }
 
+
 Methods that are not applicable to unevenly spaced time series. These are provided so that methods intended for \code{\link{ts}} objects in base \R are not accidentally applied to \code{"uts_vector"} and \code{"uts_matrix"} objects:
 \itemize{
   \item \code{\link{as.ts.uts_vector}}

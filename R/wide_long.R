@@ -205,23 +205,18 @@ uts_matrix_wide <- function(values, times, names=base::rownames(values), fields=
     stop("The observation time vector is not a POSIXct object")
   
   # Allocate memory for output
-  if (length(names) > 0)
-    rnames <- sort(unique(names))
-  else
-    rnames <- NULL
-  if (length(fields) > 0)
-    cnames <- sort(unique(fields))
-  else
-    cnames <- NULL
-  nrows <- length(rnames)
-  ncols <- length(cnames)
-  out <- uts_matrix(uts(), ncol=ncols, nrow=nrows, dimnames=list(rnames, cnames))
+  nrows <- length(unique(names))
+  ncols <- length(fields)
+  out <- uts_matrix(uts(), ncol=ncols, nrow=nrows)
 
   # Insert data one column at a time
   for (col in seq_len(ncols)) {
     out_col <- uts_vector_long(values[, col], times, names=names)
+    print(last(out_col))
     for (row in seq_len(nrows))
       out[[row + (col-1)*nrows]] <- out_col[[row]]
   }
+  rownames(out) <- names(out_col)
+  colnames(out) <- fields
   out
 }
